@@ -16,10 +16,15 @@ I store all my command-line files in a folder (cl), then under that folder there
   **** vim
   **** zsh.d
           
-h2. Warning
+h2. Installation
 
 I mod these all the time, and sometimes I break stuff.  Also, my main platforms are OS X and Linux (Debian based) in the console, not XWindows.  Most of my stuff works just fine in something like gnome-terminal, but I usually only check my main platforms when I make changes.
 
-h2. More information
+h2. A word of warning
 
-"InfiniteRed":http://blog.infinitered.com/entries/show/9
+I use this on Mac OS X mainly and on CentOS or Ubuntu systems from time to time. I'm not a pro Vim user so that's what
+I completely took from Todd (thanks for that!). I will work on all the files from time to time and try to keep up with
+changes on Todds repo regarding none-ZSH issues, but don't blame me if somethings doesn't work as expected ;-) If you
+improve anything or fix a problem please let me know, thanks.
+
+Hope this will be helpful for some folks.
