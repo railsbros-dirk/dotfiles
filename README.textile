@@ -1,6 +1,6 @@
 h1. dotfiles
 
-This repo is based on the work of Todd Werth (!http://github.com/twerth!). I modified it in the way, that i use ZSH
+This repo is based on the work of Todd Werth (http://github.com/twert). I modified it in the way, that i use ZSH
 instead of Bash.
 
 !http://www.infinitered.com/blog_extras/command_line_fx/kb_control_wide_short_bw2.jpg!
@@ -18,7 +18,7 @@ I store all my command-line files in a folder (cl), then under that folder there
           
 h2. Installation
 
-I mod these all the time, and sometimes I break stuff.  Also, my main platforms are OS X and Linux (Debian based) in the console, not XWindows.  Most of my stuff works just fine in something like gnome-terminal, but I usually only check my main platforms when I make changes.
+Just run the ./install script to link everything in place. You need to have the Highline gem installed (http://highline.rubyforge.org/).
 
 h2. A word of warning
 
