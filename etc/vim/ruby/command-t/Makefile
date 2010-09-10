@@ -4,23 +4,23 @@ SHELL = /bin/sh
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/universal-darwin10.0
+topdir = /Users/dbreuer/.rvm/rubies/ruby-1.8.7-p249/lib/ruby/1.8/i686-darwin10.2.0
 hdrdir = $(topdir)
 VPATH = $(srcdir):$(topdir):$(hdrdir)
 exec_prefix = $(prefix)
-prefix = $(DESTDIR)/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr
+prefix = $(DESTDIR)/Users/dbreuer/.rvm/rubies/ruby-1.8.7-p249
 sharedstatedir = $(prefix)/com
-mandir = $(DESTDIR)/usr/share/man
+mandir = $(datarootdir)/man
 psdir = $(docdir)
 oldincludedir = $(DESTDIR)/usr/include
 localedir = $(datarootdir)/locale
 bindir = $(exec_prefix)/bin
 libexecdir = $(exec_prefix)/libexec
-sitedir = $(DESTDIR)/Library/Ruby/Site
+sitedir = $(libdir)/ruby/site_ruby
 htmldir = $(docdir)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 includedir = $(prefix)/include
-infodir = $(DESTDIR)/usr/share/info
+infodir = $(datarootdir)/info
 vendorlibdir = $(vendordir)/$(ruby_version)
 sysconfdir = $(prefix)/etc
 libdir = $(exec_prefix)/lib
@@ -38,35 +38,35 @@ localstatedir = $(prefix)/var
 sitelibdir = $(sitedir)/$(ruby_version)
 
 CC = gcc
-LIBRUBY = $(LIBRUBY_SO)
+LIBRUBY = $(LIBRUBY_A)
 LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
-LIBRUBYARG_SHARED = -l$(RUBY_SO_NAME)
-LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)
+LIBRUBYARG_SHARED = 
+LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)-static
 
 RUBY_EXTCONF_H = 
-CFLAGS   =  -fno-common -arch i386 -arch x86_64 -g -Os -pipe -fno-common -DENABLE_DTRACE  -fno-common  -pipe -fno-common $(cflags) 
+CFLAGS   =  -fno-common -g -O2 -pipe -fno-common $(cflags) 
 INCFLAGS = -I. -I$(topdir) -I$(hdrdir) -I$(srcdir)
 DEFS     = 
 CPPFLAGS = -DHAVE_RUBY_H  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE $(DEFS) $(cppflags)
 CXXFLAGS = $(CFLAGS) 
-ldflags  = -L. -arch i386 -arch x86_64 
+ldflags  = -L. 
 dldflags = 
 archflag = 
 DLDFLAGS = $(ldflags) $(dldflags) $(archflag)
-LDSHARED = cc -arch i386 -arch x86_64 -pipe -bundle -undefined dynamic_lookup
+LDSHARED = cc -dynamic -bundle -undefined suppress -flat_namespace
 AR = ar
 EXEEXT = 
 
 RUBY_INSTALL_NAME = ruby
 RUBY_SO_NAME = ruby
-arch = universal-darwin10.0
-sitearch = universal-darwin10.0
+arch = i686-darwin10.2.0
+sitearch = i686-darwin10.2.0
 ruby_version = 1.8
-ruby = /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
+ruby = /Users/dbreuer/.rvm/rubies/ruby-1.8.7-p249/bin/ruby
 RUBY = $(ruby)
 RM = rm -f
 MAKEDIRS = mkdir -p
-INSTALL = /usr/bin/install -c
+INSTALL = /usr/local/bin/ginstall -c
 INSTALL_PROG = $(INSTALL) -m 0755
 INSTALL_DATA = $(INSTALL) -m 644
 COPY = cp
@@ -86,7 +86,7 @@ extout =
 extout_prefix = 
 target_prefix = 
 LOCAL_LIBS = 
-LIBS = $(LIBRUBYARG_SHARED)  -lpthread -ldl  
+LIBS =   -ldl -lobjc  
 SRCS = ext.c match.c matcher.c
 OBJS = ext.o match.o matcher.o
 TARGET = ext
@@ -148,7 +148,7 @@ site-install-rb: install-rb
 .c.o:
 	$(CC) $(INCFLAGS) $(CPPFLAGS) $(CFLAGS) -c $<
 
-$(DLLIB): $(OBJS)
+$(DLLIB): $(OBJS) Makefile
 	@-$(RM) $@
 	$(LDSHARED) -o $@ $(OBJS) $(LIBPATH) $(DLDFLAGS) $(LOCAL_LIBS) $(LIBS)
 

@@ -1,0 +1,34 @@
+#!/bin/zsh
+
+export LC_CTYPE=en_US.UTF-8
+
+if test -x =gdircolors; then
+    eval "`gdircolors ~/.zsh.d/dircolors`"
+    export LS_COLORS="*.ogm=01;35:${LS_COLORS}"
+    export ZLS_COLORS=$LS_COLORS
+fi
+
+autoload -U is-at-least
+
+is-at-least 4.3.0 && {
+    unsetopt hist_save_by_copy
+}
+
+# http://xanana.ucsc.edu/~wgscott/wordpress_new/wordpress/?p=12
+typeset -ga preexec_functions
+typeset -ga precmd_functions
+typeset -ga chpwd_functions
+
+[ -w $zsh_cache ] && HISTFILE=$zsh_cache/history
+
+export EDITOR='mate -w'
+
+HISTSIZE=10000              # size of history
+LISTMAX=1000                # never ask
+NULLCMD='cat'               # use cat for > null commands
+REPORTTIME=2                # report time if execution exceeds amount of seconds
+SAVEHIST=10000              # maximum of history events to be save
+LOGCHECK=60
+watch=(notme)               # watch login/logout
+                            
+setopt appendhistory autocd extendedglob hist_ignore_all_dups share_history inc_append_history hist_ignore_space

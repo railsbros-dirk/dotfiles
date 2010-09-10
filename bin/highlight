@@ -6,8 +6,8 @@
 # GPL licensed (see end of file) * Use at your own risk!
 #
 # Usage examples: 
-#   tail -f somemaillog | mycolorize white '^From: .*' bell
-#   tail -f somemaillog | mycolorize white '^From: \/.*' green 'Folder: .*'
+#   tail -f somemaillog | highlight white '^From: .*' bell
+#   tail -f somemaillog | highlight white '^From: \/.*' green 'Folder: .*'
 #
 # Notes:
 #   Regular expressions need to be suitable for _sed_

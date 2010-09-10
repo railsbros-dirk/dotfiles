@@ -1,19 +1,20 @@
 h1. dotfiles
 
-!http://www.infinitered.com/blog_extras/command_line_fx/kb_control_wide_short_bw2.jpg!
+This repo is based on the work of Todd Werth (!http://github.com/twerth!). I modified it in the way, that i use ZSH
+instead of Bash.
 
-This repo started out with just my . files (mainly vim files), but over time I've added to it, and now it represents a subset of all my command-line folders.
+!http://www.infinitered.com/blog_extras/command_line_fx/kb_control_wide_short_bw2.jpg!
 
 h2. File and directory structure
 
 I store all my command-line files in a folder (cl), then under that folder there are 3 sub-folders (cl/bin cl/etc cl/doc), to keep them organized away from all my other files.  I link (etc/link) the dot files to the root of my home folder, so I prefer to store them without the . (gitignore rather than .gitignore), then I add the dot in the link.  So if you use one, make sure you put the dot back.
 
   * ~
-  ** cl
+  ** dotfiles
   *** bin
-  *** docs
   *** etc
   **** vim
+  **** zsh.d
           
 h2. Warning
 

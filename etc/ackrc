@@ -1,0 +1,2 @@
+--ignore-dir=log, tmp
+--type-add=ruby=.haml,.rake,.rsel

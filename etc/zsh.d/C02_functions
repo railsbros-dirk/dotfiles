@@ -1,0 +1,85 @@
+mdc() { mkdir -p "$1" && cd "$1" }
+setenv() { export $1=$2 }  # csh compatibility
+sdate() { date +%Y.%m.%d }
+pc() { awk "{print \$$1}" }
+rot13 () { tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]" }
+
+devlog() {
+  echo > log/development.log
+  tail -fn 150 log/development.log
+}
+
+prodlog() {
+  echo > log/production.log
+  tail -fn 150 log/production.log
+}
+
+testlog() {
+  echo > log/test.log
+  tail -fn 150 log/test.log
+}
+
+svn-ignore() {
+  svn propedit svn:ignore ${1:-.}
+}
+
+current_ips() {
+  ifconfig | grep "inet " | awk '{print $2}' | sed -e s/addr://g
+}
+
+# Searches all Ruby files in the given directories (default is '.')
+# and opens them in TextMate (Ment for better searching).
+find_for_mate() {
+  find ${1:-.} -name "*.${2:-rb}" -print0 | xargs -0 mate
+}
+
+ruby_version_prompt_info() {
+  ruby --version | awk '{print $2}'
+}
+
+ruby_patchlevel_prompt_info() {
+  ruby --version | awk '{print $5}' | sed s/\)//g
+}
+
+current_gemset() {
+  local gemsetName=`rvm gemset name`
+  
+  if [[ (-n ${gemsetName}) ]]
+  then
+    echo ${gemsetName}
+  else
+    echo default
+  fi
+}
+
+hudson_build_log() {
+  local project=$1
+  local buildNumber=$(ssh admin@blackcat.galaxycats.com "cat /Users/admin/.hudson/jobs/${project}/nextBuildNumber")
+  (( buildNumber = buildNumber - 1))
+
+  ssh admin@blackcat.galaxycats.com "tail -fn 150 /Users/admin/.hudson/jobs/${project}/builds/${buildNumber}/log"
+}
+
+pman() {
+  man -t "${1}" | open -f -a /Applications/Preview.app
+}
+
+tman() {
+  MANWIDTH=160 MANPAGER='col -bx' man $@ | mate
+}
+
+ss() {
+  if test -f "./script/server"; then
+    ./script/server
+  else
+    unicorn -p 3000
+  fi
+}
+
+rc() {
+  if test -f "./script/console"; then
+    ./script/console
+  else
+    rails console
+  fi
+}

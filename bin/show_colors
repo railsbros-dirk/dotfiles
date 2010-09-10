@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 echo -e "${COLOR_NC}COLOR_NC (No color)"
 echo -e "${COLOR_WHITE}COLOR_WHITE\t${COLOR_BLACK}COLOR_BLACK"
 echo -e "${COLOR_BLUE}COLOR_BLUE\t${COLOR_LIGHT_BLUE}COLOR_LIGHT_BLUE"

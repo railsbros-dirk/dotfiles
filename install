@@ -1,0 +1,74 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+
+begin
+  require 'highline/import'
+rescue LoadError => e
+  puts "The highline gem is required for this script. Install it with 'sudo gem install highline'!"
+  exit
+end
+
+options = {
+  :binary_dest  => "/usr/local/bin",
+  :dotfile_dest => File.expand_path("~/"),
+  :current_dir  => File.dirname(File.expand_path(__FILE__))
+}
+
+say "<%= color('Installing dotfiles, vim config, zsh config and some utils to your system ...', :green) %>"
+puts
+
+say "<%= color('Linking files under bin/ ...', :green) %>"
+
+binaries_to_link = Dir[File.join(options[:current_dir], "bin", "*")].each do |binary|
+  say "Linking <%= color('#{binary}', :magenta) %> to <%= color('#{options[:binary_dest]}', :magenta) %> ..."
+  FileUtils.ln_s(binary, File.join(options[:binary_dest], File.basename(binary)), :force => true)
+end
+
+say "<%= color('DONE!', :green) %>"
+
+puts
+say "<%= color('Linking dotfiles found under etc/ ...', :green) %>"
+
+dotfiles_to_link = Dir[File.join(options[:current_dir], "etc", "*")].each do |dotfile|
+  say "Linking <%= color('#{dotfile}', :magenta) %> to <%= color('#{options[:dotfile_dest]}', :magenta) %> ..."
+  FileUtils.ln_s(dotfile, File.join(options[:dotfile_dest], ".#{File.basename(dotfile)}"), :force => true)
+end
+
+say "<%= color('DONE!', :green) %>"
+
+puts
+say "<%= color('Setting some general git configs ...', :green) %>"
+
+git_configs = [
+  {:key => "color.diff", :value => "auto"},
+  {:key => "color.status", :value => "auto"},
+  {:key => "color.branch", :value => "auto"},
+  {:key => "color.interactive", :value => "auto"},
+  {:key => "alias.br", :value => "branch"},
+  {:key => "alias.st", :value => "status"},
+  {:key => "alias.ci", :value => "commit -m"},
+  {:key => "alias.ca", :value => "commit -a -m"},
+  {:key => "alias.co", :value => "checkout"},
+  {:key => "merge.tool", :value => "opendiff"},
+  {:key => "merge.summary", :value => "true"},
+  {:key => "core.repositoryformatversion", :value => "0"},
+  {:key => "core.filemode", :value => "true"},
+  {:key => "core.bare", :value => "false"},
+  {:key => "core.logallrefupdates", :value => "true"},
+  {:key => "branch.autosetupmerge", :value => "true"},
+  {:key => "branch.master.remote", :value => "origin"},
+  {:key => "branch.master.merge", :value => "refs/heads/master"},
+  {:key => "git-tmbundle.gitx-path", :value => "/usr/local/bin/gitx"}
+]
+
+git_configs.each do |git_config|
+  say "Setting <%= color('#{git_config[:key]}', :magenta) %> to <%= color('#{git_config[:value]}', :magenta) %>"
+  system "git config --global --unset-all #{git_config[:key]}"
+  system "git config --global --add #{git_config[:key]} '#{git_config[:value]}'"
+end
+
+say "<%= color('DONE!', :green) %>"
+
+puts
+say "<%= color('Everything done. Enjoy!', :green) %>"

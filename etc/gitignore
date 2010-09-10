@@ -1,4 +1,6 @@
 .DS_Store
+.rake_tasks
+.cap_tasks
 .svn
-*.sw?
-.netrwhist
+*.swp
+vendor/bundle

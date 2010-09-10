@@ -1,0 +1,29 @@
+alias ls="gls --color=auto"
+
+alias cl="clear"
+alias mv='nocorrect mv'       # no spelling correction on mv
+alias cp='nocorrect cp'
+alias mkdir='nocorrect mkdir'
+alias ll='ls -lsahF'
+alias l.='ls -d .[^.]*'
+alias lsd='ls -ld *(-/DN)'
+alias md='mkdir -p'
+alias rd='rmdir'
+alias cd..='cd ..'
+alias ..='cd ..'
+alias grep='grep --color=auto'
+alias po='popd'
+alias pu='pushd'
+alias tsl="tail -f /var/log/syslog"
+alias df="df -hT"
+alias tree='tree -psC -L'
+
+alias zshconf="mate ~/.zsh.d"
+
+alias firefox='/Applications/Firefox.app/Contents/MacOS/firefox -profilemanager'
+alias quake3.config='mate ~/Library/Application\ Support/Quake3/cpma/cfg/cpl-server.cfg'
+alias quake3.nb='open /Applications/ioquake3/ioquake3-1.36.app --args +set r_fullscreen "1" +set r_customaspect "1" +set r_customwidth "1440" +set r_customheight "900" +set r_mode "-1" +set fs_game cpma +exec cfg/cpl-server.cfg'
+alias quake3.24='open /Applications/ioquake3/ioquake3-1.36.app --args +set r_fullscreen "1" +set r_customaspect "1" +set r_customwidth "1920" +set r_customheight "1200" +set r_mode "-1" +set fs_game cpma +exec cfg/cpl-server.cfg'
+alias gitx='open -a GitX'
+
+alias gemi="gem install --no-ri --no-rdoc"
