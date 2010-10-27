@@ -83,3 +83,8 @@ rc() {
     rails console
   fi
 }
+
+# jump to project in dir PROJECTS_DIR
+p() {
+  cd $PROJECTS_DIR/$1
+}
