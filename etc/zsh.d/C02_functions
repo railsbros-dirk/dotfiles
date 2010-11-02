@@ -42,13 +42,15 @@ ruby_patchlevel_prompt_info() {
 }
 
 current_gemset() {
-  local gemsetName=`rvm gemset name`
-  
-  if [[ (-n ${gemsetName}) ]]
-  then
-    echo ${gemsetName}
-  else
-    echo default
+  if [[ ($SHOW_GEMSET_IN_PROMPT -gt 0) ]]; then
+    local gemsetName=`rvm gemset name`
+
+    if [[ (-n ${gemsetName}) ]]
+    then
+      echo "@${gemsetName}"
+    else
+      echo "@default"
+    fi
   fi
 }
 
