@@ -13,7 +13,7 @@ Wirble.init
 Wirble.colorize
 
 # Awesome print for better pretty print
-require "awesome_print"
+require "ap"
  
 # Clear the screen
 def clear
