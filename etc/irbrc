@@ -3,12 +3,6 @@ $KCODE = 'UTF8'
 # load libraries
 require 'rubygems'
 
-# Pretty Print method
-require 'pp'
-
-require 'wirble'
-# require 'utility_belt'
-
 # Wirble is a set of enhancements for irb
 # http://pablotron.org/software/wirble/README
 # Implies require 'pp', 'irb/completion', and 'rubygems'
@@ -17,6 +11,9 @@ Wirble.init
  
 # Enable colored output
 Wirble.colorize
+
+# Awesome print for better pretty print
+require "awesome_print"
  
 # Clear the screen
 def clear
@@ -29,7 +26,7 @@ def clear
 end
  
 # Shortcuts
-alias c clear
+alias cl clear
 
 # Load the readline module.
 IRB.conf[:USE_READLINE] = true
