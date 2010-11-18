@@ -34,9 +34,9 @@ command! PeepOpen :call <SID>LaunchPeepOpenViaVim()
 noremap <unique> <script> <Plug>PeepOpen <SID>Launch
 noremap <SID>Launch :call <SID>LaunchPeepOpenViaVim()<CR>
 
-if !hasmapto('<Plug>PeepOpen')
-  map <unique> <silent> <Leader>p <Plug>PeepOpen
-endif
+" if !hasmapto('<Plug>PeepOpen')
+"   map <unique> <silent> <Leader>p <Plug>PeepOpen
+" endif
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
