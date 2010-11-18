@@ -169,7 +169,7 @@ map j gj
 imap <down> <C-o>gj
 map E ge
 
-map <Leader>p <C-^> " Go to previous file
+" map <Leader>p <C-^> " Go to previous file
 
 
 " Ruby stuff ******************************************************************
