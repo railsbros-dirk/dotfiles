@@ -228,6 +228,7 @@ let NERDCreateDefaultMappings=0 " I turn this off to make it simple
   " ruby extconf.rb
   " make
 let g:CommandTMatchWindowAtTop = 1
+let g:CommandTMaxHeight = 20
 map <Leader>f :CommandT<CR>
 
 
