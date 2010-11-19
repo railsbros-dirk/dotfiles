@@ -246,6 +246,7 @@ map <Leader>b :FufBuffer<CR>
 "set complete=.
 let g:AutoComplPop_IgnoreCaseOption = 0
 let g:AutoComplPop_BehaviorKeywordLength = 2
+let g:AutoComplPop_MappingDriven = -1
 
 
 " railsvim ***************************************************************
