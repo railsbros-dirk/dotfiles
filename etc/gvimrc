@@ -13,7 +13,7 @@ if has("gui_macvim")
   set stal=2 " turn on tabs by default
 
   macmenu &File.New\ Tab key=<nop>
-  map <D-t> <Plug>PeepOpen
+  map <D-t> :CommandT<CR>
 
 elseif has("gui_gtk2")
 
