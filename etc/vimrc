@@ -155,7 +155,9 @@ set backspace=indent,eol,start
 set number " Show line numbers
 set matchpairs+=<:>
 set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
-set nofoldenable " Turn off folding 
+set nofoldenable " Turn on folding 
+set foldmethod=syntax " Folding based on syntax
+set foldlevel=1
 
 
 " Navigation ******************************************************************
@@ -240,13 +242,9 @@ map <Leader>b :FufBuffer<CR>
 
 
 " autocomplpop ***************************************************************
-" complete option
-"set complete=.,w,b,u,t,k
-"let g:AutoComplPop_CompleteOption = '.,w,b,u,t,k'
-"set complete=.
-let g:AutoComplPop_IgnoreCaseOption = 0
-let g:AutoComplPop_BehaviorKeywordLength = 2
-let g:AutoComplPop_MappingDriven = -1
+let g:acp_enableAtStartup = 0
+let g:acp_mappingDriven = 1
+let g:acp_behaviorRubyOmniSymbolLength = 2
 
 
 " railsvim ***************************************************************
