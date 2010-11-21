@@ -61,3 +61,6 @@
 [submodule "etc/vim/bundle/delimitMate.git"]
 	path = etc/vim/bundle/delimitMate.git
 	url = https://github.com/Raimondi/delimitMate.git
+[submodule "etc/vim/bundle/Specky.git"]
+	path = etc/vim/bundle/Specky.git
+	url = git://github.com/vim-scripts/Specky.git
