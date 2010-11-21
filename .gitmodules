@@ -73,3 +73,6 @@
 [submodule "etc/vim/bundle/vim-makegreen"]
 	path = etc/vim/bundle/vim-makegreen
 	url = git://github.com/reinh/vim-makegreen
+[submodule "etc/vim/bundle/vim-peepopen"]
+	path = etc/vim/bundle/vim-peepopen
+	url = git://github.com/shemerey/vim-peepopen
