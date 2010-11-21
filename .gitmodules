@@ -49,3 +49,9 @@
 [submodule "etc/vim/bundle/bufexplorer"]
 	path = etc/vim/bundle/bufexplorer
 	url = git://github.com/markabe/bufexplorer.git
+[submodule "etc/vim/bundle/vim-ruby"]
+	path = etc/vim/bundle/vim-ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
+[submodule "etc/vim/bundle/vim-conque"]
+	path = etc/vim/bundle/vim-conque
+	url = git://github.com/rson/vim-conque.git
