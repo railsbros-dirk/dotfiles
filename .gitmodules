@@ -16,3 +16,6 @@
 [submodule "etc/vim/bundle/ack"]
 	path = etc/vim/bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
+[submodule "etc/vim/bundle/vim-rails"]
+	path = etc/vim/bundle/vim-rails
+	url = git://github.com/tpope/vim-rails.git
