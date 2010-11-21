@@ -55,30 +55,12 @@
 [submodule "etc/vim/bundle/vim-conque"]
 	path = etc/vim/bundle/vim-conque
 	url = git://github.com/rson/vim-conque.git
-[submodule "etc/vim/bundle/vim-indent-object"]
-	path = etc/vim/bundle/vim-indent-object.git
-	url = git://github.com/michaeljsmith/vim-indent-object.git
-[submodule "etc/vim/bundle/delimitMate"]
-	path = etc/vim/bundle/delimitMate.git
-	url = https://github.com/Raimondi/delimitMate.git
-[submodule "etc/vim/bundle/Specky"]
-	path = etc/vim/bundle/Specky.git
-	url = git://github.com/vim-scripts/Specky.git
-[submodule "etc/vim/bundle/vim-makegreen"]
-	path = etc/vim/bundle/vim-makegreen.git
-	url = git://github.com/reinh/vim-makegreen.git
-[submodule "etc/vim/bundle/vim-peepopen"]
-	path = etc/vim/bundle/vim-peepopen.git
-	url = git://github.com/shemerey/vim-peepopen.git
-[submodule "etc/vim/bundle/vim-rooter"]
-	path = etc/vim/bundle/vim-rooter.git
-	url = git://github.com/airblade/vim-rooter.git
-[submodule "etc/vim/bundle/taglist"]
-	path = etc/vim/bundle/taglist.vim.git
-	url = git://github.com/vim-scripts/taglist.vim.git
 [submodule "etc/vim/bundle/gist-vim"]
 	path = etc/vim/bundle/gist-vim
 	url = git://github.com/mattn/gist-vim
 [submodule "etc/vim/bundle/vim-javascript"]
 	path = etc/vim/bundle/vim-javascript
 	url = git://github.com/pangloss/vim-javascript
+[submodule "etc/vim/bundle/vim-indent-object"]
+	path = etc/vim/bundle/vim-indent-object
+	url = git://github.com/michaeljsmith/vim-indent-object
