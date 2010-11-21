@@ -55,3 +55,6 @@
 [submodule "etc/vim/bundle/vim-conque"]
 	path = etc/vim/bundle/vim-conque
 	url = git://github.com/rson/vim-conque.git
+[submodule "etc/vim/bundle/vim-indent-object.git"]
+	path = etc/vim/bundle/vim-indent-object.git
+	url = git://github.com/michaeljsmith/vim-indent-object.git
