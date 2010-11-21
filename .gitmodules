@@ -43,3 +43,6 @@
 [submodule "etc/vim/bundle/vim-git"]
 	path = etc/vim/bundle/vim-git
 	url = git://github.com/tpope/vim-git.git
+[submodule "etc/vim/bundle/vim-markdown"]
+	path = etc/vim/bundle/vim-markdown
+	url = git://github.com/tpope/vim-markdown.git
