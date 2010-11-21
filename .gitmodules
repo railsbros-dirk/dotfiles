@@ -19,3 +19,6 @@
 [submodule "etc/vim/bundle/vim-rails"]
 	path = etc/vim/bundle/vim-rails
 	url = git://github.com/tpope/vim-rails.git
+[submodule "etc/vim/bundle/vim-ragtag"]
+	path = etc/vim/bundle/vim-ragtag
+	url = git://github.com/tpope/vim-ragtag.git
