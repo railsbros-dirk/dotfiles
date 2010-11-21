@@ -7,3 +7,6 @@
 [submodule "etc/vim/bundle/pathogen"]
 	path = etc/vim/bundle/pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+[submodule "etc/vim/bundle/command-t"]
+	path = etc/vim/bundle/command-t
+	url = git://github.com/wincent/Command-T.git
