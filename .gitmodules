@@ -82,3 +82,6 @@
 [submodule "etc/vim/bundle/taglist.vim"]
 	path = etc/vim/bundle/taglist.vim
 	url = git://github.com/vim-scripts/taglist.vim
+[submodule "etc/vim/bundle/nerdcommenter"]
+	path = etc/vim/bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
