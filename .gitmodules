@@ -31,3 +31,6 @@
 [submodule "etc/vim/bundle/vim-unimpaired"]
 	path = etc/vim/bundle/vim-unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "etc/vim/bundle/vim-cucumber"]
+	path = etc/vim/bundle/vim-cucumber
+	url = git://github.com/tpope/vim-cucumber.git
