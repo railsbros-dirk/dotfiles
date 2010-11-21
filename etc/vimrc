@@ -4,14 +4,12 @@
 " |                                                                           |
 " | Some highlights:                                                          |
 " |   jj = <esc>  Very useful for keeping your hands on the home row          |
-" |   ,n = toggle NERDTree off and on                                         |
+" |   ,d = toggle NERDTree off and on                                         |
 " |                                                                           |
-" |   ,f = fuzzy find all files                                               |
-" |   ,b = fuzzy find in all buffers                                          |
-" |   ,p = go to previous file                                                |
+" |   ,T = fuzzy find all files                                               |
+" |   ,P = go to previous file                                                |
 " |                                                                           |
-" |   hh = inserts '=>'                                                       |
-" |   aa = inserts '@'                                                        |
+" |   <C-l> = inserts '=>'                                                    |
 " |                                                                           |
 " |   ,h = new horizontal window                                              |
 " |   ,v = new vertical window                                                |
@@ -26,10 +24,17 @@
 " | Put machine/user specific settings in ~/.vimrc.local                      |
 " -----------------------------------------------------------------------------  
 
+" Initial stuff ***************************************************************
 
-set nocompatible
+set nocompatible " Must come first because it changes other options.
 let mapleader = ","
 imap jj <Esc> " Professor VIM says '87% of users prefer jj over esc', jj abrams disagrees
+
+
+" Pathogen ********************************************************************
+
+silent! call pathogen#runtime_append_all_bundles()
+silent! call pathogen#helptags()
 
 
 " Tabs ************************************************************************
@@ -52,6 +57,7 @@ function! Tabstyle_spaces()
   set softtabstop=2
   set shiftwidth=2
   set tabstop=2
+  set smarttab
   set expandtab
 endfunction
 
@@ -61,6 +67,10 @@ call Tabstyle_spaces()
 " Indenting *******************************************************************
 set ai " Automatically set the indent of a new line (local to buffer)
 set si " smartindent (local to buffer)
+filetype plugin indent on " Turn on file type detection.
+syntax enable " Turn on syntax highlighting.
+set ofu=syntaxcomplete#Complete
+set completeopt=longest,menuone
 
 
 " Scrollbars ******************************************************************
@@ -73,14 +83,18 @@ set equalalways " Multiple windows, when created, are equal in size
 set splitbelow splitright
 
 " Vertical and horizontal split then hop to a new buffer
-:noremap <Leader>v :vsp^M^W^W<cr>
-:noremap <Leader>h :split^M^W^W<cr>
+:noremap <Leader>v :vsp<cr>
+:noremap <Leader>h :split<cr>
 
 
 " Cursor highlights ***********************************************************
 set cursorline
 "set cursorcolumn
 
+
+" Runtime *********************************************************************
+" runtime macros/matchit.vim " Load the matchit plugin.
+runtime snippets/support_functions.vim " Load the snippet support functions
 
 " Searching *******************************************************************
 set hlsearch  " highlight search
@@ -101,20 +115,28 @@ set showcmd
 set ruler " Show ruler
 "set ch=2 " Make command line two lines high
 match LongLineWarning '\%120v.*' " Error format when a line is longer than 120
+set showmode " Display the mode you're in.
+" Useful status information at bottom of screen
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+
 
 
 " Line Wrapping ***************************************************************
 set nowrap
+" set wrap                          " Turn on line wrapping.
+set scrolloff=3                   " Show 3 lines of context around the cursor.
 set linebreak  " Wrap at word
+set formatoptions=tq
+set wrapmargin=4
+set textwidth=120
 
 
 " Directories *****************************************************************
-" Setup backup location and enable
-"set backupdir=~/backup/vim
-"set backup
+set nobackup                      " Don't make a backup before overwriting a file.
+set nowritebackup                 " And again.
 
 " Set Swap directory
-"set directory=~/backup/vim/swap
+set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 
 " Sets path to directory buffer was loaded from
 "autocmd BufEnter * lcd %:p:h
@@ -152,9 +174,28 @@ set nolist
 
 " Misc settings ***************************************************************
 set backspace=indent,eol,start
-set number " Show line numbers
+set number " Show line numbers " Intuitive backspacing.
 set matchpairs+=<:>
 set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
+set hidden " Handle multiple buffers better.
+map Q <Esc> " Get rid of awkward Ex-mode
+map U :redo<CR>
+set shell=/bin/bash " Some commands seem to have problems with zsh"
+set laststatus=2 " Show the status line all the time
+set autoindent
+set smartindent
+set title " Set the terminal's title
+set wildignore+=vendor,log,tmp,*.swp
+
+set wildmenu                      " Enhanced command line completion.
+set wildmode=list:longest         " Complete files like a shell.
+
+
+
+" Folding *********************************************************************
+" Automatic fold settings for specific files. Uncomment to use.
+autocmd FileType ruby set foldmethod=syntax
+autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 set nofoldenable " Turn on folding 
 set foldmethod=syntax " Folding based on syntax
 set foldlevel=1
@@ -171,7 +212,7 @@ map j gj
 imap <down> <C-o>gj
 map E ge
 
-map <Leader>p <C-^> " Go to previous file
+map <Leader>P <C-^> " Go to previous file
 
 
 " Ruby stuff ******************************************************************
@@ -192,9 +233,7 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 
 
 " Hard to type *****************************************************************
-imap uu _
-imap hh =>
-imap aa @
+imap <C-l> <space>=><space>
 
 
 " -----------------------------------------------------------------------------  
@@ -202,7 +241,7 @@ imap aa @
 " -----------------------------------------------------------------------------  
 
 " NERDTree ********************************************************************
-:noremap <Leader>n :NERDTreeToggle<CR>
+map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 let NERDTreeHijackNetrw=1 " User instead of Netrw when doing an edit /foobar
 let NERDTreeMouseMode=1 " Single click for everything
 
@@ -213,7 +252,7 @@ let NERDCreateDefaultMappings=0 " I turn this off to make it simple
 " Toggle commenting on 1 line or all selected lines. Wether to comment or not
 " is decided based on the first line; if it's not commented then all lines
 " will be commented
-:map <Leader>c :call NERDComment(0, "toggle")<CR> 
+" :map <D-/> :call NERDComment(0, "toggle")<CR> 
 
 
 " SnippetsEmu *****************************************************************
@@ -235,10 +274,8 @@ map <Leader>f :CommandT<CR>
 
 
 " fuzzyfinder ********************************************************
-" I'm using CommandT for main searching, but it doesn't do buffers, so I'm
-" using FuzzyFinder for that
-map <Leader>b :FufBuffer<CR>
-"let g:fuzzy_ignore = '.o;.obj;.bak;.exe;.pyc;.pyo;.DS_Store;.db'
+" map <Leader>b :FufBuffer<CR>
+" let g:fuzzy_ignore = '.o;.obj;.bak;.exe;.pyc;.pyo;.DS_Store;.db'
 
 
 " autocomplpop ***************************************************************
@@ -248,8 +285,17 @@ let g:acp_behaviorRubyOmniSymbolLength = 2
 
 
 " railsvim ***************************************************************
-map <Leader>ra :AS<CR>
-map <Leader>rs :RS<CR>
+map <Leader>r <Plug>RubyTestRun " change from <Leader>t to <Leader>\
+map <Leader>R <Plug>RubyFileRun " change from <Leader>T to <Leader>]
+let g:rubycomplete_rails = 1
+
+
+" MakeGreen **************************************************************
+" For the MakeGreen plugin and Ruby RSpec. Uncomment to use.
+autocmd BufNewFile,BufRead *_spec.rb compiler rspec
+
+" Javascript *************************************************************
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
 
 " -----------------------------------------------------------------------------  
@@ -259,22 +305,15 @@ map <Leader>rs :RS<CR>
 
 " Mac *************************************************************************
 "if has("mac") 
-  "" 
 "endif
- 
-" Windows *********************************************************************
-"if has("gui_win32")
-  "" 
-"endif
-
 
 
 " -----------------------------------------------------------------------------  
 " |                               Startup                                     |
 " -----------------------------------------------------------------------------  
 " Open NERDTree on start
+"
 "autocmd VimEnter * exe 'NERDTree' | wincmd l 
-
 
 
 " -----------------------------------------------------------------------------  
@@ -283,15 +322,3 @@ map <Leader>rs :RS<CR>
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
-
-"if hostname() == "foo"
-  " do something
-"endif
-
-" Example .vimrc.local:
-
-"call Tabstyle_tabs()
-"colorscheme ir_dark
-"match LongLineWarning '\%120v.*'
-
-"autocmd User ~/git/some_folder/* call Tabstyle_spaces() | let g:force_xhtml=1
