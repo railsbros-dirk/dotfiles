@@ -79,3 +79,6 @@
 [submodule "etc/vim/bundle/vim-rooter"]
 	path = etc/vim/bundle/vim-rooter
 	url = git://github.com/airblade/vim-rooter
+[submodule "etc/vim/bundle/taglist.vim"]
+	path = etc/vim/bundle/taglist.vim
+	url = git://github.com/vim-scripts/taglist.vim
