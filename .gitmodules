@@ -1,0 +1,18 @@
+[submodule "etc/vim/bundle/ack"]
+	path = etc/vim/bundle/ack
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "etc/vim/bundle/scrooloose-nerdtree"]
+	path = etc/vim/bundle/scrooloose-nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "etc/vim/bundle/command-t"]
+	path = etc/vim/bundle/command-t
+	url = https://github.com/wincent/Command-T.git
+[submodule "etc/vim/bundle/pathogen"]
+	path = etc/vim/bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "etc/vim/bundle/snipmate"]
+	path = etc/vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "etc/vim/snippets"]
+	path = etc/vim/snippets
+	url = git://github.com/railsbros-dirk/snipmate-snippets.git
