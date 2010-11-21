@@ -64,3 +64,6 @@
 [submodule "etc/vim/bundle/Specky.git"]
 	path = etc/vim/bundle/Specky.git
 	url = git://github.com/vim-scripts/Specky.git
+[submodule "etc/vim/bundle/vim-makegreen.git"]
+	path = etc/vim/bundle/vim-makegreen.git
+	url = git://github.com/reinh/vim-makegreen.git
