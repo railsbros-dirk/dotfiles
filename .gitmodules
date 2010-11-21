@@ -10,3 +10,6 @@
 [submodule "etc/vim/bundle/command-t"]
 	path = etc/vim/bundle/command-t
 	url = git://github.com/wincent/Command-T.git
+[submodule "etc/vim/bundle/nerdtree"]
+	path = etc/vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
