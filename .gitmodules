@@ -64,3 +64,6 @@
 [submodule "etc/vim/bundle/vim-indent-object"]
 	path = etc/vim/bundle/vim-indent-object
 	url = git://github.com/michaeljsmith/vim-indent-object
+[submodule "etc/vim/bundle/delimitMate"]
+	path = etc/vim/bundle/delimitMate
+	url = git://github.com/Raimondi/delimitMate
