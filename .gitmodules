@@ -76,3 +76,6 @@
 [submodule "etc/vim/bundle/taglist.vim.git"]
 	path = etc/vim/bundle/taglist.vim.git
 	url = git://github.com/vim-scripts/taglist.vim.git
+[submodule "etc/vim/bundle/gist-vim"]
+	path = etc/vim/bundle/gist-vim
+	url = git://github.com/mattn/gist-vim
