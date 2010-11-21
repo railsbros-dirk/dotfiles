@@ -46,3 +46,6 @@
 [submodule "etc/vim/bundle/vim-markdown"]
 	path = etc/vim/bundle/vim-markdown
 	url = git://github.com/tpope/vim-markdown.git
+[submodule "etc/vim/bundle/bufexplorer"]
+	path = etc/vim/bundle/bufexplorer
+	url = git://github.com/markabe/bufexplorer.git
