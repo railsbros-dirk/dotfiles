@@ -1,2 +1,2 @@
---ignore-dir=log, tmp
+--ignore-dir=log, tmp, vendor
 --type-add=ruby=.haml,.rake,.rsel
