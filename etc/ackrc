@@ -1,2 +1,5 @@
---ignore-dir=log, tmp, vendor
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=vendor
+--ignore-dir=hausbilder
 --type-add=ruby=.haml,.rake,.rsel
