@@ -253,7 +253,7 @@ let NERDCreateDefaultMappings=0 " I turn this off to make it simple
 " Toggle commenting on 1 line or all selected lines. Wether to comment or not
 " is decided based on the first line; if it's not commented then all lines
 " will be commented
-" :map <D-/> :call NERDComment(0, "toggle")<CR> 
+map <Leader>/ :call NERDComment(0, "toggle")<CR> 
 
 
 " SnippetsEmu *****************************************************************

@@ -24,8 +24,11 @@ if has("gui_macvim")
   " Toggle commenting on 1 line or all selected lines. Wether to comment or not
   " is decided based on the first line; if it's not commented then all lines
   " will be commented
-  " macmenu &Window.Zoom key=<nop>
-  map <Leader>/ :call NERDComment(0, "toggle")<CR> 
+  aunmenu Window
+  "macmenu &Window.Zoom key=<nop>
+  "map <Leader>/ :call NERDComment(0, "toggle")<CR> 
+  unmap <Leader>/
+  map <D-/> :call NERDComment(0, "toggle")<CR> 
   
   map <C-S-d> Vyp " duplicate current line
   map <D-d> dd " delete current line
