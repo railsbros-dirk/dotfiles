@@ -274,6 +274,15 @@ let g:CommandTMaxHeight = 20
 map <Leader>f :CommandT<CR>
 
 
+" Unimpaired *********************************************************
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+
 " fuzzyfinder ********************************************************
 " map <Leader>b :FufBuffer<CR>
 " let g:fuzzy_ignore = '.o;.obj;.bak;.exe;.pyc;.pyo;.DS_Store;.db'
