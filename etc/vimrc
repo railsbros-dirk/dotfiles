@@ -123,13 +123,14 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 
 " Line Wrapping ***************************************************************
 set nowrap
-" set wrap                          " Turn on line wrapping.
+"set wrap                          " Turn on line wrapping.
 set scrolloff=3                   " Show 3 lines of context around the cursor.
 set linebreak  " Wrap at word
+set nolist
 set formatoptions=tq
 set wrapmargin=4
 set textwidth=120
-
+set formatoptions+=l
 
 " Directories *****************************************************************
 set nobackup                      " Don't make a backup before overwriting a file.
