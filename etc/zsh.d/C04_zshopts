@@ -3,7 +3,7 @@
 export LC_CTYPE=en_US.UTF-8
 
 if test -x =gdircolors; then
-    eval "`gdircolors ~/.zsh.d/dircolors`"
+    eval "`dircolors ~/.zsh.d/dircolors`"
     export LS_COLORS="*.ogm=01;35:${LS_COLORS}"
     export ZLS_COLORS=$LS_COLORS
 fi

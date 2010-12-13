@@ -1,4 +1,6 @@
-alias ls="gls --color=auto"
+if [ -f /usr/local/bin/gls ]; then
+  alias ls="gls --color=auto"
+fi
 
 alias cl="clear"
 alias mv='nocorrect mv'       # no spelling correction on mv
