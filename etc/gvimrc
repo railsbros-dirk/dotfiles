@@ -24,7 +24,7 @@ if has("gui_macvim")
   " Toggle commenting on 1 line or all selected lines. Wether to comment or not
   " is decided based on the first line; if it's not commented then all lines
   " will be commented
-  aunmenu Window
+  aunmenu Window.Zoom
   "macmenu &Window.Zoom key=<nop>
   "map <Leader>/ :call NERDComment(0, "toggle")<CR> 
   unmap <Leader>/
