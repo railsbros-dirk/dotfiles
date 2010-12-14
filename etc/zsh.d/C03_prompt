@@ -1,7 +1,11 @@
 figlet -f larry3d `hostname -s`
 
 echo ""
-fortune futurama
+if fortune futurama &> /dev/null; then
+  fortune futurama
+else
+  fortune startrek
+fi
 echo ""
 
 #!/bin/zsh
