@@ -30,7 +30,11 @@ typeset -ga chpwd_functions
 
 [ -w $zsh_cache ] && HISTFILE=$zsh_cache/history
 
-export EDITOR='mate -w'
+if [ `uname` = 'Darwin' ]; then
+  export EDITOR='mvim'
+else
+  export EDITOR='vim'
+fi
 
 HISTSIZE=10000              # size of history
 LISTMAX=1000                # never ask
