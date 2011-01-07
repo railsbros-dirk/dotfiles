@@ -31,7 +31,7 @@ typeset -ga chpwd_functions
 [ -w $zsh_cache ] && HISTFILE=$zsh_cache/history
 
 if [ `uname` = 'Darwin' ]; then
-  export EDITOR='mvim'
+  export EDITOR='mvim -f -c "au VimLeave * !open -a Terminal"'
 else
   export EDITOR='vim'
 fi
