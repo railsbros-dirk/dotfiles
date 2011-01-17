@@ -88,3 +88,18 @@
 [submodule "etc/vim/bundle/coffee-script"]
 	path = etc/vim/bundle/coffee-script
 	url = git://github.com/kchmck/vim-coffee-script.git
+[submodule "etc/vim/bundle/align"]
+	path = etc/vim/bundle/align
+	url = git://github.com/tsaleh/vim-align.git
+[submodule "etc/vim/bundle/markdown_preview"]
+	path = etc/vim/bundle/markdown_preview
+	url = git://github.com/robgleeson/vim-markdown-preview.git
+[submodule "etc/vim/bundle/indent-object"]
+	path = etc/vim/bundle/indent-object
+	url = git://github.com/michaeljsmith/vim-indent-object.git
+[submodule "etc/vim/bundle/jslint"]
+	path = etc/vim/bundle/jslint
+	url = git://github.com/hallettj/jslint.vim.git
+[submodule "etc/vim/bundle/scala"]
+	path = etc/vim/bundle/scala
+	url = git://github.com/rosstimson/scala-vim-support.git

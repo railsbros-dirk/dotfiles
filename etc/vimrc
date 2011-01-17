@@ -219,6 +219,11 @@ map E ge
 
 map <Leader>P <C-^> " Go to previous file
 
+" Remove trailing spaces
+function RemoveTrailingSpaces()
+  %s/\v[\t ]{-1,}$//g
+endfunction
+
 
 " Ruby stuff ******************************************************************
 "compiler ruby         " Enable compiler support for ruby
@@ -310,6 +315,29 @@ autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
 " Javascript *************************************************************
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
+function s:setupWrapping()
+  set wrap
+  set wm=2
+  set textwidth=72
+endfunction
+
+function s:setupMarkup()
+  call s:setupWrapping()
+  map <buffer> <Leader>p :Mm <CR>
+endfunction
+
+" make and python use real tabs
+au FileType make                                     set noexpandtab
+au FileType python                                   set noexpandtab
+
+" Thorfile, Rakefile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Thorfile,config.ru}    set ft=ruby
+
+" md, markdown, and mk are markdown and define buffer-local preview
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+
+au BufRead,BufNewFile *.txt call s:setupWrapping()
 
 
 " -----------------------------------------------------------------------------  
