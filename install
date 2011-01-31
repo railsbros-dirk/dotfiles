@@ -16,7 +16,7 @@ options = {
   :current_dir  => File.dirname(File.expand_path(__FILE__))
 }
 
-say "<%= color('Installing dotfiles, vim config, zsh config and some utils to your system ...', :green) %>"
+say "<%= color('Installing dotfiles, vim config, zsh config and some utils to your system ...', :yellow) %>"
 puts
 
 say "<%= color('Linking files under bin/ ...', :green) %>"
@@ -39,7 +39,7 @@ end
 say "<%= color('DONE!', :green) %>"
 
 puts
-say "<%= color('Setting some general git configs ...', :green) %>"
+say "<%= color('Setting some general git configs ...', :yellow) %>"
 
 git_configs = [
   {:key => "color.diff", :value => "auto"},
@@ -67,6 +67,30 @@ git_configs.each do |git_config|
   say "Setting <%= color('#{git_config[:key]}', :magenta) %> to <%= color('#{git_config[:value]}', :magenta) %>"
   system "git config --global --unset-all #{git_config[:key]}"
   system "git config --global --add #{git_config[:key]} '#{git_config[:value]}'"
+end
+
+say "<%= color('DONE!', :green) %>"
+
+say "<%= color('Initializing the Vim submodules ...', :yellow) %>"
+
+system <<-SHELL
+cd #{options[:dotfile_dest]} &&
+git submodule init &&
+git submodule update
+SHELL
+
+say "<%= color('DONE!', :green) %>"
+
+say "<%= color('Building the command-t plugin ...', :yellow) %>"
+
+Dir.chdir "etc/vim/bundle/command-t/ruby/command-t" do
+  system "find . -name '.gitignore' | xargs rm"
+  if `rvm > /dev/null 2>&1` && $?.exitstatus == 0
+    system "rvm system ruby extconf.rb"
+  else
+    system "/usr/bin/ruby extconf.rb" # assume /usr/bin/ruby is system ruby
+  end
+  system "make clean && make"
 end
 
 say "<%= color('DONE!', :green) %>"
