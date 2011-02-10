@@ -194,7 +194,7 @@ set wildmode=list:longest         " Complete files like a shell.
 " Enable auto-save / auto-write
 set autowrite
 set autowriteall
-au FocusLost * :wa
+au BufLeave,FocusLost silent! * :wa
 
 
 " Folding *********************************************************************
