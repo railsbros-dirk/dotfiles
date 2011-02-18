@@ -103,3 +103,6 @@
 [submodule "etc/vim/bundle/scala"]
 	path = etc/vim/bundle/scala
 	url = git://github.com/rosstimson/scala-vim-support.git
+[submodule "etc/vim/bundle/liquid"]
+	path = etc/vim/bundle/liquid
+	url = git://github.com/tpope/vim-liquid.git
