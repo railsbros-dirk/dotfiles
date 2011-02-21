@@ -30,7 +30,7 @@ alias cl clear
 
 # Load the readline module.
 IRB.conf[:USE_READLINE] = true
-Readline.basic_word_break_characters= " \t\n\\><=;|&." unless defined?(JRUBY_VERSION)
+#Readline.basic_word_break_characters= " \t\n\\><=;|&." unless defined?(JRUBY_VERSION)
  
 # Remove the annoying irb(main):001:0 and replace with >>
 IRB.conf[:PROMPT_MODE]  = :SIMPLE
