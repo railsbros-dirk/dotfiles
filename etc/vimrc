@@ -185,7 +185,7 @@ set laststatus=2 " Show the status line all the time
 set autoindent
 set smartindent
 set title " Set the terminal's title
-set wildignore+=vendor,log,tmp,*.swp
+set wildignore+=log,tmp,*.swp
 set list listchars=tab:\ \ ,trail:·
 
 set wildmenu                      " Enhanced command line completion.
