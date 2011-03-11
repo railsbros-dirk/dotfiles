@@ -174,8 +174,8 @@ set nolist
 
 
 " Misc settings ***************************************************************
-set backspace=indent,eol,start
-set number " Show line numbers " Intuitive backspacing.
+set backspace=indent,eol,start " Intuitive backspacing.
+set number " Show line numbers 
 set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
 set hidden " Handle multiple buffers better.
 map Q <Esc> " Get rid of awkward Ex-mode
