@@ -75,6 +75,7 @@ ss() {
     unicorn -p 3000
   fi
 }
+alias rs="ss"
 
 rc() {
   if test -f "./script/console"; then
@@ -82,4 +83,9 @@ rc() {
   else
     rails console
   fi
+}
+
+repair_xml(){
+  xmllint --format $1 > repaired_xml_tmp.xml
+  mv repaired_xml_tmp.xml $1
 }
