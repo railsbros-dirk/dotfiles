@@ -42,13 +42,15 @@ ruby_patchlevel_prompt_info() {
 }
 
 current_gemset() {
-  local gemsetName=`rvm gemset name`
-  
-  if [[ (-n ${gemsetName}) ]]
-  then
-    echo ${gemsetName}
-  else
-    echo default
+  if [[ ($SHOW_GEMSET_IN_PROMPT -gt 0) ]]; then
+    local gemsetName=`rvm gemset name`
+
+    if [[ (-n ${gemsetName}) ]]
+    then
+      echo "@${gemsetName}"
+    else
+      echo "@default"
+    fi
   fi
 }
 
@@ -88,4 +90,9 @@ rc() {
 repair_xml(){
   xmllint --format $1 > repaired_xml_tmp.xml
   mv repaired_xml_tmp.xml $1
+}
+
+# jump to project in dir PROJECTS_DIR
+p() {
+  cd $PROJECTS_DIR/$1
 }

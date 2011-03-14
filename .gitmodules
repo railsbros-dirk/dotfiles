@@ -1,0 +1,108 @@
+[submodule "etc/vim/snippets"]
+	path = etc/vim/snippets
+	url = git://github.com/railsbros-dirk/snipmate-snippets.git
+[submodule "etc/vim/bundle/snipmate"]
+	path = etc/vim/bundle/snipmate
+	url = git://github.com/msanders/snipmate.vim.git
+[submodule "etc/vim/bundle/pathogen"]
+	path = etc/vim/bundle/pathogen
+	url = git://github.com/tpope/vim-pathogen.git
+[submodule "etc/vim/bundle/command-t"]
+	path = etc/vim/bundle/command-t
+	url = git://github.com/wincent/Command-T.git
+[submodule "etc/vim/bundle/nerdtree"]
+	path = etc/vim/bundle/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
+[submodule "etc/vim/bundle/ack"]
+	path = etc/vim/bundle/ack
+	url = git://github.com/mileszs/ack.vim.git
+[submodule "etc/vim/bundle/vim-rails"]
+	path = etc/vim/bundle/vim-rails
+	url = git://github.com/tpope/vim-rails.git
+[submodule "etc/vim/bundle/vim-ragtag"]
+	path = etc/vim/bundle/vim-ragtag
+	url = git://github.com/tpope/vim-ragtag.git
+[submodule "etc/vim/bundle/vim-surround"]
+	path = etc/vim/bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git
+[submodule "etc/vim/bundle/vim-rake"]
+	path = etc/vim/bundle/vim-rake
+	url = git://github.com/tpope/vim-rake.git
+[submodule "etc/vim/bundle/vim-unimpaired"]
+	path = etc/vim/bundle/vim-unimpaired
+	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "etc/vim/bundle/vim-cucumber"]
+	path = etc/vim/bundle/vim-cucumber
+	url = git://github.com/tpope/vim-cucumber.git
+[submodule "etc/vim/bundle/vim-liquid"]
+	path = etc/vim/bundle/vim-liquid
+	url = git://github.com/tpope/vim-liquid.git
+[submodule "etc/vim/bundle/vim-fugitive"]
+	path = etc/vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "etc/vim/bundle/vim-git"]
+	path = etc/vim/bundle/vim-git
+	url = git://github.com/tpope/vim-git.git
+[submodule "etc/vim/bundle/vim-markdown"]
+	path = etc/vim/bundle/vim-markdown
+	url = git://github.com/tpope/vim-markdown.git
+[submodule "etc/vim/bundle/bufexplorer"]
+	path = etc/vim/bundle/bufexplorer
+	url = git://github.com/markabe/bufexplorer.git
+[submodule "etc/vim/bundle/vim-ruby"]
+	path = etc/vim/bundle/vim-ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
+[submodule "etc/vim/bundle/vim-conque"]
+	path = etc/vim/bundle/vim-conque
+	url = git://github.com/rson/vim-conque.git
+[submodule "etc/vim/bundle/gist-vim"]
+	path = etc/vim/bundle/gist-vim
+	url = git://github.com/mattn/gist-vim
+[submodule "etc/vim/bundle/vim-javascript"]
+	path = etc/vim/bundle/vim-javascript
+	url = git://github.com/pangloss/vim-javascript
+[submodule "etc/vim/bundle/vim-indent-object"]
+	path = etc/vim/bundle/vim-indent-object
+	url = git://github.com/michaeljsmith/vim-indent-object
+[submodule "etc/vim/bundle/delimitMate"]
+	path = etc/vim/bundle/delimitMate
+	url = git://github.com/Raimondi/delimitMate
+[submodule "etc/vim/bundle/Specky"]
+	path = etc/vim/bundle/Specky
+	url = git://github.com/vim-scripts/Specky
+[submodule "etc/vim/bundle/vim-makegreen"]
+	path = etc/vim/bundle/vim-makegreen
+	url = git://github.com/reinh/vim-makegreen
+[submodule "etc/vim/bundle/vim-peepopen"]
+	path = etc/vim/bundle/vim-peepopen
+	url = git://github.com/shemerey/vim-peepopen
+[submodule "etc/vim/bundle/vim-rooter"]
+	path = etc/vim/bundle/vim-rooter
+	url = git://github.com/airblade/vim-rooter
+[submodule "etc/vim/bundle/taglist.vim"]
+	path = etc/vim/bundle/taglist.vim
+	url = git://github.com/vim-scripts/taglist.vim
+[submodule "etc/vim/bundle/nerdcommenter"]
+	path = etc/vim/bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule "etc/vim/bundle/coffee-script"]
+	path = etc/vim/bundle/coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git
+[submodule "etc/vim/bundle/align"]
+	path = etc/vim/bundle/align
+	url = git://github.com/tsaleh/vim-align.git
+[submodule "etc/vim/bundle/markdown_preview"]
+	path = etc/vim/bundle/markdown_preview
+	url = git://github.com/robgleeson/vim-markdown-preview.git
+[submodule "etc/vim/bundle/indent-object"]
+	path = etc/vim/bundle/indent-object
+	url = git://github.com/michaeljsmith/vim-indent-object.git
+[submodule "etc/vim/bundle/jslint"]
+	path = etc/vim/bundle/jslint
+	url = git://github.com/hallettj/jslint.vim.git
+[submodule "etc/vim/bundle/scala"]
+	path = etc/vim/bundle/scala
+	url = git://github.com/rosstimson/scala-vim-support.git
+[submodule "etc/vim/bundle/liquid"]
+	path = etc/vim/bundle/liquid
+	url = git://github.com/tpope/vim-liquid.git
