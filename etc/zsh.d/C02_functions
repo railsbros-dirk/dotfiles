@@ -96,3 +96,7 @@ repair_xml(){
 p() {
   cd $PROJECTS_DIR/$1
 }
+
+update_projects() {
+  ruby -e "Dir['*/.git'].each { |dir| system %Q{cd #{dir.gsub(/\/\.git/, '')}; git pull; git submodule init; git submodule update; bundle install; cd ..} }"
+}
