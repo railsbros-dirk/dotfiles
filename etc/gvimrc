@@ -29,6 +29,9 @@ if has("gui_macvim")
   " Command-e for ConqueTerm
   map <D-e> :call StartTerm()<CR>
 
+  " Run Ruby file
+  map <D-r> :call RunRuby()<CR>
+
   " Command-/ to toggle comments
   map <D-/> <plug>NERDCommenterToggle<CR>
 
@@ -193,6 +196,32 @@ endfunction
 function Mkdir(file)
   execute "!mkdir " . a:file
   call s:UpdateNERDTree()
+endfunction
+
+function RunRuby()
+  if exists("b:filetype") && getbufvar("%", "&filetype") == "ruby"
+    echo "RUBY!!!"
+  else
+    return
+  endif
+
+  "if !getbufvar("%", "&saved")
+    "let tmpfile = tempname()
+    "exe "write " . tmpfile
+  "endif
+
+  "execute "e "
+"ruby <<RUBY
+  "output = File.new "/tmp/run_ruby_output.html", "w+"
+
+  "ENV['TM_FILEPATH']     = VIM.evaluate(%{expand("%")})
+  "ENV['RUBYLIB']         = "/Applications/TextMate.app/Contents/SharedSupport/Bundles/Ruby.tmbundle/Support/RubyMate"
+  "ENV['TM_SUPPORT_PATH'] = '/Applications/TextMate.app/Contents/SharedSupport/Support'
+  "output << `ruby -KU -- #{ENV['RUBYLIB']}/run_script.rb`
+  "output.close
+
+  "`open /tmp/run_ruby_output.html`
+"RUBY
 endfunction
 
 function Edit(file)
