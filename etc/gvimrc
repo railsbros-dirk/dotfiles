@@ -199,29 +199,29 @@ function Mkdir(file)
 endfunction
 
 function RunRuby()
-  if exists("b:filetype") && getbufvar("%", "&filetype") == "ruby"
-    echo "RUBY!!!"
-  else
-    return
+  if !getbufvar("%", "&saved")
+    let tmpfile = tempname()
+    exe "write " . tmpfile . ".rb"
   endif
 
-  "if !getbufvar("%", "&saved")
-    "let tmpfile = tempname()
-    "exe "write " . tmpfile
-  "endif
+  execute "e "
+ruby <<RUBY
+  output = File.new "/tmp/run_ruby_output.html", "w+"
 
-  "execute "e "
-"ruby <<RUBY
-  "output = File.new "/tmp/run_ruby_output.html", "w+"
+  ENV['TM_FILEPATH']       = VIM.evaluate(%{expand("%")})
+  ENV['RUBYLIB']           = "/Applications/TextMate.app/Contents/SharedSupport/Bundles/Ruby.tmbundle/Support/RubyMate"
+  ENV['TM_SUPPORT_PATH']   = '/Applications/TextMate.app/Contents/SharedSupport/Support'
 
-  "ENV['TM_FILEPATH']     = VIM.evaluate(%{expand("%")})
-  "ENV['RUBYLIB']         = "/Applications/TextMate.app/Contents/SharedSupport/Bundles/Ruby.tmbundle/Support/RubyMate"
-  "ENV['TM_SUPPORT_PATH'] = '/Applications/TextMate.app/Contents/SharedSupport/Support'
-  "output << `ruby -KU -- #{ENV['RUBYLIB']}/run_script.rb`
-  "output.close
+  if ENV['TM_FILEPATH'] =~ /_spec\.rb$/
+    output << `rspec -f html --color $TM_FILEPATH 2>&1`
+  else
+    output << `ruby -KU -- #{ENV['RUBYLIB']}/run_script.rb`
+  end
 
-  "`open /tmp/run_ruby_output.html`
-"RUBY
+  output.close
+
+  `open /tmp/run_ruby_output.html`
+RUBY
 endfunction
 
 function Edit(file)
