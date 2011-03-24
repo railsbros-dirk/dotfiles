@@ -73,11 +73,7 @@ say "<%= color('DONE!', :green) %>"
 
 say "<%= color('Initializing the Vim submodules ...', :yellow) %>"
 
-system <<-SHELL
-cd #{options[:dotfile_dest]} &&
-git submodule init &&
-git submodule update
-SHELL
+system "git submodule init && git submodule update"
 
 say "<%= color('DONE!', :green) %>"
 
