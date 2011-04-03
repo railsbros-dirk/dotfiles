@@ -61,6 +61,7 @@ if has("gui_macvim")
 
   map <C-S-d> Vyp " duplicate current line
   map <D-d> dd " delete current line
+  imap <D-d> <ESC>ddi
 
 elseif has("gui_gtk2")
 
