@@ -77,8 +77,9 @@ end
 " set transparency=95
 
 " Default size of window
-set columns=150
-set lines=70
+set columns=200
+set lines=105
+winpos 0 1500
 
 " Tab headings
 set gtl=%t gtt=%F
