@@ -91,9 +91,6 @@
 [submodule "etc/vim/bundle/align"]
 	path = etc/vim/bundle/align
 	url = git://github.com/tsaleh/vim-align.git
-[submodule "etc/vim/bundle/markdown_preview"]
-	path = etc/vim/bundle/markdown_preview
-	url = git://github.com/robgleeson/vim-markdown-preview.git
 [submodule "etc/vim/bundle/indent-object"]
 	path = etc/vim/bundle/indent-object
 	url = git://github.com/michaeljsmith/vim-indent-object.git
@@ -106,3 +103,6 @@
 [submodule "etc/vim/bundle/liquid"]
 	path = etc/vim/bundle/liquid
 	url = git://github.com/tpope/vim-liquid.git
+[submodule "etc/vim/bundle/markdown-preview"]
+	path = etc/vim/bundle/markdown-preview
+	url = git://github.com/mkitt/markdown-preview.vim.git
