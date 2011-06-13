@@ -43,5 +43,9 @@ REPORTTIME=2                # report time if execution exceeds amount of seconds
 SAVEHIST=10000              # maximum of history events to be save
 LOGCHECK=60
 watch=(notme)               # watch login/logout
+
+setopt AUTO_PUSHD               # make cd push the dir to a stack
+setopt PUSHD_IGNORE_DUPS        # Don't push the same dir twice
+DIRSTACKSIZE=10                 # Max. size of the stack befor it gets truncated
                             
 setopt appendhistory autocd extendedglob hist_ignore_all_dups share_history inc_append_history hist_ignore_space

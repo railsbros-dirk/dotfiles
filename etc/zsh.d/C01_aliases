@@ -5,6 +5,7 @@ else
 fi
 
 alias cl="clear"
+alias d="dirs -v"
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
@@ -16,8 +17,6 @@ alias rd='rmdir'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias grep='grep --color=auto'
-alias po='popd'
-alias pu='pushd'
 alias tsl="tail -f /var/log/syslog"
 alias df="df -hT"
 alias tree='tree -psC -L'
