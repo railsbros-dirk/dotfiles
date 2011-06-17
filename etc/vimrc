@@ -71,6 +71,7 @@ filetype plugin indent on " Turn on file type detection.
 syntax enable " Turn on syntax highlighting.
 set ofu=syntaxcomplete#Complete
 set completeopt=longest,menuone
+set complete-=i
 
 
 " Scrollbars ******************************************************************
@@ -114,7 +115,7 @@ colorscheme solarized
 set showcmd
 set ruler " Show ruler
 "set ch=2 " Make command line two lines high
-match LongLineWarning '\%120v.*' " Error format when a line is longer than 120
+"match LongLineWarning '\%120v.*' " Error format when a line is longer than 120
 set showmode " Display the mode you're in.
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
