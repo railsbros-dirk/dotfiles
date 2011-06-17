@@ -1,22 +1,22 @@
 #!/bin/zsh
 
-bindkey -v '^[[3~' delete-char
+bindkey -e '^[[3~' delete-char
 # bindkey -v "^[Od" backward-word
 # bindkey -v "^[Oc" forward-word
 
-bindkey -v "^A" beginning-of-line
-bindkey -v "^E" end-of-line
-bindkey -v "^K" kill-line
-bindkey -v "^L" clear-screen
-bindkey -v "^U" kill-whole-line
-bindkey -v "^V" quoted-insert
-bindkey -v "^W" backward-kill-word
+bindkey -e "^A" beginning-of-line
+bindkey -e "^E" end-of-line
+bindkey -e "^K" kill-line
+bindkey -e "^L" clear-screen
+bindkey -e "^U" kill-whole-line
+bindkey -e "^V" quoted-insert
+bindkey -e "^W" backward-kill-word
 
-bindkey -v "^N" down-history
-bindkey -v "^P" up-history
+bindkey -e "^N" down-history
+bindkey -e "^P" up-history
 
-bindkey -v "^[H" run-help
-bindkey -v "^[h" run-help
+bindkey -e "^[H" run-help
+bindkey -e "^[h" run-help
 
 # alow for editing of the command line
 # http://zshwiki.org/home/examples/zlewidgets
