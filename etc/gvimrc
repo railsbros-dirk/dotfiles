@@ -14,7 +14,7 @@ if has("gui_macvim")
   set guioptions-=T                 " Hide toolbar.
   set guioptions-=L
   set guioptions+=r
-  set transparency=23
+  set transparency=2
 
   " set stal=2 " turn on tabs by default
 
@@ -87,7 +87,8 @@ set gtl=%t gtt=%F
 let g:rubytest_cmd_feature = "cucumber --no-color %p"
 let g:rubytest_cmd_story = "cucumber --no-color %p -n '%c'"
 
-colorscheme sunburst
+"colorscheme solarized
+colorscheme solarized
 
 " ConqueTerm wrapper
 function StartTerm()

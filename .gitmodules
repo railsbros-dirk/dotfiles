@@ -106,3 +106,6 @@
 [submodule "etc/vim/bundle/markdown-preview"]
 	path = etc/vim/bundle/markdown-preview
 	url = git://github.com/mkitt/markdown-preview.vim.git
+[submodule "etc/vim/bundle/vim-colors-solarized"]
+	path = etc/vim/bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
