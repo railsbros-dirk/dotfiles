@@ -1,0 +1,2 @@
+fpath=(~/.zsh.d/custom_funcs $fpath)
+typeset -U fpath

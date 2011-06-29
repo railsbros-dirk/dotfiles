@@ -33,15 +33,12 @@ find_for_mate() {
   find ${1:-.} -name "*.${2:-rb}" -print0 | xargs -0 mate
 }
 
-ruby_version_prompt_info() {
-  ruby --version | awk '{print $2}'
+function ruby_version_prompt_info() {
+  ruby_version=$(~/.rvm/bin/rvm-prompt 2> /dev/null) || return
+  echo "($ruby_version)"
 }
 
-ruby_patchlevel_prompt_info() {
-  ruby --version | awk '{print $5}' | sed s/\)//g
-}
-
-current_gemset() {
+function current_gemset() {
   if [[ ($SHOW_GEMSET_IN_PROMPT -gt 0) ]]; then
     local gemsetName=`rvm gemset name`
 
@@ -93,8 +90,8 @@ repair_xml(){
 }
 
 # jump to project in dir PROJECTS_DIR
-p() {
-  cd $PROJECTS_DIR/$1
+function p() {
+  cd ~projects_dir/$1
   clear
 }
 
