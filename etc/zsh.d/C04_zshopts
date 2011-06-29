@@ -44,8 +44,24 @@ SAVEHIST=10000              # maximum of history events to be save
 LOGCHECK=60
 watch=(notme)               # watch login/logout
 
-setopt AUTO_PUSHD               # make cd push the dir to a stack
-setopt PUSHD_IGNORE_DUPS        # Don't push the same dir twice
+setopt auto_name_dirs
+setopt auto_pushd               # make cd push the dir to a stack
+setopt pushd_ignore_dups        # Don't push the same dir twice
 DIRSTACKSIZE=10                 # Max. size of the stack befor it gets truncated
-                            
+
 setopt appendhistory autocd extendedglob hist_ignore_all_dups share_history inc_append_history hist_ignore_space
+
+## smart urls
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
+## file rename magick
+bindkey "^[m" copy-prev-shell-word
+
+## jobs
+setopt long_list_jobs
+
+## pager
+export PAGER=less
+export LC_CTYPE=en_US.UTF-8
+

@@ -4,32 +4,32 @@ sdate() { date +%Y.%m.%d }
 pc() { awk "{print \$$1}" }
 rot13 () { tr "[a-m][n-z][A-M][N-Z]" "[n-z][a-m][N-Z][A-M]" }
 
-devlog() {
+function devlog() {
   echo > log/development.log
   tail -fn 150 log/development.log
 }
 
-prodlog() {
+function prodlog() {
   echo > log/production.log
   tail -fn 150 log/production.log
 }
 
-testlog() {
+function testlog() {
   echo > log/test.log
   tail -fn 150 log/test.log
 }
 
-svn-ignore() {
+function svn-ignore() {
   svn propedit svn:ignore ${1:-.}
 }
 
-current_ips() {
+function current_ips() {
   ifconfig | grep "inet " | awk '{print $2}' | sed -e s/addr://g
 }
 
 # Searches all Ruby files in the given directories (default is '.')
 # and opens them in TextMate (Ment for better searching).
-find_for_mate() {
+function find_for_mate() {
   find ${1:-.} -name "*.${2:-rb}" -print0 | xargs -0 mate
 }
 
@@ -51,7 +51,7 @@ function current_gemset() {
   fi
 }
 
-hudson_build_log() {
+function hudson_build_log() {
   local project=$1
   local buildNumber=$(ssh admin@blackcat.galaxycats.com "cat /Users/admin/.hudson/jobs/${project}/nextBuildNumber")
   (( buildNumber = buildNumber - 1))
@@ -59,15 +59,15 @@ hudson_build_log() {
   ssh admin@blackcat.galaxycats.com "tail -fn 150 /Users/admin/.hudson/jobs/${project}/builds/${buildNumber}/log"
 }
 
-pman() {
+function pman() {
   man -t "${1}" | open -f -a /Applications/Preview.app
 }
 
-tman() {
+function tman() {
   MANWIDTH=160 MANPAGER='col -bx' man $@ | mate
 }
 
-ss() {
+function ss() {
   if test -f "./script/server"; then
     ./script/server
   else
@@ -76,7 +76,7 @@ ss() {
 }
 alias rs="ss"
 
-rc() {
+function rc() {
   if test -f "./script/console"; then
     ./script/console
   else
@@ -84,7 +84,7 @@ rc() {
   fi
 }
 
-repair_xml(){
+function repair_xml() {
   xmllint --format $1 > repaired_xml_tmp.xml
   mv repaired_xml_tmp.xml $1
 }
@@ -95,6 +95,17 @@ function p() {
   clear
 }
 
-update_projects() {
+function update_projects() {
   ruby -e "Dir['*/.git'].each { |dir| system %Q{cd #{dir.gsub(/\/\.git/, '')}; git pull; git submodule init; git submodule update; bundle install; cd ..} }"
+}
+
+function cdf() { cd *$1*/ } # stolen from @topfunky
+
+# Originally from Jonathan Penn, with modifications by Gary Bernhardt
+function whodoneit() {
+    (set -e &&
+        for x in $(git grep -I --name-only $1); do
+            git blame -f -- $x | grep $1;
+        done
+    )
 }

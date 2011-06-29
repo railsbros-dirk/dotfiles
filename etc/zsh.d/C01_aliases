@@ -6,9 +6,6 @@ fi
 
 alias cl="clear"
 alias d="dirs -v"
-alias mv='nocorrect mv'       # no spelling correction on mv
-alias cp='nocorrect cp'
-alias mkdir='nocorrect mkdir'
 alias ll='ls -lsahF'
 alias l.='ls -d .[^.]*'
 alias lsd='ls -ld *(-/DN)'
