@@ -21,11 +21,22 @@ alias tsl="tail -f /var/log/syslog"
 alias df="df -hT"
 alias tree='tree -psC -L'
 
-alias zshconf="mate ~/.zsh.d"
-
-alias firefox='/Applications/Firefox.app/Contents/MacOS/firefox -profilemanager'
 alias quake3.config='mate ~/Library/Application\ Support/Quake3/cpma/cfg/cpl-server.cfg'
 alias quake3.nb='open /Applications/ioquake3/ioquake3-1.36.app --args +set r_fullscreen "1" +set r_customaspect "1" +set r_customwidth "1440" +set r_customheight "900" +set r_mode "-1" +set fs_game cpma +exec cfg/cpl-server.cfg'
 alias quake3.24='open /Applications/ioquake3/ioquake3-1.36.app --args +set r_fullscreen "1" +set r_customaspect "1" +set r_customwidth "1920" +set r_customheight "1200" +set r_mode "-1" +set fs_game cpma +exec cfg/cpl-server.cfg'
 
 alias gemi="gem install --no-ri --no-rdoc"
+
+# Git aliases
+
+alias g='git'
+alias gs='git status'
+alias gl='git pull'
+alias gp='git push'
+alias gcm='git checkout master'
+
+# Ruby / Rails aliases
+
+alias migrate="bundle exec 'rake db:migrate; rake db:test:prepare'"
+alias bi="bundle install"
+alias be="bundle exec"
