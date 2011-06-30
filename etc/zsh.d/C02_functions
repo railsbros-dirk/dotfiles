@@ -89,7 +89,7 @@ function repair_xml() {
   mv repaired_xml_tmp.xml $1
 }
 
-# jump to project in dir PROJECTS_DIR
+# jump to project in dir ~projects_dir
 function p() {
   cd ~projects_dir/$1
   clear

@@ -26,4 +26,4 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 zstyle ':completion:*:*:*:*:*' menu yes select
 
-compdef '_path_files -/ -W ${PROJECTS_DIR}' p
+compdef '_path_files -/ -W ${~projects_dir}' p
