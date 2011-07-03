@@ -1,8 +1,9 @@
 #!/bin/zsh
 
+# emacs editing
+bindkey -e
+
 bindkey -e '^[[3~' delete-char
-# bindkey -v "^[Od" backward-word
-# bindkey -v "^[Oc" forward-word
 
 bindkey -e "^A" beginning-of-line
 bindkey -e "^E" end-of-line
@@ -15,17 +16,14 @@ bindkey -e "^W" backward-kill-word
 bindkey -e "^N" down-history
 bindkey -e "^P" up-history
 
-bindkey -e "^[H" run-help
-bindkey -e "^[h" run-help
-
+## file rename magick
+bindkey "^m" copy-prev-shell-word
+#
 # alow for editing of the command line
 # http://zshwiki.org/home/examples/zlewidgets
 autoload -U    edit-command-line
 zle -N         edit-command-line
-bindkey -a 'v' edit-command-line
-
-# vi editing
-bindkey -e
+bindkey '\ee'  edit-command-line
 
 bindkey '^r' history-incremental-search-backward
 bindkey '^f' history-incremental-search-forward

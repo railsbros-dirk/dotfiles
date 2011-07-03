@@ -16,11 +16,13 @@ else
   fi
 fi
 
+# zmv "programmable rename"
+autoload -U zmv
 
 autoload -U is-at-least
 
 is-at-least 4.3.0 && {
-    unsetopt hist_save_by_copy
+  unsetopt hist_save_by_copy
 }
 
 # http://xanana.ucsc.edu/~wgscott/wordpress_new/wordpress/?p=12
@@ -29,12 +31,6 @@ typeset -ga precmd_functions
 typeset -ga chpwd_functions
 
 [ -w $zsh_cache ] && HISTFILE=$zsh_cache/history
-
-if [ `uname` = 'Darwin' ]; then
-  export EDITOR='mvim -f -c "au VimLeave * !open -a Terminal"'
-else
-  export EDITOR='vim'
-fi
 
 HISTSIZE=10000              # size of history
 LISTMAX=1000                # never ask
@@ -54,9 +50,6 @@ setopt appendhistory autocd extendedglob hist_ignore_all_dups share_history inc_
 ## smart urls
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
-
-## file rename magick
-bindkey "^[m" copy-prev-shell-word
 
 ## jobs
 setopt long_list_jobs

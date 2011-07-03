@@ -18,6 +18,9 @@ alias tsl="tail -f /var/log/syslog"
 alias df="df -hT"
 alias tree='tree -psC -L'
 
+alias -s txt='less -rE'
+alias -s log='tail -fn 200'
+
 alias quake3.config='mate ~/Library/Application\ Support/Quake3/cpma/cfg/cpl-server.cfg'
 alias quake3.nb='open /Applications/ioquake3/ioquake3-1.36.app --args +set r_fullscreen "1" +set r_customaspect "1" +set r_customwidth "1440" +set r_customheight "900" +set r_mode "-1" +set fs_game cpma +exec cfg/cpl-server.cfg'
 alias quake3.24='open /Applications/ioquake3/ioquake3-1.36.app --args +set r_fullscreen "1" +set r_customaspect "1" +set r_customwidth "1920" +set r_customheight "1200" +set r_mode "-1" +set fs_game cpma +exec cfg/cpl-server.cfg'
