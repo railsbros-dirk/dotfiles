@@ -17,7 +17,7 @@ bindkey -e "^N" down-history
 bindkey -e "^P" up-history
 
 ## file rename magick
-bindkey "^m" copy-prev-shell-word
+bindkey '\em' copy-prev-shell-word
 #
 # alow for editing of the command line
 # http://zshwiki.org/home/examples/zlewidgets
