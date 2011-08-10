@@ -106,7 +106,7 @@ set smartcase " Ignore case when searching lowercase
 
 " Colors **********************************************************************
 "set t_Co=256 " 256 colors
-set background=dark
+set background=light
 syntax on " syntax highlighting
 "let g:solarized_termcolors=256
 colorscheme solarized
@@ -199,6 +199,8 @@ set autowrite
 set autowriteall
 au BufLeave,FocusLost * silent! :wa
 
+" :W to save with sudo
+command W w !sudo tee % > /dev/null
 
 " Folding *********************************************************************
 " Automatic fold settings for specific files. Uncomment to use.
@@ -219,6 +221,11 @@ map <down> gj
 map j gj
 imap <down> <C-o>gj
 map E ge
+
+map <Leader>H :vertical res -5<CR>
+map <Leader>L :vertical res +5<CR>
+map <Leader>K :res +5<CR>
+map <Leader>J :res -5<CR>
 
 map <Leader>P <C-^> " Go to previous file
 

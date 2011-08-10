@@ -1,4 +1,6 @@
 " -----------------------------------------------------------------------------
+"
+"
 " |                            VIM Settings                                   |
 " |                              GUI stuff                                    |
 " -----------------------------------------------------------------------------
@@ -47,8 +49,10 @@ if has("gui_macvim")
   map <D-/> <plug>NERDCommenterToggle<CR>
 
   " Command-][ to increase/decrease indentation
+  map <D-]> V>gv<ESC>
   vmap <D-]> >gv
   imap <D-]> <ESC>V>gv<ESC>i
+  map <D-[> V<gv<ESC>
   vmap <D-[> <gv
   imap <D-[> <ESC>V<gv<ESC>i
 
@@ -80,11 +84,15 @@ if has("gui_macvim")
   " Adjust viewports to the same size
   map <Leader>= <C-w>=
   imap <Leader>= <Esc> <C-w>=
+
+  " don't use system pasteboard for macvim
+  set clipboard=
 end
 
 " General *********************************************************************
 
 " set transparency=95
+set background=dark
 
 " Default size of window
 set columns=189
