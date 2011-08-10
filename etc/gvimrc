@@ -279,3 +279,7 @@ call s:DefineCommand("touch", "Touch")
 call s:DefineCommand("rm", "Remove")
 call s:DefineCommand("e", "Edit")
 call s:DefineCommand("mkdir", "Mkdir")
+
+if filereadable(expand("~/.gvimrc.local"))
+  source ~/.gvimrc.local
+endif
