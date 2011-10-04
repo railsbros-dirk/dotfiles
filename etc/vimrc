@@ -202,9 +202,6 @@ au BufLeave,FocusLost * silent! :wa
 " :W to save with sudo
 command W w !sudo tee % > /dev/null
 
-" No Balloon Tipps
-set noballooneval
-
 " Folding *********************************************************************
 " Automatic fold settings for specific files. Uncomment to use.
 autocmd FileType ruby set foldmethod=syntax
