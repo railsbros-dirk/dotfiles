@@ -1,9 +1,6 @@
 [submodule "etc/vim/snippets"]
 	path = etc/vim/snippets
 	url = git://github.com/railsbros-dirk/snipmate-snippets.git
-[submodule "etc/vim/bundle/snipmate"]
-	path = etc/vim/bundle/snipmate
-	url = git://github.com/msanders/snipmate.vim.git
 [submodule "etc/vim/bundle/pathogen"]
 	path = etc/vim/bundle/pathogen
 	url = git://github.com/tpope/vim-pathogen.git
@@ -97,9 +94,6 @@
 [submodule "etc/vim/bundle/scala"]
 	path = etc/vim/bundle/scala
 	url = git://github.com/rosstimson/scala-vim-support.git
-[submodule "etc/vim/bundle/liquid"]
-	path = etc/vim/bundle/liquid
-	url = git://github.com/tpope/vim-liquid.git
 [submodule "etc/vim/bundle/markdown-preview"]
 	path = etc/vim/bundle/markdown-preview
 	url = git://github.com/mkitt/markdown-preview.vim.git
@@ -109,3 +103,30 @@
 [submodule "etc/vim/bundle/vim-supertab"]
 	path = etc/vim/bundle/vim-supertab
 	url = git://github.com/ervandew/supertab.git
+[submodule "etc/vim/bundle/vim-abolish"]
+	path = etc/vim/bundle/vim-abolish
+	url = git://github.com/tpope/vim-abolish.git
+[submodule "etc/vim/bundle/vim-repeat"]
+	path = etc/vim/bundle/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
+[submodule "etc/vim/bundle/vim-slurper.git"]
+	path = etc/vim/bundle/vim-slurper.git
+	url = git://github.com/adamlowe/vim-slurper.git
+[submodule "etc/vim/bundle/gundo"]
+	path = etc/vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
+[submodule "etc/vim/bundle/ZoomWin"]
+	path = etc/vim/bundle/ZoomWin
+	url = git://github.com/vim-scripts/ZoomWin.git
+[submodule "etc/vim/bundle/syntastic"]
+	path = etc/vim/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic.git
+[submodule "etc/vim/bundle/vim-snipmate"]
+	path = etc/vim/bundle/vim-snipmate
+	url = git://github.com/garbas/vim-snipmate.git
+[submodule "etc/vim/bundle/tlib_vim"]
+	path = etc/vim/bundle/tlib_vim
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "etc/vim/bundle/vim-addon-mw-utils"]
+	path = etc/vim/bundle/vim-addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
