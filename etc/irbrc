@@ -87,6 +87,14 @@ class Object
   end
 end
 
+def pbcopy(input)
+  IO.popen("pbcopy", "r+") do |clipboard|
+    clipboard << input
+  end
+
+  return input
+end
+
 def log_to_stdout
   if Object.const_defined?('Rails')
     Rails.logger.instance_variable_set("@log", STDOUT)
