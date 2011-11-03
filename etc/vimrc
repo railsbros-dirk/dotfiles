@@ -219,9 +219,6 @@ set foldlevel=1
 " This is likely a bludgeon to solve some other issue, but it works
 set noequalalways
 
-" ZoomWin configuration
-map <S-C-CR> :ZoomWin<CR>
-
 " Navigation ******************************************************************
 
 " Make cursor move by visual lines instead of file lines (when wrapping)

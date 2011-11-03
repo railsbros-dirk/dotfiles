@@ -101,6 +101,9 @@ set lines=61
 " Tab headings
 set gtl=%t gtt=%F
 
+" ZoomWin configuration
+map <S-C-CR> :ZoomWin<CR>
+
 let g:rubytest_cmd_feature = "cucumber --no-color %p"
 let g:rubytest_cmd_story = "cucumber --no-color %p -n '%c'"
 
