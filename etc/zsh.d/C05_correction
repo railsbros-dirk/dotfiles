@@ -7,5 +7,6 @@ alias mysql='nocorrect mysql'
 alias mkdir='nocorrect mkdir'
 alias gist='nocorrect gist'
 alias knife='nocorrect knife'
+alias git-flow='nocorrect git-flow'
 
 # vim:set ft=zsh:
