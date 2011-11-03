@@ -220,7 +220,7 @@ set foldlevel=1
 set noequalalways
 
 " ZoomWin configuration
-map <Leader><Leader> :ZoomWin<CR>
+map <S-C-CR> :ZoomWin<CR>
 
 " Navigation ******************************************************************
 
