@@ -107,7 +107,7 @@ map <S-C-CR> :ZoomWin<CR>
 let g:rubytest_cmd_feature = "cucumber --no-color %p"
 let g:rubytest_cmd_story = "cucumber --no-color %p -n '%c'"
 
-"colorscheme solarized
+colorscheme Tomorrow-Night-Bright
 
 " ConqueTerm wrapper
 function StartTerm()

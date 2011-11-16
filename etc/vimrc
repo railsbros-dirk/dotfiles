@@ -106,10 +106,13 @@ set smartcase " Ignore case when searching lowercase
 
 " Colors **********************************************************************
 "set t_Co=256 " 256 colors
-set background=light
+set background=dark
 syntax on " syntax highlighting
 "let g:solarized_termcolors=256
-colorscheme solarized
+"colorscheme solarized
+"let g:molokai_original=1
+"colorscheme molokai
+colorscheme Tomorrow-Night
 
 
 " Status Line *****************************************************************
@@ -176,7 +179,6 @@ set nolist
 
 
 " Misc settings ***************************************************************
-" allow backspacing over everything in insert mode
 set backspace=indent,eol,start " Intuitive backspacing.
 set number " Show line numbers 
 set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
@@ -188,6 +190,7 @@ set laststatus=2 " Show the status line all the time
 set autoindent
 set smartindent
 set title " Set the terminal's title
+set wildignore+=log,tmp,*.swp
 set list listchars=tab:\ \ ,trail:·
 set clipboard=unnamed " Copy to system pasteboard
 
@@ -197,6 +200,7 @@ set encoding=utf-8
 set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+
 
 " Enable auto-save / auto-write
 set autowrite
@@ -214,10 +218,6 @@ set nofoldenable " Turn on folding
 set foldmethod=syntax " Folding based on syntax
 set foldlevel=1
 
-" Without setting this, ZoomWin restores windows in a way that causes
-" equalalways behavior to be triggered the next time CommandT is used.
-" This is likely a bludgeon to solve some other issue, but it works
-set noequalalways
 
 " Navigation ******************************************************************
 
@@ -241,6 +241,11 @@ map <Leader>P <C-^> " Go to previous file
 function RemoveTrailingSpaces()
   %s/\v[\t ]{-1,}$//g
 endfunction
+
+" Without setting this, ZoomWin restores windows in a way that causes
+" equalalways behavior to be triggered the next time CommandT is used.
+" This is likely a bludgeon to solve some other issue, but it works
+set noequalalways
 
 
 " Ruby stuff ******************************************************************
@@ -269,9 +274,8 @@ imap <C-l> <space>=><space>
 " -----------------------------------------------------------------------------  
 
 " NERDTree ********************************************************************
+map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
-"map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
-map <Leader>d :NERDTreeToggle<CR>
 let NERDTreeHijackNetrw=1 " User instead of Netrw when doing an edit /foobar
 let NERDTreeMouseMode=1 " Single click for everything
 
@@ -310,6 +314,11 @@ nmap <C-Down> ]e
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
+
+
+" fuzzyfinder ********************************************************
+" map <Leader>b :FufBuffer<CR>
+" let g:fuzzy_ignore = '.o;.obj;.bak;.exe;.pyc;.pyo;.DS_Store;.db'
 
 
 " autocomplpop ***************************************************************
@@ -361,7 +370,7 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 nnoremap <F5> :GundoToggle<CR>
 
 " set the tmp path for markdown-preview
-let g:MarkdownPreviewTMP = '/tmp/markdown-preview/'
+let g:MarkdownPreviewTMP = '/tmp/vim-markdown-preview'
 
 " Remember last location in file
 if has("autocmd")
@@ -377,10 +386,6 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
-" Enable syntastic syntax checking
-let g:syntastic_enable_signs=1
-let g:syntastic_quiet_warnings=1
-
 " Use modeline overrides
 set modeline
 set modelines=10
@@ -393,9 +398,7 @@ let macvim_hig_shift_movement = 1
 
 " Show (partial) command in the status line
 set showcmd
-" -----------------------------------------------------------------------------  
-" |                               Host specific                               |
-" -----------------------------------------------------------------------------  
+
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif

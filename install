@@ -79,14 +79,12 @@ say "<%= color('DONE!', :green) %>"
 
 say "<%= color('Building the command-t plugin ...', :yellow) %>"
 
-Dir.chdir "etc/vim/bundle/command-t/ruby/command-t" do
-  system "find . -name '.gitignore' | xargs rm"
+Dir.chdir "etc/vim/bundle/command-t" do
   if `rvm > /dev/null 2>&1` && $?.exitstatus == 0
-    system "rvm system ruby extconf.rb"
+    system "rvm default 'rake make'"
   else
-    system "/usr/bin/ruby extconf.rb" # assume /usr/bin/ruby is system ruby
+    system "rake make" # assume /usr/bin/ruby is system ruby
   end
-  system "make clean && make"
 end
 
 say "<%= color('DONE!', :green) %>"
