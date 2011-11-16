@@ -9,14 +9,14 @@
 " OS Specific *****************************************************************
 if has("gui_macvim")
 
-  set fuoptions=maxvert,maxhorz " fullscreen options (MacVim only), resized window when changed to fullscreen
-  set guifont=DejaVuSansMono:h10
+  set fuoptions=maxvert,maxhorz     " fullscreen options (MacVim only), resized window when changed to fullscreen
+  set guifont=DejaVuSansMono:h12
   set antialias                     " MacVim: smooth fonts.
   set encoding=utf-8                " Use UTF-8 everywhere.
   set guioptions-=T                 " Hide toolbar.
   set guioptions-=L
   set guioptions+=r
-  set transparency=8
+  set transparency=15
 
   " set stal=2 " turn on tabs by default
 
@@ -108,7 +108,6 @@ let g:rubytest_cmd_feature = "cucumber --no-color %p"
 let g:rubytest_cmd_story = "cucumber --no-color %p -n '%c'"
 
 "colorscheme solarized
-colorscheme solarized
 
 " ConqueTerm wrapper
 function StartTerm()
