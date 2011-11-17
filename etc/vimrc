@@ -112,7 +112,7 @@ syntax on " syntax highlighting
 "colorscheme solarized
 "let g:molokai_original=1
 "colorscheme molokai
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Bright
 
 
 " Status Line *****************************************************************
@@ -398,6 +398,8 @@ let macvim_hig_shift_movement = 1
 
 " Show (partial) command in the status line
 set showcmd
+
+set noballooneval
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
