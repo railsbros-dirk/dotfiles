@@ -194,6 +194,9 @@ set wildignore+=log,tmp,*.swp
 set list listchars=tab:\ \ ,trail:·
 set clipboard=unnamed " Copy to system pasteboard
 
+" Syntax checking for ruby
+map <Leader>c :!ruby -c %<CR>
+
 " Set encoding
 set encoding=utf-8
 
@@ -392,9 +395,6 @@ set modelines=10
 
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
-
-" MacVIM shift+arrow-keys behavior (required in .vimrc)
-let macvim_hig_shift_movement = 1
 
 " Show (partial) command in the status line
 set showcmd
