@@ -132,4 +132,4 @@
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
 [submodule "etc/vim/bundle/vim-tomorrow-theme"]
 	path = etc/vim/bundle/vim-tomorrow-theme
-	url = git://github.com/ChrisKempson/Vim-Tomorrow-Theme.git
+	url = git://github.com/railsbros-dirk/Vim-Tomorrow-Theme.git
