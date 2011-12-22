@@ -10,7 +10,7 @@ bindkey ^T tetris
 
 if [ `uname` = 'Darwin' ]; then
   export VISUAL='mvim -f -c "au VimLeave * !open -a $TERM_PROGRAM"'
-  export EDITOR='mvim -f -c "au VimLeave * !open -a $TERM_PROGRAM"'
+  export EDITOR='vim'
 else
   export VISUAL="vim"
   export EDITOR='vim'

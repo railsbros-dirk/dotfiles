@@ -35,6 +35,8 @@ alias gl='git pull'
 alias gp='git push'
 alias gcm='git checkout master'
 
+alias tig='VISUAL=vim tig'
+
 # Ruby / Rails aliases
 
 alias migrate="bundle exec 'rake db:migrate; rake db:test:prepare'"

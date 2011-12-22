@@ -51,12 +51,12 @@ function current_gemset() {
   fi
 }
 
-function hudson_build_log() {
+function jenkins_build_log() {
   local project=$1
-  local buildNumber=$(ssh admin@blackcat.galaxycats.com "cat /Users/admin/.hudson/jobs/${project}/nextBuildNumber")
+  local buildNumber=$(ssh admin@blackcat.galaxycats.com "cat /Users/admin/.jenkins/jobs/${project}/nextBuildNumber")
   (( buildNumber = buildNumber - 1))
 
-  ssh admin@blackcat.galaxycats.com "tail -fn 150 /Users/admin/.hudson/jobs/${project}/builds/${buildNumber}/log"
+  ssh admin@blackcat.galaxycats.com "tail -fn 150 /Users/admin/.jenkins/jobs/${project}/builds/${buildNumber}/log"
 }
 
 function pman() {
@@ -112,4 +112,8 @@ function whodoneit() {
 
 function battery_stat() {
   ioreg -l | grep -i capacity | tr '\n' ' | ' | awk '{printf("%.2f%%", $10/$5 * 100)}'
+}
+
+function last_sha() {
+  g log -n 1 --format=short | grep commit | cut -d ' ' -f 2
 }

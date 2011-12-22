@@ -16,7 +16,7 @@ if has("gui_macvim")
   set guioptions-=T                 " Hide toolbar.
   set guioptions-=L
   set guioptions+=r
-  set transparency=23
+  set transparency=15
 
   " set stal=2 " turn on tabs by default
 
