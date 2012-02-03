@@ -8,6 +8,8 @@ autoload -U tetris
 zle -N tetris
 bindkey ^T tetris
 
+export RUBYOPT=-Ku
+
 if [ `uname` = 'Darwin' ]; then
   export VISUAL='mvim -f -c "au VimLeave * !open -a $TERM_PROGRAM"'
   export EDITOR='vim'

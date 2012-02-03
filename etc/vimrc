@@ -1,4 +1,4 @@
-" -----------------------------------------------------------------------------  
+" -----------------------------------------------------------------------------
 " |                            VIM Settings                                   |
 " |                   (see gvimrc for gui vim settings)                       |
 " |                                                                           |
@@ -22,7 +22,7 @@
 " |   :call Tabstyle_spaces = set tab to 2 spaces                             |
 " |                                                                           |
 " | Put machine/user specific settings in ~/.vimrc.local                      |
-" -----------------------------------------------------------------------------  
+" -----------------------------------------------------------------------------
 
 " Initial stuff ***************************************************************
 
@@ -100,7 +100,7 @@ runtime snippets/support_functions.vim " Load the snippet support functions
 " Searching *******************************************************************
 set hlsearch  " highlight search
 set incsearch  " Incremental search, search as you type
-set ignorecase " Ignore case when searching 
+set ignorecase " Ignore case when searching
 set smartcase " Ignore case when searching lowercase
 
 
@@ -156,8 +156,8 @@ filetype plugin indent on
 
 
 " Insert New Line *************************************************************
-map <S-Enter> O<ESC> " awesome, inserts new line without going into insert mode
-map <Enter> o<ESC>
+"map <S-Enter> O<ESC> " awesome, inserts new line without going into insert mode
+"map <Enter> o<ESC>
 "set fo-=r " do not insert a comment leader after an enter, (no work, fix!!)
 
 
@@ -179,8 +179,15 @@ set nolist
 
 
 " Misc settings ***************************************************************
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=255
+
+set ttyfast " u got a fast terminal
+set ttyscroll=3
+set lazyredraw " to avoid scrolling problems
+
 set backspace=indent,eol,start " Intuitive backspacing.
-set number " Show line numbers 
+set number " Show line numbers
 set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
 set hidden " Handle multiple buffers better.
 map Q <Esc> " Get rid of awkward Ex-mode
@@ -217,10 +224,13 @@ command W w !sudo tee % > /dev/null
 " Automatic fold settings for specific files. Uncomment to use.
 autocmd FileType ruby set foldmethod=syntax
 autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
-set nofoldenable " Turn on folding 
+set nofoldenable " Turn on folding
 set foldmethod=syntax " Folding based on syntax
 set foldlevel=1
 
+"Sourced from vim tip: http://vim.wikia.com/wiki/Keep_folds_closed_while_inserting_text
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 " Navigation ******************************************************************
 
@@ -265,16 +275,16 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 " May require ruby compiled in
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete 
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 
 
 " Hard to type *****************************************************************
 imap <C-l> <space>=><space>
 
 
-" -----------------------------------------------------------------------------  
+" -----------------------------------------------------------------------------
 " |                              Plug-ins                                     |
-" -----------------------------------------------------------------------------  
+" -----------------------------------------------------------------------------
 
 " NERDTree ********************************************************************
 map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
@@ -289,7 +299,7 @@ let NERDCreateDefaultMappings=0 " I turn this off to make it simple
 " Toggle commenting on 1 line or all selected lines. Wether to comment or not
 " is decided based on the first line; if it's not commented then all lines
 " will be commented
-map <Leader>/ :call NERDComment(0, "toggle")<CR> 
+map <Leader>/ :call NERDComment(0, "toggle")<CR>
 
 
 " SnippetsEmu *****************************************************************

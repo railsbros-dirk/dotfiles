@@ -1,4 +1,4 @@
-$KCODE = 'UTF8'
+$KCODE = 'UTF8' unless RUBY_VERSION > "1.9"
 
 # load libraries
 require 'rubygems'
@@ -27,6 +27,7 @@ end
  
 # Shortcuts
 alias cl clear
+alias q exit
 
 # Load the readline module.
 IRB.conf[:USE_READLINE] = true
