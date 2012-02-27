@@ -409,8 +409,6 @@ let g:JSLintHighlightErrorLine = 0
 " Show (partial) command in the status line
 set showcmd
 
-set noballooneval
-
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
