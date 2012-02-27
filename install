@@ -42,10 +42,7 @@ puts
 say "<%= color('Setting some general git configs ...', :yellow) %>"
 
 git_configs = [
-  {:key => "color.diff", :value => "auto"},
-  {:key => "color.status", :value => "auto"},
-  {:key => "color.branch", :value => "auto"},
-  {:key => "color.interactive", :value => "auto"},
+  {:key => "color.ui", :value => "auto"},
   {:key => "alias.br", :value => "branch"},
   {:key => "alias.st", :value => "status"},
   {:key => "alias.ci", :value => "commit -m"},
