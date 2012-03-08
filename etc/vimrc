@@ -167,15 +167,9 @@ set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
 
 
 " Invisible characters *********************************************************
-set listchars=trail:.,tab:>-,eol:$
-set nolist
+set listchars=trail:.,tab:>-
+set list
 :noremap <Leader>i :set list!<CR> " Toggle invisible chars
-
-
-" Mouse ***********************************************************************
-"set mouse=a " Enable the mouse
-"behave xterm
-"set selectmode=mouse
 
 
 " Misc settings ***************************************************************
@@ -191,14 +185,13 @@ set number " Show line numbers
 set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
 set hidden " Handle multiple buffers better.
 map Q <Esc> " Get rid of awkward Ex-mode
-map U :redo<CR>
+"map U :redo<CR>
 set shell=/bin/bash " Some commands seem to have problems with zsh"
 set laststatus=2 " Show the status line all the time
 set autoindent
 set smartindent
 set title " Set the terminal's title
 set wildignore+=log,tmp,*.swp
-set list listchars=tab:\ \ ,trail:·
 set clipboard=unnamed " Copy to system pasteboard
 
 " Syntax checking for ruby

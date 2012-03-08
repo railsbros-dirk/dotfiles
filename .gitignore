@@ -1,9 +1,9 @@
 distribute
 etc/vim/.netrwhist
 etc/vim/.VimballRecord
-etc/vim/bundle/vim-autocomplpop/doc/tags
-etc/vim/bundle/vim-autocomplpop/doc/tags-ja
-etc/vim/bundle/vim-l9/doc/tags
-etc/vim/bundle/vim-l9/doc/tags-ja
 etc/vim/tmp
 etc/vim/doc
+
+# Ignore all vundle bundles except vundle itself
+etc/vim/bundle
+!etc/vim/bundle/vundle

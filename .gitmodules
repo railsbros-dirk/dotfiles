@@ -133,3 +133,6 @@
 [submodule "etc/vim/bundle/vim-tomorrow-theme"]
 	path = etc/vim/bundle/vim-tomorrow-theme
 	url = git://github.com/railsbros-dirk/Vim-Tomorrow-Theme.git
+[submodule "etc/vim/bundle/vundle"]
+	path = etc/vim/bundle/vundle
+	url = https://github.com/gmarik/vundle.git
