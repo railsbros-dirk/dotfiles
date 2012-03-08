@@ -10,11 +10,12 @@ else
 fi
 echo ""
 
-setopt auto_cd
-setopt multios
-setopt cdablevars
+setopt AUTO_CD
+setopt MULTIOS
+setopt CDABLEVARS
 
-setopt prompt_subst
+setopt PROMPT_SUBST
+
 autoload -U promptinit
 promptinit
 prompt railsbros
