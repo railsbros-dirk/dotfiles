@@ -89,8 +89,7 @@ prompt_railsbros_setup() {
     local -A pc
 
     pc[default]='default'
-    pc[date]='cyan'
-    pc[time]='white'
+    pc[time]='cyan'
     pc[punc]='yellow'
     pc[line]='magenta'
     pc[hist]='green'
@@ -151,6 +150,7 @@ prompt_railsbros_setup() {
     RPROMPT+="($pc[user]%n:$pc[reset]"
     RPROMPT+="$pc[shortpath]%~$pc[reset])"
     RPROMPT+=" $pc[rvm_version]$p_rvm$pc[reset]"
+    RPROMPT+=" $pc[time]%D{%T}$pc[reset]"
 
     export PROMPT RPROMPT
   }
