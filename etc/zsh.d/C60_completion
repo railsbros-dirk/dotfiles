@@ -23,4 +23,17 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 zstyle ':completion:*:*:*:*:*' menu yes select
 
+## determine in which order the names (files) should be
+## listed and completed when using menu completion.
+## `size' to sort them by the size of the file
+## `links' to sort them by the number of links to the file
+## `modification' or `time' or `date' to sort them by the last modification time
+## `access' to sort them by the last access time
+## `inode' or `change' to sort them by the last inode change time
+## `reverse' to sort in decreasing order
+## If the style is set to any other value, or is unset, files will be
+## sorted by reverse access time.
+## kudos to cypher (https://github.com/cypher/dotfiles/blob/master/zshrc)
+zstyle ':completion:*' file-sort reverse access
+
 compdef '_path_files -/ -W ${~projects_dir}' p
