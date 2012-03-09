@@ -150,7 +150,9 @@ prompt_railsbros_setup() {
     RPROMPT+="($pc[user]%n:$pc[reset]"
     RPROMPT+="$pc[shortpath]%~$pc[reset])"
     RPROMPT+=" $pc[rvm_version]$p_rvm$pc[reset]"
-    RPROMPT+=" $pc[time]%D{%T}$pc[reset]"
+    if [ $SHOW_TIME_IN_PROMPT ]; then
+      RPROMPT+=" $pc[time]%D{%T}$pc[reset]"
+    fi
 
     export PROMPT RPROMPT
   }
