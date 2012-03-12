@@ -1,6 +1,3 @@
 [submodule "etc/vim/snippets"]
 	path = etc/vim/snippets
 	url = git://github.com/railsbros-dirk/snipmate-snippets.git
-[submodule "etc/vim/bundle/vundle"]
-	path = etc/vim/bundle/vundle
-	url = https://github.com/gmarik/vundle.git
