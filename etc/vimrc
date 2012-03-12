@@ -3,10 +3,9 @@
 " |                   (see gvimrc for gui vim settings)                       |
 " |                                                                           |
 " | Some highlights:                                                          |
-" |   jj = <esc>  Very useful for keeping your hands on the home row          |
 " |   ,d = toggle NERDTree off and on                                         |
 " |                                                                           |
-" |   ,T = fuzzy find all files                                               |
+" |   ,f = fuzzy find all files                                               |
 " |   ,P = go to previous file                                                |
 " |                                                                           |
 " |   <C-l> = inserts '=>'                                                    |
@@ -15,8 +14,6 @@
 " |   ,v = new vertical window                                                |
 " |                                                                           |
 " |   ,i = toggle invisibles                                                  |
-" |                                                                           |
-" |   enter and shift-enter = adds a new line after/before the current line   |
 " |                                                                           |
 " |   :call Tabstyle_tabs = set tab to real tabs                              |
 " |   :call Tabstyle_spaces = set tab to 2 spaces                             |
@@ -27,15 +24,59 @@
 " Initial stuff ***************************************************************
 
 set nocompatible " Must come first because it changes other options.
+filetype off     " required for vundle
 let mapleader = ","
-imap jj <Esc> " Professor VIM says '87% of users prefer jj over esc', jj abrams disagrees
 
 
-" Pathogen ********************************************************************
+" Vundle **********************************************************************
 
-silent! call pathogen#runtime_append_all_bundles()
-silent! call pathogen#helptags()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" Bundles *********************************************************************
+
+Bundle 'tpope/vim-fugitive'
+
+Bundle 'tpope/vim-ragtag'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tsaleh/vim-align'
+Bundle 'vim-scripts/ZoomWin'
+Bundle 'sickill/vim-pasta'
+Bundle 'tpope/vim-endwise'
+
+Bundle 'tpope/vim-liquid'
+
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-cucumber'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-rake'
+
+Bundle 'mileszs/ack.vim'
+
+Bundle 'sjl/gundo.vim'
+
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'Raimondi/delimitMate'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'markabe/bufexplorer'
+Bundle 'pangloss/vim-javascript'
+Bundle 'railsbros-dirk/Vim-Tomorrow-Theme'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'tomtom/tlib_vim'
+
+Bundle 'garbas/vim-snipmate'
+
+" File Navigation *************************************************************
+
+Bundle 'L9'
+Bundle 'FuzzyFinder'
 
 " Tabs ************************************************************************
 "set sta " a <Tab> in an indent inserts 'shiftwidth' spaces
@@ -153,12 +194,6 @@ filetype plugin indent on
 " To show current filetype use: set filetype
 
 "autocmd FileType html :set filetype=xhtml
-
-
-" Insert New Line *************************************************************
-"map <S-Enter> O<ESC> " awesome, inserts new line without going into insert mode
-"map <Enter> o<ESC>
-"set fo-=r " do not insert a comment leader after an enter, (no work, fix!!)
 
 
 " Sessions ********************************************************************
@@ -287,31 +322,11 @@ let NERDTreeHijackNetrw=1 " User instead of Netrw when doing an edit /foobar
 let NERDTreeMouseMode=1 " Single click for everything
 
 
-" NERD Commenter **************************************************************
-let NERDCreateDefaultMappings=0 " I turn this off to make it simple
+" Commenter **************************************************************
 
-" Toggle commenting on 1 line or all selected lines. Wether to comment or not
-" is decided based on the first line; if it's not commented then all lines
-" will be commented
-map <Leader>/ :call NERDComment(0, "toggle")<CR>
+Bundle 'tomtom/tcomment_vim'
 
-
-" SnippetsEmu *****************************************************************
-"imap <unique> <C-j> <Plug>Jumper
-"let g:snip_start_tag = "_\."
-"let g:snip_end_tag = "\._"
-"let g:snip_elem_delim = ":"
-"let g:snip_set_textmate_cp = '1'  " Tab to expand snippets, not automatically.
-
-
-" CommandT ********************************************************
-  " To compile:
-  " cd ~/cl/etc/vim/ruby/command-t
-  " ruby extconf.rb
-  " make
-let g:CommandTMatchWindowAtTop = 1
-let g:CommandTMaxHeight = 20
-map <Leader>f :CommandT<CR>
+map <leader>/ <leader>__
 
 
 " Unimpaired *********************************************************
@@ -340,12 +355,12 @@ map <Leader>R <Plug>RubyFileRun " change from <Leader>T to <Leader>]
 let g:rubycomplete_rails = 1
 
 
-" MakeGreen **************************************************************
-" For the MakeGreen plugin and Ruby RSpec. Uncomment to use.
-autocmd BufNewFile,BufRead *_spec.rb compiler rspec
-
 " Javascript *************************************************************
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
+" Markdown ***************************************************************
+
+Bundle 'matthias-guenther/hammer.vim'
 
 function s:setupWrapping()
   set wrap
@@ -355,8 +370,11 @@ endfunction
 
 function s:setupMarkup()
   call s:setupWrapping()
-  map <buffer> <Leader>p :MDP <CR>
+  map <buffer> <Leader>p :Hammer<CR>
 endfunction
+
+" md, markdown, and mk are markdown and define buffer-local preview
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 
 " make and python use real tabs
 au FileType make                                     set noexpandtab
@@ -364,9 +382,6 @@ au FileType python                                   set noexpandtab
 
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-
-" md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 
 " add json syntax highlighting
 au BufNewFile,BufRead *.json set ft=javascript
