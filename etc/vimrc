@@ -211,6 +211,7 @@ set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 
+set noballooneval
 
 " Enable auto-save / auto-write
 set autowrite

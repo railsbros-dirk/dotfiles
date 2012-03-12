@@ -237,24 +237,7 @@ function RunRuby()
     exe "write " . tmpfile . ".rb"
   endif
 
-  execute "e "
-ruby <<RUBY
-  output = File.new "/tmp/run_ruby_output.html", "w+"
-
-  ENV['TM_FILEPATH']       = VIM.evaluate(%{expand("%")})
-  ENV['RUBYLIB']           = "/Applications/TextMate.app/Contents/SharedSupport/Bundles/Ruby.tmbundle/Support/RubyMate"
-  ENV['TM_SUPPORT_PATH']   = '/Applications/TextMate.app/Contents/SharedSupport/Support'
-
-  if ENV['TM_FILEPATH'] =~ /_spec\.rb$/
-    output << `rspec -f html --color $TM_FILEPATH 2>&1`
-  else
-    output << `ruby -KU -- #{ENV['RUBYLIB']}/run_script.rb`
-  end
-
-  output.close
-
-  `open /tmp/run_ruby_output.html`
-RUBY
+  execute "!ruby %"
 endfunction
 
 function Edit(file)
@@ -286,4 +269,3 @@ if filereadable(expand("~/.gvimrc.local"))
   source ~/.gvimrc.local
 endif
 
-set noballooneval
