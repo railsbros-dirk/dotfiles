@@ -40,9 +40,7 @@ if has("gui_macvim")
   " will be commented
   aunmenu Window.Zoom
   "macmenu &Window.Zoom key=<nop>
-  "map <Leader>/ :call NERDComment(0, "toggle")<CR>
-  unmap <Leader>/
-  map <D-/> :call NERDComment(0, "toggle")<CR>
+  map <D-/> <Leader>/
 
   map <C-S-d> Vyp " duplicate current line
   map <D-d> dd " delete current line
