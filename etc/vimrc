@@ -64,7 +64,6 @@ Bundle 'sjl/gundo.vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Raimondi/delimitMate'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'markabe/bufexplorer'
 Bundle 'pangloss/vim-javascript'
 Bundle 'railsbros-dirk/Vim-Tomorrow-Theme'
 Bundle 'scrooloose/nerdtree'
@@ -76,7 +75,11 @@ Bundle 'garbas/vim-snipmate'
 " File Navigation *************************************************************
 
 Bundle 'L9'
-Bundle 'FuzzyFinder'
+Bundle 'markabe/bufexplorer'
+Bundle 'wincent/Command-T'
+
+nmap <Leader>f :CommandT<CR>
+let g:CommandTMaxHeight=5
 
 " Tabs ************************************************************************
 "set sta " a <Tab> in an indent inserts 'shiftwidth' spaces
@@ -324,9 +327,9 @@ let NERDTreeMouseMode=1 " Single click for everything
 
 " Commenter **************************************************************
 
-Bundle 'tomtom/tcomment_vim'
+Bundle 'scrooloose/nerdcommenter'
 
-map <leader>/ <leader>__
+map <leader>/ <plug>NERDCommenterToggle
 
 
 " Unimpaired *********************************************************
@@ -340,7 +343,6 @@ vmap <C-Down> ]egv
 
 " fuzzyfinder ********************************************************
 " map <Leader>b :FufBuffer<CR>
-" let g:fuzzy_ignore = '.o;.obj;.bak;.exe;.pyc;.pyo;.DS_Store;.db'
 
 
 " autocomplpop ***************************************************************
