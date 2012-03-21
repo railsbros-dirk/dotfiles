@@ -136,6 +136,16 @@ set splitbelow splitright
 set cursorline
 "set cursorcolumn
 
+" Jump words with alt-arrow (osx style)
+map <M-Left> b
+map <M-Right> w
+imap <M-Left> <Esc>bi
+imap <M-Right> <Esc><Right>wi
+
+" Enable command movement
+" TODO: Fix commad-up and command-down
+map <D-Left> <C-a>
+map <D-Right> <C-e>
 
 " Runtime *********************************************************************
 runtime macros/matchit.vim " Load the matchit plugin.
@@ -287,6 +297,8 @@ function RemoveTrailingSpaces()
   %s/\v[\t ]{-1,}$//g
 endfunction
 
+command Rts :call RemoveTrailingSpaces()
+
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
 " This is likely a bludgeon to solve some other issue, but it works
@@ -377,6 +389,7 @@ endfunction
 
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} set ft=markdown
 
 " make and python use real tabs
 au FileType make                                     set noexpandtab
