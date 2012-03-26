@@ -107,6 +107,8 @@ endfunction
 
 call Tabstyle_spaces()
 
+command Tst :call Tabstyle_tabs()
+command Tss :call Tabstyle_spaces()
 
 " Indenting *******************************************************************
 set ai " Automatically set the indent of a new line (local to buffer)
