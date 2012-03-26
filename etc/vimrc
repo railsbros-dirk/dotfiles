@@ -45,6 +45,7 @@ Bundle 'tpope/vim-ragtag'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-haml'
 Bundle 'tsaleh/vim-align'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'sickill/vim-pasta'
@@ -67,7 +68,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'pangloss/vim-javascript'
 Bundle 'railsbros-dirk/Vim-Tomorrow-Theme'
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
+
 Bundle 'tomtom/tlib_vim'
 
 Bundle 'garbas/vim-snipmate'
@@ -124,6 +125,13 @@ set complete-=i
 set sidescrolloff=2
 set numberwidth=4
 
+
+" Syntax Cecking **************************************************************
+Bundle 'scrooloose/syntastic'
+
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['ruby'],
+                           \ 'passive_filetypes': ['scss', 'css', 'sass', 'javascript'] }
 
 " Windows *********************************************************************
 set equalalways " Multiple windows, when created, are equal in size
