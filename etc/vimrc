@@ -146,17 +146,6 @@ set splitbelow splitright
 set cursorline
 "set cursorcolumn
 
-" Jump words with alt-arrow (osx style)
-map <M-Left> b
-map <M-Right> w
-imap <M-Left> <Esc>bi
-imap <M-Right> <Esc><Right>wi
-
-" Enable command movement
-" TODO: Fix commad-up and command-down
-map <D-Left> <C-a>
-map <D-Right> <C-e>
-
 " Runtime *********************************************************************
 runtime macros/matchit.vim " Load the matchit plugin.
 runtime snippets/support_functions.vim " Load the snippet support functions
@@ -204,6 +193,7 @@ set formatoptions+=l
 " Directories *****************************************************************
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
+set noswapfile                    " Don't use swapfiles"
 
 " Set Swap directory
 set directory=$HOME/.vim/tmp//  " Keep swap files in one location
@@ -246,8 +236,6 @@ map Q <Esc> " Get rid of awkward Ex-mode
 "map U :redo<CR>
 set shell=/bin/bash " Some commands seem to have problems with zsh"
 set laststatus=2 " Show the status line all the time
-set autoindent
-set smartindent
 set title " Set the terminal's title
 set wildignore+=log,tmp,*.swp
 set clipboard=unnamed " Copy to system pasteboard
@@ -283,6 +271,53 @@ set foldlevel=1
 "Sourced from vim tip: http://vim.wikia.com/wiki/Keep_folds_closed_while_inserting_text
 autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
+" OSX like movement ************************************************************
+
+" Introduct new keycodes to vim for <alt-arrows>
+set <F13>=[1;3C
+map <F13> <M-Right>
+map! <F13> <M-Right>
+
+set <F14>=[1;3D
+map <F14> <M-Left>
+map! <F14> <M-Left>
+
+set <F15>=[1;10C
+map <F15> <S-M-Right>
+map! <F15> <S-M-Right>
+
+set <F16>=[1;10D
+map <F16> <S-M-Left>
+map! <F16> <S-M-Left>
+
+set <F17>=[1;10A
+map <F17> <S-M-Up>
+map! <F17> <S-M-Up>
+
+set <F18>=[1;10B
+map <F18> <S-M-Down>
+map! <F18> <S-M-Down>
+
+" Jump words with alt-arrow (osx style)
+map <M-Left> b
+map <M-Right> w
+imap <M-Left> <Esc>bi
+imap <M-Right> <Esc><Right>wi
+
+" Enable command movement
+" TODO: Fix commad-up and command-down
+map <D-Left> <C-a>
+map <D-Right> <C-e>
+
+" Mac bindings for home/end
+imap <C-a> <Esc>^i
+imap <C-e> <Esc>g$i
+map <C-a> ^
+map <C-e> g$
+
+" Fuck you, manual key
+nnoremap K <nop>
 
 " Navigation ******************************************************************
 
