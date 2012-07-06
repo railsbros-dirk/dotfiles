@@ -56,6 +56,7 @@ setopt long_list_jobs
 
 ## pager
 export PAGER=less
+export LESS="-X"
 
 autoload -U select-word-style
 select-word-style bash
