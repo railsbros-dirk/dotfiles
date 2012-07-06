@@ -107,7 +107,7 @@ prompt_railsbros_setup() {
       pc[arrow]='red'
     else
       pc[host]='green'
-      pc[user]='yellow'
+      pc[user]='magenta'
       pc[path]='cyan'
       pc[#]='yellow'
       pc[shortpath]='default'
@@ -139,17 +139,17 @@ prompt_railsbros_setup() {
 
     p_rvm='$(ruby_version_prompt_info)'
 
-    PROMPT="$bgc$pc[arrow]➜$pc[reset] "
+    PROMPT="$bgc$pc[arrow]♌$pc[reset] "
+    if [ $USER != "dbreuer" ]; then
+      PROMPT+="$pc[user]%n@"
+    fi
     PROMPT+="$pc[host]%m$pc[reset]"
 
     PROMPT+=":$pc[shortpath]%1~$pc[reset]"
     PROMPT+=$vcs_info_msg_0_
     PROMPT+=" $pc[#]\$$rst "
 
-    RPROMPT=
-    RPROMPT+="($pc[user]%n:$pc[reset]"
-    RPROMPT+="$pc[shortpath]%~$pc[reset])"
-    RPROMPT+=" $pc[rvm_version]$p_rvm$pc[reset]"
+    RPROMPT="$pc[rvm_version]$p_rvm$pc[reset]"
     if [ $SHOW_TIME_IN_PROMPT ]; then
       RPROMPT+=" $pc[time]%D{%T}$pc[reset]"
     fi
