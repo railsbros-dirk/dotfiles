@@ -1,30 +1,111 @@
-h1. dotfiles
+# Dotfiles
 
-This repo is based on the work of Todd Werth (http://github.com/twert). I modified it in the way, that i use ZSH
-instead of Bash.
+This repository contains my opinionated collection of dotfiles. It mainly
+consists of zsh and Vim configuration. Feel free to use it or take any
+ideas from it.
 
-!http://www.infinitered.com/blog_extras/command_line_fx/kb_control_wide_short_bw2.jpg!
+**Disclaimer:** My main work environment is Mac OS X. I use [iTerm2][1] as
+terminal with 256 colors. Generally I work with a very small font. I use
+these dotfile on Ubuntu servers too, but not on a daily basis. I will
+not gurantee that it will work on other environments and not even on
+this all the time ;-) Be sure to check any changes before just getting
+the latest version.
 
-h2. File and directory structure
+## Installation
 
-I store all my command-line files in a folder (cl), then under that folder there are 3 sub-folders (cl/bin cl/etc cl/doc), to keep them organized away from all my other files.  I link (etc/link) the dot files to the root of my home folder, so I prefer to store them without the . (gitignore rather than .gitignore), then I add the dot in the link.  So if you use one, make sure you put the dot back.
+As already mentioned my shell is zsh. Be sure to change yours before
+using my config. If you don't like zsh you could just use the Vim stuff.
+Changing the shell on OS X can be done via the Account Preference Pane.
+Alternatively you can switch it via this command:
 
-  * ~
-  ** dotfiles
-  *** bin
-  *** etc
-  **** vim
-  **** zsh.d
-          
-h2. Installation
+    chsh -s /bin/zsh
 
-Just run the ./install script to link everything in place. You need to have the Highline gem installed (http://highline.rubyforge.org/).
+To make Vim work as expected you need Vim compiled with Ruby support and
+the `--with-features=HUGE` flag. After that, clone the repository and
+run the included install script:
 
-h2. A word of warning
+    git clone git://github.com/railsbros-dirk/dotfiles.git ~/.dotfiles
+    cd ~/.dotfiles
+    ./install
 
-I use this on Mac OS X mainly and on CentOS or Ubuntu systems from time to time. I'm not a pro Vim user so that's what
-I completely took from Todd (thanks for that!). I will work on all the files from time to time and try to keep up with
-changes on Todds repo regarding none-ZSH issues, but don't blame me if somethings doesn't work as expected ;-) If you
-improve anything or fix a problem please let me know, thanks.
+After that everything should be setup correctly and you can start to use
+zsh and Vim.
 
-Hope this will be helpful for some folks.
+## Features
+
+I understand that some information is not very well stored in the
+repository and should be configurable on each machine. Due to this you
+have some points where you can provide your own config:
+
+  * `~/.vimrc.local` -> Provide custom Vim configuration. Will be loaded
+  after `~/.vimrc`
+  * `.zsh_config_for_USERNAME` -> Provide custom zsh configuration
+  * `.gitconfig` -> The install script will just generate it. You
+  have/can provide additional information any time.
+
+### Projects Dir
+
+Pointing the variable `projects_dir` to something useful for you will
+enable you to use the shortcut `p PROJECT_NAME`. This will bring you
+directly to the given directory under the configured `projects_dir` path:
+
+    projects_dir="$HOME/Documents/projects"
+    $ p my_project
+
+This will change into the directory `$HOME/Documents/projects/my_project`.
+
+### Vundle
+
+I used to manage my Vim plugins with Tim Popes great [pathogen plugin][2].
+Recently I discovered [Vundle][3] by [gmarik][4] and it is just awesome.
+You only have to manage the vundle via git submodule by yourself and all
+other plugins are managed by Vundle.
+
+### Color Scheme
+
+My color scheme for Vim is a slightly modified version of Chris Kempsons
+[Tomorrow Night Bright][5]. I suggest to use the same for your terminal
+to get the best color experience in Vim and zsh.
+
+### Fuzzy Finder in Vim
+
+Currently the fuzzy finder plugin of choice is [ctrlp][6]. You can fire
+it up by hitting `Ctrl-p` (what a suprise). Take a look in the docs to
+find out more about it.
+
+There is a bunch of other stuff I use. Describing it all would take too
+much time. Just look through the single config files to get an idea what
+is possible. I don't use something like [oh-my-zsh][7] or [Janus][8] to
+keep it more obvious what is going on.
+
+Feel free to use whatever you want for your own dotfiles. If you use
+mine I hope they taking you somewhere.
+
+## Thanks
+
+I didn't came up will all that configuration by myself. Here is a list
+of people I took inspiration from or just copied some code ;-)
+
+  * Todd Werth - My dotfiles were originally a fork of [his][9]
+  * Gary Bernhardt - Inspired by both the [Peepcode Play by Play episode][11]
+  and his own screencasts ['Destroy all Software'][12]
+  * [Both][13] [Vim][14] screencasts by Peepcode
+  * [tisba][17], [Marc Kalmes][15] and [Michael Contento][16]
+
+[1]: http://www.iterm2.com/
+[2]: https://github.com/tpope/vim-pathogen
+[3]: https://github.com/gmarik/vundle
+[4]: http://gmarik.info/about
+[5]: https://github.com/chriskempson/tomorrow-theme
+[6]: https://github.com/kien/ctrlp.vim
+[7]: https://github.com/robbyrussell/oh-my-zsh
+[8]: https://github.com/carlhuda/janus
+[9]: https://github.com/twerth
+[10]: https://github.com/garybernhardt/dotfiles
+[11]: https://peepcode.com/products/play-by-play-bernhardt
+[12]: https://www.destroyallsoftware.com/screencasts
+[13]: https://peepcode.com/products/smash-into-vim-i
+[14]: https://peepcode.com/products/smash-into-vim-ii
+[15]: https://github.com/mkalmes/dotfiles
+[16]: https://github.com/michaelcontento/dotfiles
+[17]: http://tisba.de/
