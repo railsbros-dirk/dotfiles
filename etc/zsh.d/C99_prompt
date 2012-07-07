@@ -1,6 +1,10 @@
 #!/bin/zsh
 
-figlet -f larry3d `hostname -s`
+if [[ -f ~/.dotfiles/logo.ascii ]]; then
+  cat ~/.dotfiles/logo.ascii
+else
+  figlet -f larry3d `hostname -s`
+fi
 
 echo ""
 if fortune futurama &> /dev/null; then
