@@ -1,45 +1,44 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
+# encoding: UTF-8
+
 require 'fileutils'
 
-begin
-  require 'highline/import'
-rescue LoadError => e
-  puts "The highline gem is required for this script. Install it with 'sudo gem install highline'!"
-  exit
+def colorize(text, color_code)
+  "#{color_code}#{text}\e[0m"
 end
 
+def red(text); colorize(text, "\e[31m"); end
+def green(text); colorize(text, "\e[32m"); end
+def yellow(text); colorize(text, "\e[33m"); end
+def magenta(text); colorize(text, "\e[35m"); end
+
 options = {
-  :binary_dest  => "/usr/local/bin",
   :dotfile_dest => File.expand_path("~/"),
   :current_dir  => File.dirname(File.expand_path(__FILE__))
 }
 
-say "<%= color('Installing dotfiles, vim config, zsh config and some utils to your system ...', :yellow) %>"
+puts
+puts
+puts magenta("        *** DOTFILES INSTALLATION ***")
 puts
 
-say "<%= color('Linking files under bin/ ...', :green) %>"
-
-binaries_to_link = Dir[File.join(options[:current_dir], "bin", "*")].each do |binary|
-  say "Linking <%= color('#{binary}', :magenta) %> to <%= color('#{options[:binary_dest]}', :magenta) %> ..."
-  FileUtils.ln_s(binary, File.join(options[:binary_dest], File.basename(binary)), :force => true)
-end
-
-say "<%= color('DONE!', :green) %>"
-
+puts ' * Installing dotfiles, vim config, zsh config and some utils to your system ...'
 puts
-say "<%= color('Linking dotfiles found under etc/ ...', :green) %>"
+
+puts yellow(' > Linking dotfiles found under etc/ ...')
 
 dotfiles_to_link = Dir[File.join(options[:current_dir], "etc", "*")].each do |dotfile|
-  say "Linking <%= color('#{dotfile}', :magenta) %> to <%= color('#{options[:dotfile_dest]}', :magenta) %> ..."
-  FileUtils.ln_s(dotfile, File.join(options[:dotfile_dest], ".#{File.basename(dotfile)}"), :force => true)
+  puts " - '#{dotfile}' to '#{options[:dotfile_dest]}' ..."
+  unless File.exists?(target = File.join(options[:dotfile_dest], ".#{File.basename(dotfile)}"))
+    FileUtils.ln_s(dotfile, target)
+  end
 end
 
-say "<%= color('DONE!', :green) %>"
+puts green(" ✔ OK!")
 
 puts
-say "<%= color('Setting some general git configs ...', :yellow) %>"
+puts yellow(' > Setting some general git configs ...')
 
 git_configs = [
   {:key => "color.ui", :value => "auto"},
@@ -48,43 +47,43 @@ git_configs = [
   {:key => "alias.ci", :value => "commit -m"},
   {:key => "alias.ca", :value => "commit -a -m"},
   {:key => "alias.co", :value => "checkout"},
+  {:key => "alias.logg", :value => "log --graph"},
+  {:key => "alias.lg", :value => "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"},
   {:key => "merge.tool", :value => "opendiff"},
   {:key => "merge.summary", :value => "true"},
   {:key => "core.repositoryformatversion", :value => "0"},
   {:key => "core.filemode", :value => "true"},
   {:key => "core.bare", :value => "false"},
+  {:key => "core.pager", :value => "less -R"},
   {:key => "core.logallrefupdates", :value => "true"},
   {:key => "branch.autosetupmerge", :value => "true"},
   {:key => "branch.master.remote", :value => "origin"},
   {:key => "branch.master.merge", :value => "refs/heads/master"},
-  {:key => "git-tmbundle.gitx-path", :value => "/usr/local/bin/gitx"}
+  {:key => "i18n.commitEncoding", :value => "utf-8"},
+  {:key => "log.date", :value => "local"}
 ]
 
 git_configs.each do |git_config|
-  say "Setting <%= color('#{git_config[:key]}', :magenta) %> to <%= color('#{git_config[:value]}', :magenta) %>"
+  puts " - #{git_config[:key]} = #{git_config[:value]} %>"
   system "git config --global --unset-all #{git_config[:key]}"
-  system "git config --global --add #{git_config[:key]} '#{git_config[:value]}'"
+  system %Q{git config --global --add #{git_config[:key]} "#{git_config[:value]}"}
 end
 
-say "<%= color('DONE!', :green) %>"
+puts green(" ✔ OK!")
 
-say "<%= color('Initializing the Vim submodules ...', :yellow) %>"
+puts
+puts yellow(" > Configuring Vim ...")
+puts " - Vim submodules"
 
 system "git submodule init && git submodule update"
 
-say "<%= color('DONE!', :green) %>"
+puts " - Vim Bundles"
 
-say "<%= color('Building the command-t plugin ...', :yellow) %>"
+system "git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle"
+system "vim +BundleInstall\! +qall"
 
-Dir.chdir "etc/vim/bundle/command-t" do
-  if `rvm > /dev/null 2>&1` && $?.exitstatus == 0
-    system "rvm default 'rake make'"
-  else
-    system "rake make" # assume /usr/bin/ruby is system ruby
-  end
-end
-
-say "<%= color('DONE!', :green) %>"
+puts green(" ✔ OK!")
 
 puts
-say "<%= color('Everything done. Enjoy!', :green) %>"
+puts green(">>>> Everything is done. Enjoy! <<<<<")
+puts
