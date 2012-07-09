@@ -43,7 +43,7 @@ puts yellow(' > Setting some general git configs ...')
 git_configs = [
   {:key => "color.ui", :value => "auto"},
   {:key => "alias.br", :value => "branch"},
-  {:key => "alias.st", :value => "status"},
+  {:key => "alias.st", :value => "status -sb"},
   {:key => "alias.ci", :value => "commit -m"},
   {:key => "alias.ca", :value => "commit -a -m"},
   {:key => "alias.co", :value => "checkout"},
