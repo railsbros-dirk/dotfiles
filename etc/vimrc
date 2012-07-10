@@ -434,6 +434,31 @@ let g:JSLintHighlightErrorLine = 0
 " Show (partial) command in the status line
 set showcmd
 
+autocmd FileType ruby compiler ruby
+
+function Run()
+  let executable=b:current_compiler
+
+  if !getbufvar("%", "&saved")
+    let tmpfile = tempname()
+    silent! exe "write " . tmpfile . ".rb"
+  endif
+
+  let filename=expand('%:p')
+
+  " Create the previewwindow if doesn't exist
+  if ! &previewwindow
+    pedit /tmp/_vim_previewwindow
+  endif
+  " Change to the previewwindow
+  silent! wincmd P
+  " Run the file with and switch back to the previous window
+  execute "%d|silent 0r!" . executable . " " . filename
+  wincmd p
+endfunction
+
+map <Leader>r :call Run()<CR>
+
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
