@@ -25,8 +25,8 @@ end
 # Clear the screen
 def clear
   system 'clear'
-  if ENV['RAILS_ENV']
-    return "Rails environment: " + ENV['RAILS_ENV']
+  if Object.const_defined?("Rails")
+    return "Rails environment: #{Rails.env}"
   else
     return "No rails environment - happy hacking!";
   end
