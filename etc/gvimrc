@@ -54,9 +54,6 @@ if has("gui_macvim")
   imap <D-M-Right> <Esc> <C-w>l
   map <D-M-Left> <C-w>h
   imap <D-M-Left> <C-w>h
-
-  " don't use system pasteboard for macvim
-  set clipboard=
 end
 
 " General *********************************************************************
