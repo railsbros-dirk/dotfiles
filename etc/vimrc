@@ -100,7 +100,6 @@ command Tss :call Tabstyle_spaces()
 set ai " Automatically set the indent of a new line (local to buffer)
 set si " smartindent (local to buffer)
 filetype plugin indent on " Turn on file type detection.
-syntax enable " Turn on syntax highlighting.
 set ofu=syntaxcomplete#Complete
 set completeopt=longest,menuone
 set complete-=i
