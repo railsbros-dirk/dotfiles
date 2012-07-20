@@ -449,7 +449,7 @@ function Run()
   " Change to the previewwindow
   silent! wincmd P
   " Run the file with and switch back to the previous window
-  execute "%d|silent 0r!" . executable . " " . filename
+  execute "%d|silent 0r!" . executable . " '" . filename . "'"
   wincmd p
 endfunction
 
