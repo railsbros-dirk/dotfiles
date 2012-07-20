@@ -1,6 +1,5 @@
 " This is the vim config of Dirk Breuer
 " Machine/user specific should go into ~/.vimrc.local
-" vim:set ts=2 sts=2 sw=2 expandtab:
 
 " Initial stuff ***************************************************************
 
@@ -75,7 +74,7 @@ function! Tabstyle_tabs()
   set softtabstop=4
   set shiftwidth=4
   set tabstop=4
-  set noexpandtab
+  set noexpandtab|retab!
   autocmd User Rails set softtabstop=4
   autocmd User Rails set shiftwidth=4
   autocmd User Rails set tabstop=4
@@ -88,7 +87,7 @@ function! Tabstyle_spaces()
   set shiftwidth=2
   set tabstop=2
   set smarttab
-  set expandtab
+  set expandtab|retab
 endfunction
 
 call Tabstyle_spaces()
@@ -143,7 +142,7 @@ set smartcase            " Ignore case when searching lowercase
 " Colors **********************************************************************
 set t_Co=256 " 256 colors
 set background=dark
-syntax on " syntax highlighting
+syntax enable " Turn on syntax highlighting.
 colorscheme Tomorrow-Night-Bright
 
 
@@ -173,9 +172,6 @@ set formatoptions+=l
 set nobackup          " Don't make a backup before overwriting a file.
 set nowritebackup     " And again.
 set noswapfile        " Don't use swapfiles"
-
-" Set Swap directory
-set directory=$HOME/.vim/tmp//  " Keep swap files in one location
 
 " File Stuff ******************************************************************
 filetype plugin indent on
