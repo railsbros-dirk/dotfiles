@@ -62,9 +62,11 @@ let g:Powerline_symbols = 'unicode'
 " File Navigation *************************************************************
 
 Bundle 'L9'
+" Bundle 'kergoth/vim-HiLinkTrace'
 
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_open_new_file = 'h' " open newly created windows in a horizontal split
 
 " Tabs ************************************************************************
 "set sta " a <Tab> in an indent inserts 'shiftwidth' spaces
@@ -191,7 +193,7 @@ noremap <Leader>i :set list!<CR> " Toggle invisible chars
 " Syntax coloring lines that are too long just slows down the world
 
 " Clear the search buffer when hitting return
-nnoremap <C-CR> :nohlsearch<cr>
+nnoremap <Leader><CR> :nohlsearch<cr>
 nnoremap <leader><leader> <c-^>
 
 
@@ -215,6 +217,9 @@ set laststatus=2 " Show the status line all the time
 set title " Set the terminal's title
 set wildignore+=log,tmp,*.swp
 set clipboard=unnamed " Copy to system pasteboard
+
+" Sometimes I just want to scroll with the trackpad ;-)
+set mouse=n
 
 " Syntax checking for ruby
 map <Leader>c :!ruby -c %<CR>
