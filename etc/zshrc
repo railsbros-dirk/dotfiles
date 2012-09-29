@@ -1,32 +1,10 @@
 #! /bin/zsh
 
-# The following lines were added by compinstall
-
-zstyle ':completion:*' completer _complete _approximate
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-:]=* r:|=*'
-zstyle :compinstall filename '~/.zshrc'
-
-autoload -Uz compinit zrecompile
-compinit
-# End of lines added by compinstall
-
-zsh_cache=${HOME}/.zsh_cache
-mkdir -p $zsh_cache
-
-if [ $UID -eq 0 ]; then
-        compinit
-else
-        compinit -d $zsh_cache/zcomp-$HOST
-
-        for f in ~/.zshrc $zsh_cache/zcomp-$HOST; do
-                zrecompile -p $f && rm -f $f.zwc.old
-        done
-fi
-
 setopt extended_glob
+
 # load specific configurations
 for zshrc_snipplet in ~/.zsh.d/C[0-9][0-9]*[^~] ; do
-        source $zshrc_snipplet
+  source $zshrc_snipplet
 done
 
 # custom configs are taken from this file

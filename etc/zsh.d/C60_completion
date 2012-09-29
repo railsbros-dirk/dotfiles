@@ -3,25 +3,37 @@ unsetopt flowcontrol
 
 setopt automenu
 setopt complete_in_word
-setopt always_to_end
+setopt auto_remove_slash
+unsetopt always_to_end
 
 WORDCHARS="*?_-.[]~/&;!#$%^(){}<>"  # part of word in line editor
 
-zmodload -i zsh/complist
+zmodload zsh/complist
+autoload -U compinit && compinit
+autoload -U colors ; colors
 
-## case-insensitive (all),partial-word and then substring completion
-if [ "x$CASE_SENSITIVE" = "xtrue" ]; then
-  zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-  unset CASE_SENSITIVE
-else
-  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-fi
+### If you want zsh's completion to pick up new commands in $path automatically
+### comment out the next line and un-comment the following 5 lines
+zstyle ':completion:::::' completer _complete _approximate
+_force_rehash() {
+  (( CURRENT == 1 )) && rehash
+  return 1 # Because we didn't really complete anything
+}
+zstyle ':completion:::::' completer _force_rehash _complete _approximate
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:*:*:*:processes' menu yes select
+zstyle ':completion:*:*:*:*:processes' force-list always
 
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-zstyle ':completion:*:*:*:*:*' menu yes select
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX + $#SUFFIX) / 3 )) )'
+zstyle ':completion:*:descriptions' format "- %d -"
+zstyle ':completion:*:corrections' format "- %d - (errors %e})"
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.(^1*)' insert-sections true
+zstyle ':completion:*' menu yes select
+zstyle ':completion:*' verbose yes
 
 ## determine in which order the names (files) should be
 ## listed and completed when using menu completion.
@@ -36,4 +48,7 @@ zstyle ':completion:*:*:*:*:*' menu yes select
 ## kudos to cypher (https://github.com/cypher/dotfiles/blob/master/zshrc)
 zstyle ':completion:*' file-sort reverse access
 
+zstyle :compinstall filename '~/.zsh.d/C60_completion'
+
 compdef '_path_files -/ -W ${~projects_dir}' p
+
