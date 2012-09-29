@@ -4,6 +4,8 @@ etc/vim/.VimballRecord
 etc/vim/tmp
 etc/vim/doc
 
+etc/zsh.d/plugins
+
 # Ignore all vundle bundles except vundle itself
 etc/vim/bundle
 !etc/vim/bundle/vundle
