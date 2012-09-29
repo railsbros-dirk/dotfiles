@@ -1,0 +1,7 @@
+if [ -d $HOME/.zsh.d/plugins ]; then
+  for plugin in $plugins; do
+    source "$HOME/.zsh.d/plugins/$plugin/$plugin.plugin.zsh"
+  done
+fi
+
+

@@ -37,6 +37,36 @@ end
 
 puts green(" ✔ OK!")
 
+puts yellow(' > Installing zsh plugins ...')
+
+zsh_plugins = [
+  "git://github.com/zsh-users/zsh-syntax-highlighting.git",
+  "git://github.com/zsh-users/zsh-history-substring-search.git"
+]
+
+zsh_plugin_dir = File.join(File.dirname(__FILE__), "etc/zsh.d/plugins")
+
+FileUtils.rm_rf(zsh_plugin_dir)
+FileUtils.mkdir(zsh_plugin_dir)
+
+zsh_plugins.each do |plugin|
+  puts " - Installing #{plugin_name = File.basename(plugin, ".git")} to #{zsh_plugin_dir} ..."
+  `git clone --quiet #{plugin} #{File.join(zsh_plugin_dir, plugin_name)}`
+end
+
+puts green(" ✔ OK!")
+
+puts
+puts yellow(' > Installing zshuery ...')
+
+if File.exists?("#{ENV['HOME']}/.zshuery")
+  `cd ~/.zshuery; git reset --quiet --hard; git pull --quiet origin master`
+else
+  `git clone git://github.com/railsbros-dirk/zshuery.git ~/.zshuery`
+end
+
+puts green(" ✔ OK!")
+
 puts
 puts yellow(' > Setting some general git configs ...')
 
@@ -70,6 +100,7 @@ git_configs.each do |git_config|
 end
 
 puts green(" ✔ OK!")
+exit
 
 puts
 puts yellow(" > Configuring Vim ...")
