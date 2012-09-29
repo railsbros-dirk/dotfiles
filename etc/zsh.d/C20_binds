@@ -41,6 +41,6 @@ bindkey "\e\e[D" backward-word
 bindkey "\e\e[C" forward-word
 
 bindkey "^?" backward-delete-char
-bindkey "^[[3~" delete-char
-bindkey "^[3;5~" delete-char
-bindkey "\e[3~" delete-char
+# bindkey "^[[3~" delete-char
+# bindkey "^[3;5~" delete-char
+# bindkey "\e[3~" delete-char
