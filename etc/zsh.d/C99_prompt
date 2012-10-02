@@ -14,12 +14,6 @@ else
 fi
 echo ""
 
-setopt AUTO_CD
-setopt MULTIOS
-setopt CDABLEVARS
-
-setopt PROMPT_SUBST
-
 autoload -U promptinit
 promptinit
 prompt railsbros

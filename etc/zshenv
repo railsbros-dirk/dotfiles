@@ -1,37 +1,12 @@
-fpath=(~/.zsh.d/custom_funcs $fpath)
-fpath=(/usr/local/share/zsh-completions $fpath)
-
 typeset -U fpath
 
 zsh_cache=${HOME}/.zsh_cache
 mkdir -p $zsh_cache
 
-autoload -Uz compinit zrecompile
-
-if [ $UID -eq 0 ]; then
-  compinit
-else
-  compinit -d $zsh_cache/zcomp-$HOST
-
-  for f in ~/.zshrc $zsh_cache/zcomp-$HOST; do
-    zrecompile -p $f && rm -f $f.zwc.old
-  done
-fi
-
-autoload -U tetris
-zle -N tetris
-bindkey ^T tetris
-
 export RUBYOPT=-Ku
 
-if [ `uname` = 'Darwin' ]; then
-  export VISUAL='mvim -f -c "au VimLeave * !open -a $TERM_PROGRAM"'
-  export EDITOR='vim'
-else
-  export VISUAL="vim"
-  export EDITOR='vim'
+export LC_ALL="en_US.UTF-8"
+
+if [[ -d $HOME/.rvm/bin ]]; then
+  PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fi
-
-plugins=(zsh-syntax-highlighting zsh-history-substring-search)
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

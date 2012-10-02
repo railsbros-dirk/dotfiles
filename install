@@ -64,6 +64,7 @@ if File.exists?("#{ENV['HOME']}/.zshuery")
 else
   `git clone git://github.com/railsbros-dirk/zshuery.git ~/.zshuery`
 end
+`cd ~/.zshuery; git submodule --quiet update --init`
 
 puts green(" ✔ OK!")
 
