@@ -13,111 +13,164 @@ def green(text); colorize(text, "\e[32m"); end
 def yellow(text); colorize(text, "\e[33m"); end
 def magenta(text); colorize(text, "\e[35m"); end
 
-options = {
-  :dotfile_dest => File.expand_path("~/"),
-  :current_dir  => File.dirname(File.expand_path(__FILE__))
-}
+class Installer
+
+  attr_reader :options, :dotfiles
+
+  def initialize
+    @options = {
+      :dotfile_dest => File.expand_path("~/"),
+      :current_dir  => File.dirname(File.expand_path(__FILE__))
+    }
+    @dotfiles = Dir[File.join(options[:current_dir], "etc", "*")]
+  end
+
+  def all
+    puts ' * Installing dotfiles, vim config, zsh config and some utils to your system ...'
+    puts
+
+    installers.each do |installer|
+      method(installer).call
+    end
+  end
+
+  def installer_names
+    installers.map { |installer| installer.to_s.gsub(/install_/, '').to_sym }
+  end
+
+  def installers
+    methods.grep(/install_/)
+  end
+
+  def install_vim
+    with_explanation('Configuring Vim') do
+      link_dotfiles(dotfiles.grep(/vim/))
+      puts " - Vim submodules"
+      system "git submodule init -q; git submodule update -q"
+      puts " - Vim Bundles"
+
+      unless File.exists?("./etc/vim/bundle/vundle")
+        system "git clone -q https://github.com/gmarik/vundle.git etc/vim/bundle/vundle"
+      end
+      system "vim +BundleInstall\! +qall"
+      system "vim +BundleClean\! +qall"
+    end
+  end
+
+  def install_dotfiles
+    with_explanation("Linking dotfiles found under etc/") do
+      link_dotfiles(dotfiles - dotfiles.grep(/zsh|vim/))
+    end
+  end
+
+  def install_zsh
+    with_explanation('Installing general zsh config') do
+      link_dotfiles(dotfiles.grep(/zsh/))
+    end
+
+    with_explanation('Installing zsh plugins') do
+      zsh_plugins = [
+        "git://github.com/zsh-users/zsh-syntax-highlighting.git",
+        "git://github.com/zsh-users/zsh-history-substring-search.git"
+      ]
+
+      zsh_plugin_dir = File.join(File.dirname(__FILE__), "etc/zsh.d/plugins")
+
+      FileUtils.rm_rf(zsh_plugin_dir)
+      FileUtils.mkdir(zsh_plugin_dir)
+
+      zsh_plugins.each do |plugin|
+        puts " - Installing #{plugin_name = File.basename(plugin, ".git")} to #{zsh_plugin_dir} ..."
+        `git clone --quiet #{plugin} #{File.join(zsh_plugin_dir, plugin_name)}`
+      end
+    end
+
+    with_explanation('Installing zshuery') do
+      if File.exists?("#{ENV['HOME']}/.zshuery")
+        `cd ~/.zshuery; git reset --quiet --hard; git pull --quiet origin master`
+      else
+        `git clone git://github.com/railsbros-dirk/zshuery.git ~/.zshuery`
+      end
+      `cd ~/.zshuery; git submodule --quiet update --init`
+
+    end
+  end
+
+  def link_dotfiles(files)
+    files.each do |dotfile|
+      puts " - '#{dotfile}' to '#{options[:dotfile_dest]}' ..."
+      unless File.exists?(target = File.join(options[:dotfile_dest], ".#{File.basename(dotfile)}"))
+        FileUtils.ln_s(dotfile, target)
+      end
+    end
+  end
+
+  def install_gitconfig
+    with_explanation('Setting some general git configs') do
+      git_configs = [
+        {:key => "color.ui", :value => "auto"},
+        {:key => "alias.br", :value => "branch"},
+        {:key => "alias.st", :value => "status -sb"},
+        {:key => "alias.ci", :value => "commit -m"},
+        {:key => "alias.ca", :value => "commit -a -m"},
+        {:key => "alias.co", :value => "checkout"},
+        {:key => "alias.logg", :value => "log --graph"},
+        {:key => "alias.lg", :value => "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"},
+        {:key => "merge.tool", :value => "opendiff"},
+        {:key => "merge.summary", :value => "true"},
+        {:key => "core.repositoryformatversion", :value => "0"},
+        {:key => "core.filemode", :value => "true"},
+        {:key => "core.bare", :value => "false"},
+        {:key => "core.pager", :value => "less -R"},
+        {:key => "core.logallrefupdates", :value => "true"},
+        {:key => "branch.autosetupmerge", :value => "true"},
+        {:key => "branch.master.remote", :value => "origin"},
+        {:key => "branch.master.merge", :value => "refs/heads/master"},
+        {:key => "i18n.commitEncoding", :value => "utf-8"},
+        {:key => "log.date", :value => "local"}
+      ]
+
+      git_configs.each do |git_config|
+        puts " - #{git_config[:key]} = #{git_config[:value]} %>"
+        system "git config --global --unset-all #{git_config[:key]}"
+        system %Q{git config --global --add #{git_config[:key]} "#{git_config[:value]}"}
+      end
+    end
+  end
+
+  def with_explanation(header, &block)
+    puts yellow(" > #{header} ...")
+    yield
+    puts green(" ✔ OK!")
+    puts
+  end
+end
 
 puts
 puts
 puts magenta("        *** DOTFILES INSTALLATION ***")
 puts
 
-puts ' * Installing dotfiles, vim config, zsh config and some utils to your system ...'
-puts
+installer = Installer.new
 
-puts yellow(' > Linking dotfiles found under etc/ ...')
+install_command = ARGV.first || "help"
 
-dotfiles_to_link = Dir[File.join(options[:current_dir], "etc", "*")].each do |dotfile|
-  puts " - '#{dotfile}' to '#{options[:dotfile_dest]}' ..."
-  unless File.exists?(target = File.join(options[:dotfile_dest], ".#{File.basename(dotfile)}"))
-    FileUtils.ln_s(dotfile, target)
-  end
-end
-
-puts green(" ✔ OK!")
-
-puts yellow(' > Installing zsh plugins ...')
-
-zsh_plugins = [
-  "git://github.com/zsh-users/zsh-syntax-highlighting.git",
-  "git://github.com/zsh-users/zsh-history-substring-search.git"
-]
-
-zsh_plugin_dir = File.join(File.dirname(__FILE__), "etc/zsh.d/plugins")
-
-FileUtils.rm_rf(zsh_plugin_dir)
-FileUtils.mkdir(zsh_plugin_dir)
-
-zsh_plugins.each do |plugin|
-  puts " - Installing #{plugin_name = File.basename(plugin, ".git")} to #{zsh_plugin_dir} ..."
-  `git clone --quiet #{plugin} #{File.join(zsh_plugin_dir, plugin_name)}`
-end
-
-puts green(" ✔ OK!")
-
-puts
-puts yellow(' > Installing zshuery ...')
-
-if File.exists?("#{ENV['HOME']}/.zshuery")
-  `cd ~/.zshuery; git reset --quiet --hard; git pull --quiet origin master`
+case install_command.to_sym
+when :all
+  installer.all
+when *installer.installer_names
+  installer.send("install_#{install_command}")
 else
-  `git clone git://github.com/railsbros-dirk/zshuery.git ~/.zshuery`
+  puts
+  puts <<-TXT
+  Please choose one of the following installers: all, #{installer.installer_names.join(', ')}
+  TXT
+
+  puts
+  puts red("  ✘ Failed!")
+  puts
+  exit(1)
 end
-`cd ~/.zshuery; git submodule --quiet update --init`
-
-puts green(" ✔ OK!")
-
-puts
-puts yellow(' > Setting some general git configs ...')
-
-git_configs = [
-  {:key => "color.ui", :value => "auto"},
-  {:key => "alias.br", :value => "branch"},
-  {:key => "alias.st", :value => "status -sb"},
-  {:key => "alias.ci", :value => "commit -m"},
-  {:key => "alias.ca", :value => "commit -a -m"},
-  {:key => "alias.co", :value => "checkout"},
-  {:key => "alias.logg", :value => "log --graph"},
-  {:key => "alias.lg", :value => "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"},
-  {:key => "merge.tool", :value => "opendiff"},
-  {:key => "merge.summary", :value => "true"},
-  {:key => "core.repositoryformatversion", :value => "0"},
-  {:key => "core.filemode", :value => "true"},
-  {:key => "core.bare", :value => "false"},
-  {:key => "core.pager", :value => "less -R"},
-  {:key => "core.logallrefupdates", :value => "true"},
-  {:key => "branch.autosetupmerge", :value => "true"},
-  {:key => "branch.master.remote", :value => "origin"},
-  {:key => "branch.master.merge", :value => "refs/heads/master"},
-  {:key => "i18n.commitEncoding", :value => "utf-8"},
-  {:key => "log.date", :value => "local"}
-]
-
-git_configs.each do |git_config|
-  puts " - #{git_config[:key]} = #{git_config[:value]} %>"
-  system "git config --global --unset-all #{git_config[:key]}"
-  system %Q{git config --global --add #{git_config[:key]} "#{git_config[:value]}"}
-end
-
-puts green(" ✔ OK!")
-exit
-
-puts
-puts yellow(" > Configuring Vim ...")
-puts " - Vim submodules"
-
-system "git submodule init -q; git submodule update -q"
-
-puts " - Vim Bundles"
-
-unless File.exists?("./etc/vim/bundle/vundle")
-  system "git clone -q https://github.com/gmarik/vundle.git etc/vim/bundle/vundle"
-end
-system "vim +BundleInstall\! +qall"
-system "vim +BundleClean\! +qall"
-
-puts green(" ✔ OK!")
 
 puts
 puts green(">>>> Everything is done. Enjoy! <<<<<")
