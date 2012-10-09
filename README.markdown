@@ -31,6 +31,21 @@ run the included install script:
 After that everything should be setup correctly and you can start to use
 zsh and Vim.
 
+### Partial Installation
+
+If you just want to install the Vim setup or Zsh configs you can run the
+install script with a additional parameter. For instance the following
+will only install the Vim configuration.
+
+    ./install vim
+
+For a complete list of available options run:
+
+    ./insall help
+
+**NOTE:** The script will _not_ overwrite existing configuration. If you
+want to use the script move your "old" files out of the way first ;-)
+
 ## Features
 
 I understand that some information is not very well stored in the
