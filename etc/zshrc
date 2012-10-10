@@ -29,7 +29,7 @@ else
 fi
 
 # Setup editor
-if [ $IS_MAC -eq 1 ]; then
+if [[ $IS_MAC -eq 1 ]]; then
   export VISUAL='vim'
   export EDITOR='vim'
 else
