@@ -130,7 +130,7 @@ class Installer
       ]
 
       git_configs.each do |git_config|
-        puts " - #{git_config[:key]} = #{git_config[:value]} %>"
+        puts " - #{git_config[:key]} = #{git_config[:value]}"
         system "git config --global --unset-all #{git_config[:key]}"
         system %Q{git config --global --add #{git_config[:key]} "#{git_config[:value]}"}
       end
