@@ -59,6 +59,47 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-powerline'
 let g:Powerline_symbols = 'unicode'
 
+" NeoComplCache ***************************************************************
+Bundle 'Shougo/neocomplcache'
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Disable auto popup
+let g:neocomplcache_disable_auto_complete = 0
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" AutoComplPop like behavior.
+let g:neocomplcache_enable_auto_select = 1
+
+" <TAB>: completion.
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+imap     <C-k>        <Plug>(neocomplcache_start_unite_complete)
+
+" Unite ***********************************************************************
+Bundle 'Shougo/unite.vim'
+Bundle 'h1mesuke/unite-outline'
+
+let g:unite_winheight = 20
+
+" The Unite prefix key.
+nnoremap    [unite]   <Nop>
+nmap  <C-u> [unite]
+
+" Open Unite with register contents
+nnoremap <silent> <Leader>g  :Unite -buffer-name=register register<CR>
+" Show outline of current file (best with saved files)
+nnoremap <silent> <Leader>o  :Unite outline<CR>
+
 " File Navigation *************************************************************
 
 Bundle 'L9'
