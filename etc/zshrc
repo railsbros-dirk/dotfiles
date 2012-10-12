@@ -16,7 +16,7 @@ load_aliases
 setopt extended_glob
 
 # Configure colors
-if test -x =dircolors; then
+if [[ -x dircolors ]]; then
   eval "`dircolors ~/.zsh.d/dircolors`"
   export ZLS_COLORS=$LS_COLORS
 fi

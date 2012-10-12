@@ -140,7 +140,7 @@ prompt_railsbros_setup() {
     p_rvm='$(ruby_version_prompt_info)'
 
     PROMPT="$bgc$pc[arrow]♌$pc[reset] "
-    if [ $USER != "dbreuer" ]; then
+    if [ $USER != "$my_user" ]; then
       PROMPT+="$pc[user]%n@"
     fi
     PROMPT+="$pc[host]%m$pc[reset]"
