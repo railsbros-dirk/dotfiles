@@ -48,6 +48,9 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'pangloss/vim-javascript'
 Bundle 'railsbros-dirk/Vim-Tomorrow-Theme'
 
+" At match #N out of M matches
+Bundle 'henrik/vim-indexed-search'
+
 Bundle 'tomtom/tlib_vim'
 
 Bundle 'garbas/vim-snipmate'
@@ -109,9 +112,8 @@ Bundle 'kien/ctrlp.vim'
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_open_new_file = 'h' " open newly created windows in a horizontal split
 let g:ctrlp_use_caching = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
+let g:ctrlp_custom_ignore =  {
+  \ 'link': 'fejo-engines',
   \ }
 
 " Tabs ************************************************************************
@@ -142,6 +144,14 @@ call Tabstyle_spaces()
 
 command Tst :call Tabstyle_tabs()
 command Tss :call Tabstyle_spaces()
+
+" Center display line after searches ******************************************
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 
 " Indenting *******************************************************************
 set ai " Automatically set the indent of a new line (local to buffer)
@@ -256,7 +266,6 @@ map U :redo<CR>
 set shell=/bin/bash " Some commands seem to have problems with zsh"
 set laststatus=2 " Show the status line all the time
 set title " Set the terminal's title
-set wildignore+=log,tmp,*.swp
 set clipboard=unnamed " Copy to system pasteboard
 
 " Sometimes I just want to scroll with the trackpad ;-)
@@ -270,15 +279,28 @@ set encoding=utf-8
 
 set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,tmp/*,*.so,*.swp,*.zip
+
+" Files we're never gonna use vim for
+set wildignore+=*.png,*.jpg,*.gif
+
+" Ruby
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,Gemfile.lock,*/log/*,.sass-cache,*/coverage/*
+
+" Python
+set wildignore+=*.pyc,*.pyo
+
+" NodeJS
+set wildignore+=*/node_modules/**"
 
 " Enable auto-save / auto-write
 set autowrite
 set autowriteall
 au BufLeave,FocusLost * silent! :wa
 
-" :W to save with sudo
-command W w !sudo tee % > /dev/null
+" :w!! to save with sudo
+cmap w!! w !sudo tee % > /dev/null
+command W w
 
 " Folding *********************************************************************
 " Automatic fold settings for specific files. Uncomment to use.
@@ -286,6 +308,19 @@ set nofoldenable " Turn on folding
 set foldmethod=syntax " Folding based on syntax
 set foldlevel=1
 
+" Toggle folding with <Space>
+nnoremap <Space> za
+vnoremap <Space> zf
+
+" Open all folds automatically
+autocmd BufRead,BufNewFile * normal zR
+
+" Define folds automatically by indent level, but would also like to create
+" folds manually. See: http://vim.wikia.com/wiki/Folding
+augroup vimrc
+  au BufReadPre * setlocal foldmethod=indent
+  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+augroup END
 
 " OSX like movement ************************************************************
 
@@ -321,6 +356,11 @@ map <Leader>L :vertical res +5<CR>
 map <Leader>K :res +5<CR>
 map <Leader>J :res -5<CR>
 
+map <C-S-Left> <C-w><Left>
+map <C-S-Right> <C-w><Right>
+map <C-S-Up> <C-w><Up>
+map <C-S-Down> <C-w><Down>
+
 " Remove trailing spaces
 function RemoveTrailingSpaces()
   %s/\v[\t ]{-1,}$//g
@@ -333,11 +373,15 @@ command Rts :call RemoveTrailingSpaces()
 " This is likely a bludgeon to solve some other issue, but it works
 set noequalalways
 
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-" Ruby stuff ******************************************************************
-"compiler ruby         " Enable compiler support for ruby
-"map <F5> :!ruby %<CR>
+" find conflict markers
+nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
+" upper/lower word
+nmap <leader>L mQviwU`Q
+nmap <leader>l mQviwu`Q
 
 " Custom auto commands
 augroup vimrcEx
