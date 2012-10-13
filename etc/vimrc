@@ -351,10 +351,10 @@ imap <down> <C-o>gj
 map E ge
 
 " Resize splits with home H/J/K/L
-map <Leader>H :vertical res -5<CR>
-map <Leader>L :vertical res +5<CR>
-map <Leader>K :res +5<CR>
-map <Leader>J :res -5<CR>
+map <S-h> :vertical res +5<CR>
+map <S-l> :vertical res -5<CR>
+map <S-k> :res +5<CR>
+map <S-j> :res -5<CR>
 
 map <C-S-Left> <C-w><Left>
 map <C-S-Right> <C-w><Right>
@@ -367,6 +367,11 @@ function RemoveTrailingSpaces()
 endfunction
 
 command Rts :call RemoveTrailingSpaces()
+
+" Tabs
+map <S-t> :tabnew<CR>
+map <S-Left> :tabprev<CR>
+map <S-Right> :tabnext<CR>
 
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
@@ -540,6 +545,9 @@ function Run()
 endfunction
 
 map <Leader>r :call Run()<CR>
+
+" ZoomWin configuration
+map <Leader>z :ZoomWin<CR>
 
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
