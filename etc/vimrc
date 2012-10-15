@@ -116,6 +116,8 @@ let g:ctrlp_custom_ignore =  {
   \ 'link': 'fejo-engines',
   \ }
 
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files --exclude-standard -co']
+
 " Tabs ************************************************************************
 "set sta " a <Tab> in an indent inserts 'shiftwidth' spaces
 
