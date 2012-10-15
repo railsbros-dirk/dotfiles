@@ -385,8 +385,8 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
 " upper/lower word
-nmap <leader>L mQviwU`Q
-nmap <leader>l mQviwu`Q
+nmap <leader>L gUiw
+nmap <leader>l guiw
 
 " Custom auto commands
 augroup vimrcEx
