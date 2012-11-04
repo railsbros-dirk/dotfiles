@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Dotfiles : My zsh and Vim configuration" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Dotfiles</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/railsbros-dirk/dotfiles">View on GitHub</a>
+
+          <h1 id="project_title">Dotfiles</h1>
+          <h2 id="project_tagline">My zsh and Vim configuration</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/railsbros-dirk/dotfiles/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/railsbros-dirk/dotfiles/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Dotfiles</h1>
+
+<p>This repository contains my opinionated collection of dotfiles. It mainly
+consists of zsh and Vim configuration. Feel free to use it or take any
+ideas from it.</p>
+
+<p><strong>Disclaimer:</strong> My main work environment is Mac OS X. I use <a href="http://www.iterm2.com/">iTerm2</a> as
+terminal with 256 colors. Generally I work with a very small font. I use
+these dotfile on Ubuntu servers too, but not on a daily basis. I will
+not gurantee that it will work on other environments and not even on
+this all the time ;-) Be sure to check any changes before just getting
+the latest version.</p>
+
+<h2>Installation</h2>
+
+<p>As already mentioned my shell is zsh. Be sure to change yours before
+using my config. If you don't like zsh you could just use the Vim stuff.
+Changing the shell on OS X can be done via the Account Preference Pane.
+Alternatively you can switch it via this command:</p>
+
+<pre><code>chsh -s /bin/zsh
+</code></pre>
+
+<p>To make Vim work as expected you need Vim compiled with Ruby support and
+the <code>--with-features=HUGE</code> flag. After that, clone the repository and
+run the included install script:</p>
+
+<pre><code>git clone git://github.com/railsbros-dirk/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+./install
+</code></pre>
+
+<p>After that everything should be setup correctly and you can start to use
+zsh and Vim.</p>
+
+<h3>Partial Installation</h3>
+
+<p>If you just want to install the Vim setup or Zsh configs you can run the
+install script with a additional parameter. For instance the following
+will only install the Vim configuration.</p>
+
+<pre><code>./install vim
+</code></pre>
+
+<p>For a complete list of available options run:</p>
+
+<pre><code>./insall help
+</code></pre>
+
+<p><strong>NOTE:</strong> The script will <em>not</em> overwrite existing configuration. If you
+want to use the script move your "old" files out of the way first ;-)</p>
+
+<h2>Features</h2>
+
+<p>I understand that some information is not very well stored in the
+repository and should be configurable on each machine. Due to this you
+have some points where you can provide your own config:</p>
+
+<ul>
+<li>
+<code>~/.vimrc.local</code> -&gt; Provide custom Vim configuration. Will be loaded
+after <code>~/.vimrc</code>
+</li>
+<li>
+<code>.zsh_config_for_USERNAME</code> -&gt; Provide custom zsh configuration</li>
+<li>
+<code>.gitconfig</code> -&gt; The install script will just generate it. You
+have/can provide additional information any time.</li>
+</ul><h3>Projects Dir</h3>
+
+<p>Pointing the variable <code>projects_dir</code> to something useful for you will
+enable you to use the shortcut <code>p PROJECT_NAME</code>. This will bring you
+directly to the given directory under the configured <code>projects_dir</code> path:</p>
+
+<pre><code>projects_dir="$HOME/Documents/projects"
+$ p my_project
+</code></pre>
+
+<p>This will change into the directory <code>$HOME/Documents/projects/my_project</code>.</p>
+
+<h3>Vundle</h3>
+
+<p>I used to manage my Vim plugins with Tim Popes great <a href="https://github.com/tpope/vim-pathogen">pathogen plugin</a>.
+Recently I discovered <a href="https://github.com/gmarik/vundle">Vundle</a> by <a href="http://gmarik.info/about">gmarik</a> and it is just awesome.
+You only have to manage the vundle via git submodule by yourself and all
+other plugins are managed by Vundle.</p>
+
+<h3>Color Scheme</h3>
+
+<p>My color scheme for Vim is a slightly modified version of Chris Kempsons
+<a href="https://github.com/chriskempson/tomorrow-theme">Tomorrow Night Bright</a>. I suggest to use the same for your terminal
+to get the best color experience in Vim and zsh.</p>
+
+<h3>Fuzzy Finder in Vim</h3>
+
+<p>Currently the fuzzy finder plugin of choice is <a href="https://github.com/kien/ctrlp.vim">ctrlp</a>. You can fire
+it up by hitting <code>Ctrl-p</code> (what a suprise). Take a look in the docs to
+find out more about it.</p>
+
+<p>There is a bunch of other stuff I use. Describing it all would take too
+much time. Just look through the single config files to get an idea what
+is possible. I don't use something like <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> or <a href="https://github.com/carlhuda/janus">Janus</a> to
+keep it more obvious what is going on.</p>
+
+<p>Feel free to use whatever you want for your own dotfiles. If you use
+mine I hope they taking you somewhere.</p>
+
+<h2>Thanks</h2>
+
+<p>I didn't came up will all that configuration by myself. Here is a list
+of people I took inspiration from or just copied some code ;-)</p>
+
+<ul>
+<li>Todd Werth - My dotfiles were originally a fork of <a href="https://github.com/twerth">his</a>
+</li>
+<li>Gary Bernhardt - Inspired by both the <a href="https://peepcode.com/products/play-by-play-bernhardt">Peepcode Play by Play episode</a>
+and his own screencasts <a href="https://www.destroyallsoftware.com/screencasts">'Destroy all Software'</a>
+</li>
+<li>
+<a href="https://peepcode.com/products/smash-into-vim-i">Both</a> <a href="https://peepcode.com/products/smash-into-vim-ii">Vim</a> screencasts by Peepcode</li>
+<li>
+<a href="http://tisba.de/">tisba</a>, <a href="https://github.com/mkalmes/dotfiles">Marc Kalmes</a> and <a href="https://github.com/michaelcontento/dotfiles">Michael Contento</a>
+</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Dotfiles maintained by <a href="https://github.com/railsbros-dirk">railsbros-dirk</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
