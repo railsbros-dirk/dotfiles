@@ -16,7 +16,7 @@ if has("gui_macvim")
   set guioptions-=T                 " Hide toolbar.
   set guioptions-=L
   set guioptions+=r
-  set transparency=15
+  set transparency=8
 
   macmenu &File.New\ Tab key=<nop>
 

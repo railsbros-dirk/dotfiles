@@ -62,6 +62,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-powerline'
 let g:Powerline_symbols = 'unicode'
 
+
 " NeoComplCache ***************************************************************
 Bundle 'Shougo/neocomplcache'
 " Disable AutoComplPop.
@@ -81,7 +82,7 @@ let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " AutoComplPop like behavior.
-let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_enable_auto_select = 0
 
 " <TAB>: completion.
 inoremap <expr><C-y>  neocomplcache#close_popup()
@@ -353,10 +354,10 @@ imap <down> <C-o>gj
 map E ge
 
 " Resize splits with home H/J/K/L
-map <S-h> :vertical res +5<CR>
-map <S-l> :vertical res -5<CR>
-map <S-k> :res +5<CR>
-map <S-j> :res -5<CR>
+map <S-Left> :vertical res +5<CR>
+map <S-Right> :vertical res -5<CR>
+map <S-Up> :res +5<CR>
+map <S-Down> :res -5<CR>
 
 map <C-S-Left> <C-w><Left>
 map <C-S-Right> <C-w><Right>
@@ -372,8 +373,8 @@ command Rts :call RemoveTrailingSpaces()
 
 " Tabs
 map <S-t> :tabnew<CR>
-map <S-Left> :tabprev<CR>
-map <S-Right> :tabnext<CR>
+map <S-h> :tabprev<CR>
+map <S-l> :tabnext<CR>
 
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
@@ -407,7 +408,7 @@ augroup vimrcEx
 
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType ruby,javascript set synmaxcol=255
+  autocmd FileType ruby,javascript set synmaxcol=800
   autocmd FileType python set sw=4 sts=4 et
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass 
