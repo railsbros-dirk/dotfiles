@@ -128,6 +128,7 @@ prompt_railsbros_setup() {
     else
       psvar[1]="$ex"
     fi
+
     zstyle ':vcs_info:*' enable             git
     zstyle ':vcs_info:*' actionformats      "[$pc[scm_branch]%b|%a$pc[reset]%u%c]"
     zstyle ':vcs_info:*' formats            "[$pc[scm_branch]%b$pc[reset]%u%c]"
@@ -137,17 +138,24 @@ prompt_railsbros_setup() {
 
     local p_rvm
 
-    p_rvm='$(ruby_version_prompt_info)'
+    p_rvm='[$(rvm-prompt i v)]'
 
     PROMPT="$bgc$pc[arrow]♌$pc[reset] "
+
     if [ $USER != "$my_user" ]; then
       PROMPT+="$pc[user]%n@"
     fi
-    PROMPT+="$pc[host]%m$pc[reset]"
 
-    PROMPT+=":$pc[shortpath]%1~$pc[reset]"
+    if [ $HOST != "$my_host" ]; then
+      PROMPT+="$pc[host]%m$pc[reset]:"
+    fi
+
+    PROMPT+="$pc[shortpath]%1~$pc[reset]"
     PROMPT+=$vcs_info_msg_0_
-    PROMPT+=" $pc[#]\$$rst "
+
+    local table_flip='[╯°□°]╯︵ ┻━┻'
+
+    PROMPT+="%(?..${table_flip}) $pc[#]\$$rst "
 
     RPROMPT="$pc[rvm_version]$p_rvm$pc[reset]"
     if [ $SHOW_TIME_IN_PROMPT ]; then
