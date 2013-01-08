@@ -3,10 +3,3 @@ typeset -U fpath
 zsh_cache=${HOME}/.zsh_cache
 mkdir -p $zsh_cache
 
-export RUBYOPT=-Ku
-
-export LC_ALL="en_US.UTF-8"
-
-if [[ -d $HOME/.rvm/bin ]]; then
-  PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-fi

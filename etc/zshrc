@@ -1,5 +1,13 @@
 #! /bin/zsh
 
+export RUBYOPT=-Ku
+
+export LC_ALL="en_US.UTF-8"
+
+if [[ -d $HOME/.rvm/bin ]]; then
+  PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+fi
+
 # Add custom completions and prompt to fpath
 fpath=(~/.zsh.d/custom_funcs $fpath)
 
