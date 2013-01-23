@@ -41,7 +41,7 @@ will only install the Vim configuration.
 
 For a complete list of available options run:
 
-    ./insall help
+    ./install help
 
 **NOTE:** The script will _not_ overwrite existing configuration. If you
 want to use the script move your "old" files out of the way first ;-)

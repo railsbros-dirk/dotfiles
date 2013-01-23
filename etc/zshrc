@@ -37,13 +37,8 @@ else
 fi
 
 # Setup editor
-if [[ $IS_MAC -eq 1 ]]; then
-  export VISUAL='vim'
-  export EDITOR='vim'
-else
-  export VISUAL="vim"
-  export EDITOR='vim'
-fi
+export VISUAL='vim'
+export EDITOR='vim'
 
 # Use another histfile
 [ -w $zsh_cache ] && HISTFILE=$zsh_cache/history
