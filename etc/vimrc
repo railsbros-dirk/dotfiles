@@ -242,7 +242,7 @@ set lazyredraw " to avoid scrolling problems
 "set t_ti= t_te=
 
 set backspace=indent,eol,start " Intuitive backspacing.
-set number " Show line numbers
+set nonumber " Hide line numbers per default
 set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
 set hidden " Handle multiple buffers better.
 map Q <Esc> " Get rid of awkward Ex-mode
