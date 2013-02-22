@@ -31,6 +31,8 @@ Bundle 'vim-scripts/ZoomWin'
 Bundle 'sickill/vim-pasta'
 Bundle 'tpope/vim-endwise'
 
+Bundle 'othree/html5.vim'
+
 Bundle 'tpope/vim-liquid'
 
 Bundle 'vim-ruby/vim-ruby'
@@ -51,12 +53,13 @@ Bundle 'railsbros-dirk/Vim-Tomorrow-Theme'
 
 " At match #N out of M matches
 Bundle 'henrik/vim-indexed-search'
-
 Bundle 'tomtom/tlib_vim'
-
 Bundle 'garbas/vim-snipmate'
 
 Bundle 'samsonw/vim-task'
+inoremap <silent> <buffer> <Leader>d <ESC>:call Toggle_task_status()<CR>i
+noremap <silent> <buffer> <Leader>d :call Toggle_task_status()<CR>
+
 
 Bundle 'scrooloose/nerdtree'
 
@@ -64,6 +67,7 @@ Bundle 'Lokaltog/vim-powerline'
 let g:Powerline_symbols = 'unicode'
 
 " Unite ***********************************************************************
+Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/unite.vim'
 Bundle 'h1mesuke/unite-outline'
 
