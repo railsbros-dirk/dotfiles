@@ -41,6 +41,8 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-rvm'
 
+Bundle 'airblade/vim-gitgutter'
+
 Bundle 'mileszs/ack.vim'
 
 Bundle 'sjl/gundo.vim'
@@ -50,6 +52,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'pangloss/vim-javascript'
 Bundle 'railsbros-dirk/Vim-Tomorrow-Theme'
+hi clear SignColumn
 
 " At match #N out of M matches
 Bundle 'henrik/vim-indexed-search'
