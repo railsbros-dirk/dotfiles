@@ -1,7 +1,5 @@
 #! /bin/zsh
 
-export RUBYOPT=-Ku
-
 export LC_ALL="en_US.UTF-8"
 
 if [[ -d $HOME/.rvm/bin ]]; then
