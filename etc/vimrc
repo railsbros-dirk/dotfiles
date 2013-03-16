@@ -40,6 +40,7 @@ Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-rvm'
+autocmd VimEnter * Rvm use default
 
 Bundle 'airblade/vim-gitgutter'
 
