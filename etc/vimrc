@@ -173,7 +173,6 @@ set splitbelow splitright
 set cursorline
 
 " Runtime *********************************************************************
-runtime macros/matchit.vim             " Load the matchit plugin.
 runtime snippets/support_functions.vim " Load the snippet support functions
 
 " Searching *******************************************************************
