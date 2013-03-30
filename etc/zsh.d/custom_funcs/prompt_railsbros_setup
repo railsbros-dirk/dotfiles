@@ -137,10 +137,14 @@ prompt_railsbros_setup() {
     zstyle ':vcs_info:*' stagedstr          "$pc[scm_status_staged]↑$pc[reset]"
 
     local p_rvm
+    p_rvm=""
 
-    p_rvm='[$(rvm-prompt i v)]'
+    type rvm-prompt >/dev/null 2>&1
+    if [ "$?" -eq 0 ]; then
+      p_rvm='[$(rvm-prompt i v)]'
+    fi
 
-    PROMPT="$bgc$pc[arrow]♌$pc[reset] "
+    PROMPT=""
 
     if [ $USER != "$my_user" ]; then
       PROMPT+="$pc[user]%n@"
