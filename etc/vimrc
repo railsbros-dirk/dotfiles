@@ -186,7 +186,8 @@ set smartcase            " Ignore case when searching lowercase
 set t_Co=256 " 256 colors
 set background=dark
 syntax enable " Turn on syntax highlighting.
-colorscheme Tomorrow-Night-Bright
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-pinkiepie
 
 
 " Status Line *****************************************************************
