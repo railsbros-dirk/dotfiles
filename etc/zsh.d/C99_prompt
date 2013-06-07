@@ -1,18 +1,39 @@
 #!/bin/zsh
 
-if [[ -f ~/.dotfiles/logo.ascii ]]; then
-  cat ~/.dotfiles/logo.ascii
-else
-  figlet -f larry3d `hostname -s`
-fi
+SKIP_LOGO=0
+SKIP_FORTUNE=1
 
-echo ""
-if fortune futurama &> /dev/null; then
-  fortune futurama
-else
-  fortune startrek
-fi
-echo ""
+function showlogo() {
+  if [[ -n "$SKIP_LOGO" && "$SKIP_LOGO" == "true" ]]; then
+    return 0
+  fi
+
+  if [[ -d ~/.dotfiles/logos ]]; then
+    LOGOS=( ~/.dotfiles/logos/* )
+    cat $LOGOS[$RANDOM%$#LOGOS+1]
+  else
+    figlet -f larry3d `hostname -s`
+  fi
+
+  echo ""
+}
+
+function showfortune() {
+  if [[ $SKIP_FORTUNE == 1 ]]; then
+    return 0
+  fi
+
+  if fortune futurama &> /dev/null; then
+    fortune futurama
+  else
+    fortune startrek
+  fi
+
+  echo ""
+}
+
+showlogo
+showfortune
 
 autoload -U promptinit
 promptinit
