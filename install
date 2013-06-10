@@ -124,7 +124,7 @@ class Installer
         {:key => "core.bare", :value => "false"},
         {:key => "core.pager", :value => "less -R"},
         {:key => "core.logallrefupdates", :value => "true"},
-        {:key => "branch.autosetupmerge", :value => "true"},
+        {:key => "branch.autosetuprebase", :value => "always"},
         {:key => "branch.master.remote", :value => "origin"},
         {:key => "branch.master.merge", :value => "refs/heads/master"},
         {:key => "i18n.commitEncoding", :value => "utf-8"},
