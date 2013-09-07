@@ -63,8 +63,13 @@ def pbcopy(input)
 end
 
 def log_to_stdout
-  if Object.const_defined?('Rails')
-    Rails.logger.instance_variable_set("@log", STDOUT)
+  if Object.const_defined?('Rails') && Object.const_defined?('ActiveRecord')
+    if Rails.respond_to?("logger=")
+      ActiveRecord::Base.logger = Logger.new(STDOUT)
+    else
+      ActiveRecord::Base.connection.instance_variable_set :@logger, Logger.new(STDOUT)
+    end
+    "Logging to STDOUT..."
   end
 end
 
