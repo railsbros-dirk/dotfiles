@@ -44,3 +44,9 @@ bindkey "^?" backward-delete-char
 # bindkey "^[[3~" delete-char
 # bindkey "^[3;5~" delete-char
 # bindkey "\e[3~" delete-char
+
+for keycode in '[' '0'; do
+  bindkey "^[${keycode}A" history-substring-search-up
+  bindkey "^[${keycode}B" history-substring-search-down
+done
+unset keycode
