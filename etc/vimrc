@@ -29,6 +29,7 @@ Bundle 'tpope/vim-endwise'
 
 Bundle 'tpope/vim-markdown'
 Bundle 'jtratner/vim-flavored-markdown'
+Bundle 'nelstrom/vim-markdown-folding'
 
 Bundle 'godlygeek/tabular'
 Bundle 'vim-scripts/ZoomWin'
@@ -436,7 +437,7 @@ au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 function s:setupWrapping()
   set wrap
   set wm=2
-  set textwidth=72
+  set textwidth=112
 endfunction
 
 function <SID>previewMarkdown()
@@ -447,6 +448,8 @@ endfunction
 function s:setupMarkup()
   call s:setupWrapping()
   map <buffer> <Leader>p :call <SID>previewMarkdown()<CR>
+  set spell
+  set spelllang=de
 endfunction
 
 " md, markdown, and mk are markdown and define buffer-local preview
