@@ -1,96 +1,168 @@
-" This is the vim config of Dirk Breuer
-" Machine/user specific should go into ~/.vimrc.local
+" -=- Welcome to my Vim config -=-
 
-" Initial stuff ***************************************************************
+" **************** First things first: Some general configuration
 
-set nocompatible " Must come first because it changes other options.
-filetype off     " required for vundle
-let mapleader = ","
+set nocompatible                                              " Turn off vi-compatibility, must be the first config to set
+filetype off                                                  " required for Vundle to work (See Vundle for details)
 
-" Vundle **********************************************************************
+let mapleader = ','                                           " <Leader> is ','
 
+set encoding=utf-8
+set ai                                                        " Automatically set the indent of a new line (local to buffer)
+set completeopt=longest,menu                                  " Only show completion menu for more then one option and use the longest common text
+set timeout timeoutlen=1000 ttimeoutlen=100                   " Fix slow O inserts from Gary Bernhardt
+set shell=bash                                                " some commands seem to have problems with zsh (i.e. RVM)
+set nowrap                                                    " There should be no wrapping (at least not for source code).
+set sidescroll=1                                              " Scroll 1 column at a time horizontally
+set sidescrolloff=2                                           " Keep some columns left/right for sidescrolling
+set equalalways                                               " Multiple windows, when created, are equal in size
+set splitbelow splitright                                     " Define where new splits should be placed
+set cursorline                                                " Highlight the line with the cursor
+set hlsearch                                                  " highlight search
+set incsearch                                                 " Incremental search, search as you type
+set ignorecase smartcase                                      " Ignore case when searching
+set ruler                                                     " Show the current line and column number
+set showmode                                                  " Display the mode you're in.
+set scrolloff=3                                               " Show 3 lines of context around the cursor.
+set ttyfast                                                   " We got us a fast terminal (a.k.a. local machine)
+set backspace=indent,eol,start                                " Intuitive backspacing.
+set nonumber                                                  " Hide line numbers per default
+set list listchars=trail:·,tab:>-,nbsp:¬,extends:»,precedes:« " Show invisble chars and tell how to display them
+set nobackup                                                  " Don't make a backup before overwriting a file.
+set nowritebackup                                             " And again.
+set noswapfile                                                " Don't use swapfiles
+set hidden                                                    " Handle multiple buffers better.
+set laststatus=2                                              " Show the status line all the time
+set title                                                     " Set the terminal's title
+set clipboard=unnamed                                         " Copy to system pasteboard
+set winwidth=79                                               " Try to make the current window this wide
+set mouse=n                                                   " Scrolling with the Magic Trackpad is just too nice ;-)
+set wildmenu                                                  " Enhanced command line completion.
+set wildmode=list:longest,list:full                           " And how to complete on the command line
+set nofoldenable                                              " Turn on folding
+set foldmethod=syntax                                         " Folding based on syntax
+set foldlevel=1                                               " Close all folds starting with the first
+set spell spelllang=en_us                                     " Activate spell checking and set American as default
+
+" Some files we just don't want to see here
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,tmp/*,*.so,*.swp,*.zip " general stuff
+set wildignore+=*.png,*.jpg,*.gif,*.jpeg " images
+set wildignore+=*/vendor/gems/*,*/vendor/cache/*,Gemfile.lock,*/log/*,.sass-cache,*/coverage/* " Ruby related files
+set wildignore+=*.pyc,*.pyo " Python
+set wildignore+=*/node_modules/****************" " NodeJS
+
+" :w!! to save with sudo
+cmap w!! w !sudo tee % > /dev/null
+
+" Enable auto-save / auto-write
+set autowrite
+set autowriteall
+au BufLeave,FocusLost * silent! :wa
+
+" Setup color scheme
+syntax enable                                    " Enable syntax highlighting
+set t_Co=256                                     " 256 colors
+set background=dark                              " Me like it dark
+let base16colorspace=256                         " Access colors present in 256 colorspace
+colorscheme pinkiepie                            " And me like it pink
+match ErrorMsg '\%>100v.\+'                      " Highlight Characters that overstep 100 characters (via @moonglum)
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' " Highlight VCS conflict markers
+
+
+
+
+" **************** Vundle config
+
+" Setup Vundle itself
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required! 
+" let Vundle manage Vundle (won't work otherwise)
 Bundle 'gmarik/vundle'
 
-" Bundles *********************************************************************
 
-Bundle 'tpope/vim-fugitive'
 
-Bundle 'tpope/vim-ragtag'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-endwise'
 
+" **************** Add some Bundles, because why would we have added Vundle?
+
+" Polyglot: A collection of language packs, loaded on demand
+Bundle "sheerun/vim-polyglot"
+
+" At match #N out of M matches
+Bundle 'henrik/vim-indexed-search'
+
+" Fuzzy finder
+Bundle 'kien/ctrlp.vim'
+
+" Use the_silver_searcher (ag) from within vim
+Bundle 'rking/ag.vim'
+
+" Replace status line with the powerline
+Bundle 'Lokaltog/vim-powerline'
+
+" Markdown plugins
 Bundle 'tpope/vim-markdown'
 Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'nelstrom/vim-markdown-folding'
 
-Bundle 'godlygeek/tabular'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'sickill/vim-pasta'
-
-Bundle 'othree/html5.vim'
-
+" For blogging
 Bundle 'tpope/vim-liquid'
 
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-bundler'
+" RVM integration
 Bundle 'tpope/vim-rvm'
 autocmd VimEnter * Rvm use default
 
-Bundle 'airblade/vim-gitgutter'
-
+" Graphical undo history
 Bundle 'sjl/gundo.vim'
 
-Bundle 'MarcWeber/vim-addon-mw-utils'
+" Align utility
+Bundle 'godlygeek/tabular'
+
+" Zoom into splits
+Bundle 'vim-scripts/ZoomWin'
+
+" Smarter pasting
+Bundle 'sickill/vim-pasta'
+
+" The Vim-Git-Integration™
+Bundle 'tpope/vim-fugitive'
+
+" Minimalistic commenting plugin
+Bundle "tpope/vim-commentary"
+
+" Help with HTML tags
+Bundle 'tpope/vim-ragtag'
+
+" Surround anything with anything (i.e. words with parantheses)
+Bundle 'tpope/vim-surround'
+
+" Make commands like surround work with the '.' command
+Bundle 'tpope/vim-repeat'
+
+" Some aliases
+Bundle 'tpope/vim-unimpaired'
+
+" Close structures automatically
+Bundle 'tpope/vim-endwise'
+
+" Emojis. For Vim. Nuff said.
+Bundle "junegunn/vim-emoji"
+
+" Close parenthesis automatically
 Bundle 'Raimondi/delimitMate'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'pangloss/vim-javascript'
-Bundle 'railsbros-dirk/Vim-Tomorrow-Theme'
-hi clear SignColumn
 
-" At match #N out of M matches
-Bundle 'henrik/vim-indexed-search'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
+" Better support for Rails
+Bundle 'tpope/vim-rails'
 
-Bundle 'samsonw/vim-task'
-inoremap <silent> <buffer> <Leader>d <ESC>:call Toggle_task_status()<CR>i
-noremap <silent> <buffer> <Leader>d :call Toggle_task_status()<CR>
+" Syntax checking
+Bundle 'scrooloose/syntastic'
 
-Bundle 'scrooloose/nerdtree'
 
-Bundle 'Lokaltog/vim-powerline'
-let g:Powerline_symbols = 'unicode'
 
-" Unite ***********************************************************************
-Bundle 'Shougo/unite.vim'
-Bundle 'h1mesuke/unite-outline'
 
-let g:unite_winheight = 20
+" **************** Configure the Bundles
 
-" The Unite prefix key.
-nnoremap    [unite]   <Nop>
-nmap  <C-u> [unite]
-
-" Open Unite with register contents
-nnoremap <silent> <Leader>g  :Unite -buffer-name=register register<CR>
-" Show outline of current file (best with saved files)
-nnoremap <silent> <Leader>o  :Unite outline<CR>
-
-" File Navigation *************************************************************
-
-Bundle 'L9'
-
-Bundle 'kien/ctrlp.vim'
+" Setup up CtrlP
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_open_new_file = 'h' " open newly created windows in a horizontal split
 let g:ctrlp_use_caching = 0
@@ -106,37 +178,43 @@ let g:ctrlp_user_command = {
   \ },
   \ 'fallback': 'find %s -type f'
 \ }
+let g:ctrlp_cmd = "CtrlPLastMode"
+let g:ctrlp_extensions = ['line']
 
-" Tabs ************************************************************************
-"set sta " a <Tab> in an indent inserts 'shiftwidth' spaces
+" Use unicode symbols for power line
+let g:Powerline_symbols = 'unicode'
 
-function! Tabstyle_tabs()
-  " Using 4 column tabs
-  set softtabstop=4
-  set shiftwidth=4
-  set tabstop=4
-  set noexpandtab|retab!
-  autocmd User Rails set softtabstop=4
-  autocmd User Rails set shiftwidth=4
-  autocmd User Rails set tabstop=4
-  autocmd User Rails set noexpandtab
-endfunction
+" Turn off jslint errors by default
+let g:JSLintHighlightErrorLine = 0
 
-function! Tabstyle_spaces()
-  " Use 2 spaces
-  set softtabstop=2
-  set shiftwidth=2
-  set tabstop=2
-  set smarttab
-  set expandtab|retab
-endfunction
+if emoji#available()
+  " Terminal Vim for example
+  " Bombs and Marks
+  " let g:syntastic_error_symbol=emoji#for('boom')
+  " let g:syntastic_warning_symbol=emoji#for('exclamation')
+  " Cats
+  let g:syntastic_error_symbol=emoji#for('scream_cat')
+  let g:syntastic_warning_symbol=emoji#for('crying_cat_face')
+else
+  " GUI MacVim for example
+  let g:syntastic_error_symbol='✗'
+  let g:syntastic_warning_symbol='⚠'
+end
 
-call Tabstyle_spaces()
+" toggles the Gundo graph
+nnoremap <F5> :GundoToggle<CR>
 
-command Tst :call Tabstyle_tabs()
-command Tss :call Tabstyle_spaces()
+" We don't want active syntax checks for everything
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['ruby'],
+                           \ 'passive_filetypes': ['scss', 'css', 'sass', 'javascript', 'html'] }
 
-" Center display line after searches ******************************************
+
+
+
+" **************** And now for some custom mappings
+
+" Center display line after each search
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
@@ -144,193 +222,18 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
-" Indenting *******************************************************************
-set ai " Automatically set the indent of a new line (local to buffer)
-set si " smartindent (local to buffer)
-filetype plugin indent on " Turn on file type detection.
-set ofu=syntaxcomplete#Complete
-set completeopt=longest,menuone
-set complete-=i
-
-
-" Scrollbars ******************************************************************
-set sidescrolloff=2
-set numberwidth=4
-
-
-" Syntax Cecking **************************************************************
-Bundle 'scrooloose/syntastic'
-
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['ruby'],
-                           \ 'passive_filetypes': ['scss', 'css', 'sass', 'javascript', 'html'] }
-
-" Windows *********************************************************************
-set equalalways " Multiple windows, when created, are equal in size
-set splitbelow splitright
-
 " Vertical and horizontal split then hop to a new buffer
-:noremap <Leader>v :vsp<cr>
-:noremap <Leader>h :split<cr>
-
-
-" Cursor highlights ***********************************************************
-set cursorline
-
-" Runtime *********************************************************************
-runtime snippets/support_functions.vim " Load the snippet support functions
-
-" Searching *******************************************************************
-set hlsearch             " highlight search
-set incsearch            " Incremental search, search as you type
-set ignorecase smartcase " Ignore case when searching
-set smartcase            " Ignore case when searching lowercase
-
-
-" Colors **********************************************************************
-set t_Co=256 " 256 colors
-set background=dark
-syntax enable " Turn on syntax highlighting.
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-pinkiepie
-
-
-" Status Line *****************************************************************
-set showcmd
-set ruler " Show ruler
-"set ch=2 " Make command line two lines high
-"match LongLineWarning '\%120v.*' " Error format when a line is longer than 120
-set showmode " Display the mode you're in.
-
-" Line Wrapping ***************************************************************
-set nowrap
-set scrolloff=3       " Show 3 lines of context around the cursor.
-set linebreak         " Wrap at word
-set nolist
-set formatoptions=tq
-set wrapmargin=4
-set textwidth=120
-set formatoptions+=l
-
-" Directories *****************************************************************
-set nobackup          " Don't make a backup before overwriting a file.
-set nowritebackup     " And again.
-set noswapfile        " Don't use swapfiles"
-
-" File Stuff ******************************************************************
-filetype plugin indent on
-
-" Sessions ********************************************************************
-" Sets what is saved when you save a session
-set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
-
-
-" Invisible characters *********************************************************
-set listchars=trail:·,tab:>-,nbsp:¬,extends:»,precedes:«
-set list
-noremap <Leader>i :set list!<CR> " Toggle invisible chars
-
-
-" Misc settings ***************************************************************
-" Syntax coloring lines that are too long just slows down the world
+noremap <Leader>v :vsp<cr>
+noremap <Leader>h :split<cr>
 
 " Clear the search buffer when hitting return
-nnoremap <Leader><CR> :nohlsearch<cr>
+nnoremap <CR> :nohlsearch<cr>
+" Easier switching between previous and current buffer
 nnoremap <leader><leader> <c-^>
-
-
-set winwidth=79
-set ttyfast " u got a fast terminal
-set ttyscroll=3
-set lazyredraw " to avoid scrolling problems
-
-" Prevent Vim from clobbering the scrollback buffer. See
-" http://www.shallowsky.com/linux/noaltscreen.html
-"set t_ti= t_te=
-
-set backspace=indent,eol,start " Intuitive backspacing.
-set nonumber " Hide line numbers per default
-set vb t_vb= " Turn off bell, this could be more annoying, but I'm not sure how
-set hidden " Handle multiple buffers better.
-map Q <Esc> " Get rid of awkward Ex-mode
-map U :redo<CR>
-set shell=/bin/bash " Some commands seem to have problems with zsh"
-set laststatus=2 " Show the status line all the time
-set title " Set the terminal's title
-set clipboard=unnamed " Copy to system pasteboard
-
-" Sometimes I just want to scroll with the trackpad ;-)
-set mouse=n
-
-" Syntax checking for ruby
-map <Leader>c :!ruby -c %<CR>
-
-" Set encoding
-set encoding=utf-8
-
-set wildmenu                      " Enhanced command line completion.
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,tmp/*,*.so,*.swp,*.zip
-
-" Files we're never gonna use vim for
-set wildignore+=*.png,*.jpg,*.gif
-
-" Ruby
-set wildignore+=*/vendor/gems/*,*/vendor/cache/*,Gemfile.lock,*/log/*,.sass-cache,*/coverage/*
-
-" Python
-set wildignore+=*.pyc,*.pyo
-
-" NodeJS
-set wildignore+=*/node_modules/**"
-
-" Enable auto-save / auto-write
-set autowrite
-set autowriteall
-au BufLeave,FocusLost * silent! :wa
-
-" :w!! to save with sudo
-cmap w!! w !sudo tee % > /dev/null
-command W w
-
-" Folding *********************************************************************
-" Automatic fold settings for specific files. Uncomment to use.
-set nofoldenable " Turn on folding
-set foldmethod=syntax " Folding based on syntax
-set foldlevel=1
 
 " Toggle folding with <Space>
 nnoremap <Space> za
 vnoremap <Space> zf
-
-" Open all folds automatically
-autocmd BufRead,BufNewFile * normal zR
-
-" Define folds automatically by indent level, but would also like to create
-" folds manually. See: http://vim.wikia.com/wiki/Folding
-augroup vimrc
-  au BufReadPre * setlocal foldmethod=indent
-  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-augroup END
-
-" OSX like movement ************************************************************
-
-" Jump words with alt-arrow (osx style)
-map <M-Left> b
-map <M-Right> w
-imap <M-Left> <Esc>bi
-imap <M-Right> <Esc><Right>wi
-
-" Mac bindings for home/end
-imap <D-Left> <Esc>^i
-imap <D-Right> <Esc>g$i
-map <D-Left> ^
-map <D-Right> g$
-
-" Fuck you, manual key
-nnoremap K <nop>
-
-" Navigation ******************************************************************
 
 " Make cursor move by visual lines instead of file lines (when wrapping)
 map <up> gk
@@ -347,158 +250,75 @@ map <S-Right> :vertical res -5<CR>
 map <S-Up> :res +5<CR>
 map <S-Down> :res -5<CR>
 
+" Move between splits
 map <C-S-Left> <C-w><Left>
 map <C-S-Right> <C-w><Right>
 map <C-S-Up> <C-w><Up>
 map <C-S-Down> <C-w><Down>
 
-" Remove trailing spaces
-function RemoveTrailingSpaces()
-  %s/\v[\t ]{-1,}$//g
-endfunction
-
-command Rts :call RemoveTrailingSpaces()
-
-" Tabs
-map <S-h> :tabprev<CR>
-map <S-l> :tabnext<CR>
-
-" Without setting this, ZoomWin restores windows in a way that causes
-" equalalways behavior to be triggered the next time CommandT is used.
-" This is likely a bludgeon to solve some other issue, but it works
-set noequalalways
-
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 " upper/lower word
 nmap <leader>L gUiw
 nmap <leader>l guiw
 
-" Custom auto commands
-augroup vimrcEx
-  " Clear all autocmds in the group
-  autocmd!
-  "Sourced from vim tip: http://vim.wikia.com/wiki/Keep_folds_closed_while_inserting_text
-  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-  autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
-
-  autocmd FileType text setlocal textwidth=78
-  " Jump to last cursor position unless it's invalid or in an event handler
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType ruby,javascript set synmaxcol=800
-  autocmd FileType python set sw=4 sts=4 et
-
-  autocmd! BufRead,BufNewFile *.sass setfiletype sass 
-
-  autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
-  autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
-
-  autocmd FileType ruby set foldmethod=syntax
-  autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
-
-  " Omni Completion *************************************************************
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType python set omnifunc=pythoncomplete#Complete
-  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-  autocmd FileType c set omnifunc=ccomplete#Complete
-  " May require ruby compiled in
-  autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-augroup END
-
-" Hard to type *****************************************************************
-imap <C-l> <space>=><space>
-
-
-" -----------------------------------------------------------------------------
-" |                              Plug-ins                                     |
-" -----------------------------------------------------------------------------
-
-" Commenter **************************************************************
-
-Bundle 'tomtom/tcomment_vim'
-
-map <leader>/ :TComment<CR>
-
-" Javascript *************************************************************
-au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
-
-" Markdown ***************************************************************
-
-function s:setupWrapping()
-  set wrap
-  set wm=2
-  set textwidth=112
-endfunction
-
-function <SID>previewMarkdown()
-  silent execute "!mark % > /dev/null 2>&1 &"
-  redraw!
-endfunction
-
-function s:setupMarkup()
-  call s:setupWrapping()
-  map <buffer> <Leader>p :call <SID>previewMarkdown()<CR>
-  set spell
-  set spelllang=de
-endfunction
-
-" md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} set ft=markdown
-
-" make and python use real tabs
-au FileType make                                     set noexpandtab
-au FileType python                                   set noexpandtab
-
-" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-
-" add json syntax highlighting
-au BufNewFile,BufRead *.json set ft=javascript
-
-au BufRead,BufNewFile *.txt call s:setupWrapping()
-
-" toggles the Gundo graph
-nnoremap <F5> :GundoToggle<CR>
-
-" set the tmp path for markdown-preview
-let g:MarkdownPreviewTMP = '/tmp/vim-markdown-preview'
-
-" Opens an edit command with the path of the currently edited file filled in
-" Normal mode: <Leader>e
+" Directory of current file (`:e %%` for example) – Gary Bernhardt
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
-
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 imap <Leader>= <Esc> <C-w>=i
 
-" Use modeline overrides
-set modeline
-set modelines=10
 
-" Turn off jslint errors by default
-let g:JSLintHighlightErrorLine = 0
 
-" Show (partial) command in the status line
-set showcmd
 
-autocmd FileType ruby compiler ruby
+" **************** Custom functions
 
+function! s:setupFourSpacesIndent()
+  set softtabstop=4 shiftwidth=4 tabstop=4
+  set noexpandtab|retab
+endfunction
+
+function! s:setupTwoSpacesIdent()
+  set softtabstop=2 shiftwidth=2 tabstop=2
+  set smarttab
+  set expandtab|retab
+endfunction
+
+" Two spaces indent is default
+call s:setupTwoSpacesIdent()
+
+" Remove trailing spaces
+function RemoveTrailingSpaces()
+  %s/\v[\t ]{-1,}$//g
+endfunction
+" And create a command for it
+command Rts :call RemoveTrailingSpaces()
+
+" Switch spell checking language (via @moonglum)
+command! British :set spelllang=en_gb
+command! American :set spelllang=en_us
+command! German :set spelllang=de
+
+" Preview markdown files with Marked.app
+function <SID>previewMarkdown()
+  silent execute "!mark % > /dev/null 2>&1 &"
+  redraw!
+endfunction
+
+" File types that do not contain source code should wrap their text
+" and should not have a character limit per line. (via @moonglum)
+function! s:setupForProse()
+  set wrap linebreak nolist
+  match ErrorMsg ''
+endfunction 
+
+" When writing markdown create mapping for preview and setup wrapping
+function s:setupMarkup()
+  call s:setupForProse()
+  map <buffer> <Leader>p :call <SID>previewMarkdown()<CR>
+endfunction
+
+" Execute the current (Ruby) bugger and display the result in a preview window
 function Run()
   let executable=b:current_compiler
 
@@ -522,9 +342,69 @@ endfunction
 
 map <Leader>r :call Run()<CR>
 
-" ZoomWin configuration
-map <Leader>z :ZoomWin<CR>
 
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
+
+
+" **************** Here be autocommands
+
+" Open all folds automatically
+autocmd BufRead,BufNewFile * normal zR
+
+augroup vimrcEx
+  " Clear all autocmds in the group
+  autocmd!
+  "Sourced from vim tip: http://vim.wikia.com/wiki/Keep_folds_closed_while_inserting_text
+  autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+  autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
+  autocmd FileType text setlocal textwidth=78
+  " Jump to last cursor position unless it's invalid or in an event handler
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  " for ruby, autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  autocmd FileType ruby,javascript set synmaxcol=800
+  autocmd FileType python setlocal sw=4 sts=4 noexpandtab
+
+  autocmd! BufRead,BufNewFile *.sass setfiletype sass
+  autocmd! BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
+  " md, markdown, and mk are markdown and define buffer-local preview
+  autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+  autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} set ft=markdown ai formatoptions=tcroqn2 comments=n:&gt;
+
+  autocmd FileType ruby set foldmethod=syntax compiler ruby
+  autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
+
+  " Makefiles require tabs
+  autocmd FileType make setlocal noexpandtab
+
+  " Omni Completion *************************************************************
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType python set omnifunc=pythoncomplete#Complete
+  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+  autocmd FileType c set omnifunc=ccomplete#Complete
+
+  " May require ruby compiled in
+  autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+
+  " Set the Ruby filetype for a number of common Ruby files without .rb (via @moonglum)
+  au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,Procfile,Guardfile,Capfile,config.ru,*.rake,*.rabl} set ft=ruby
+
+  " Syntax highlighting for JSON
+  au BufNewFile,BufRead *.json set ft=javascript
+
+  " Plain text should be wrapped too
+  au BufRead,BufNewFile *.txt call s:setupForProse()
+augroup END
+
+
+
+" At the very end (and after Vundle is finished) re-activate file type detection
+filetype plugin indent on
