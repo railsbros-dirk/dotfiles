@@ -36,12 +36,22 @@ if has("gui_macvim")
   " is decided based on the first line; if it's not commented then all lines
   " will be commented
   aunmenu Window.Zoom
-  "macmenu &Window.Zoom key=<nop>
-  map <D-/> <Leader>/
 
   map <C-S-d> Vyp " duplicate current line
   map <D-d> dd " delete current line
   imap <D-d> <ESC>ddi
+
+  " Jump words with alt-arrow (osx style)
+  map <M-Left> b
+  map <M-Right> w
+  imap <M-Left> <Esc>bi
+  imap <M-Right> <Esc><Right>wi
+
+  " Mac bindings for home/end
+  imap <D-Left> <Esc>^i
+  imap <D-Right> <Esc>g$i
+  map <D-Left> ^
+  map <D-Right> g$
 end
 
 " General *********************************************************************
