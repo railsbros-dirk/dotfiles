@@ -376,7 +376,8 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
   autocmd BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} set ft=markdown ai formatoptions=tcroqn2 comments=n:&gt;
 
-  autocmd FileType ruby set foldmethod=syntax compiler ruby
+  autocmd FileType ruby compiler ruby
+  autocmd FileType ruby set foldmethod=syntax
   autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 
   " Makefiles require tabs
