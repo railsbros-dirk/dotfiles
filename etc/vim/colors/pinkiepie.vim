@@ -9,7 +9,7 @@ let s:gui03 = "505050"
 let s:gui04 = "b0b0b0"
 let s:gui05 = "d0d0d0"
 let s:gui06 = "e0e0e0"
-let s:gui07 = "f5f5f5"
+let s:gui07 = "e1f4fd"
 let s:gui08 = "ac4142"
 let s:gui09 = "d28445"
 let s:gui0A = "fdf6af"
@@ -174,7 +174,7 @@ call <sid>hi("Character",    s:gui08, "", s:cterm08, "", "")
 call <sid>hi("Comment",      s:gui03, "", s:cterm03, "", "")
 call <sid>hi("Conditional",  s:gui0E, "", s:cterm0E, "", "")
 call <sid>hi("Constant",     s:gui09, "", s:cterm09, "", "")
-call <sid>hi("Define",       s:gui0E, "", s:cterm0E, "", "none")
+call <sid>hi("Define",       s:gui0E, "", s:cterm0E, "", "bold")
 call <sid>hi("Delimiter",    s:gui0F, "", s:cterm0F, "", "")
 call <sid>hi("Float",        s:gui09, "", s:cterm09, "", "")
 call <sid>hi("Function",     s:gui0D, "", s:cterm0D, "", "")
