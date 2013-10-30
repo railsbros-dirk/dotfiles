@@ -26,7 +26,7 @@ zstyle ':completion:*' verbose yes
 ## If the style is set to any other value, or is unset, files will be
 ## sorted by reverse access time.
 ## kudos to cypher (https://github.com/cypher/dotfiles/blob/master/zshrc)
-zstyle ':completion:*' file-sort reverse access
+zstyle ':completion:*' file-sort access
 
 zstyle :compinstall filename '~/.zsh.d/C60_completion'
 
