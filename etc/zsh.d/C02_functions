@@ -33,24 +33,6 @@ function find_for_mate() {
   find ${1:-.} -name "*.${2:-rb}" -print0 | xargs -0 mate
 }
 
-function ruby_version_prompt_info() {
-  ruby_version=$(~/.rvm/bin/rvm-prompt 2> /dev/null) || return
-  echo "($ruby_version)"
-}
-
-function current_gemset() {
-  if [[ ($SHOW_GEMSET_IN_PROMPT -gt 0) ]]; then
-    local gemsetName=`rvm gemset name`
-
-    if [[ (-n ${gemsetName}) ]]
-    then
-      echo "@${gemsetName}"
-    else
-      echo "@default"
-    fi
-  fi
-}
-
 function jenkins_build_log() {
   local project=$1
   local buildNumber=$(ssh admin@blackcat.galaxycats.com "cat /Users/admin/.jenkins/jobs/${project}/nextBuildNumber")
