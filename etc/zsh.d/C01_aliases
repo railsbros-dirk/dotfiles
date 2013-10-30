@@ -43,3 +43,5 @@ alias tig='VISUAL=vim tig'
 alias migrate="bundle exec 'rake db:migrate; rake db:test:prepare'"
 alias bi="bundle install"
 alias be="bundle exec"
+
+# vim: set ft=zsh:

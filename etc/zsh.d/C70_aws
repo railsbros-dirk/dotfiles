@@ -7,3 +7,5 @@ if [[ -d $HOME/.awsenv/bin ]]; then
   export PATH="$HOME/.awsenv/bin:$PATH"
   eval "$(awsenv init -)"
 fi
+
+# vim: set ft=zsh:

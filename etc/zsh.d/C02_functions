@@ -117,3 +117,5 @@ function battery_stat() {
 function last_sha() {
   g log -n 1 --format=short | grep commit | cut -d ' ' -f 2
 }
+
+# vim: set ft=zsh:

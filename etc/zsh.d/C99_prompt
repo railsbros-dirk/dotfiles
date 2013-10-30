@@ -38,3 +38,5 @@ showfortune
 autoload -U promptinit
 promptinit
 prompt railsbros
+
+# vim: set ft=zsh:

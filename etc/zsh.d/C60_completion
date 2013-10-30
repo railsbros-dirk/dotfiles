@@ -31,3 +31,5 @@ zstyle ':completion:*' file-sort reverse access
 zstyle :compinstall filename '~/.zsh.d/C60_completion'
 
 compdef '_path_files -/ -W ${~projects_dir}' p
+
+# vim: set ft=zsh:

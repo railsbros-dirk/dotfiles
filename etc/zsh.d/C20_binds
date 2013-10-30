@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # emacs editing
 bindkey -e
 
@@ -50,3 +48,5 @@ for keycode in '[' '0'; do
   bindkey "^[${keycode}B" history-substring-search-down
 done
 unset keycode
+
+# vim: set ft=zsh:
