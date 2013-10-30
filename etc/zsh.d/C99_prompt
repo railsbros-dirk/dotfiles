@@ -1,10 +1,8 @@
-#!/bin/zsh
-
-SKIP_LOGO=0
-SKIP_FORTUNE=1
+local SKIP_LOGO=false
+local SKIP_FORTUNE=true
 
 function showlogo() {
-  if [[ -n "$SKIP_LOGO" && "$SKIP_LOGO" == "true" ]]; then
+  if [[ -n $SKIP_LOGO && $SKIP_LOGO == "true" ]]; then
     return 0
   fi
 
@@ -19,7 +17,7 @@ function showlogo() {
 }
 
 function showfortune() {
-  if [[ $SKIP_FORTUNE == 1 ]]; then
+  if [[ -n $SKIP_FORTUNE && $SKIP_FORTUNE == "true" ]]; then
     return 0
   fi
 

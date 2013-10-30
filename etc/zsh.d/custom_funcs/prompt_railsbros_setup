@@ -41,10 +41,6 @@ colorword() {
   echo "%{"$'\e['${(j:;:)s}m"%}"
 }
 
-prompt_railsbros_scm_info() {
-  echo ${vcs_info_msg_0_}
-}
-
 prompt_railsbros_setup() {
 
   setopt noxtrace localoptions
