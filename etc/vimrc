@@ -98,8 +98,8 @@ Bundle 'kien/ctrlp.vim'
 " Use the_silver_searcher (ag) from within vim
 Bundle 'rking/ag.vim'
 
-" Replace status line with the powerline
-Bundle 'Lokaltog/vim-powerline'
+" Replace status line with Airline
+Bundle 'bling/vim-airline'
 
 " Markdown plugins
 Bundle 'tpope/vim-markdown'
@@ -181,9 +181,7 @@ let g:ctrlp_user_command = {
 let g:ctrlp_cmd = "CtrlPLastMode"
 let g:ctrlp_extensions = ['line']
 
-" Use unicode symbols for power line
-let g:Powerline_symbols = 'unicode'
-
+" Setup syntastic
 if emoji#available()
   " Terminal Vim for example
   " Cats
@@ -200,6 +198,10 @@ let g:syntastic_check_on_open = 1 " Check syntax when file is opened
 " We don't want active syntax checks for everything
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'passive_filetypes': ['scss', 'css', 'sass', 'javascript', 'html', 'ruby'] }
+
+" Use Powerline font symbols
+let g:airline_powerline_fonts = 1
+let g:airline_detect_paste = 0
 
 " toggles the Gundo graph
 nnoremap <F5> :GundoToggle<CR>
