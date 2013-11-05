@@ -119,6 +119,7 @@ class Installer
         {:key => "alias.prune-all", :value => %Q{!git remote | xargs -n 1 git remote prune} },
         {:key => "merge.tool", :value => "opendiff"},
         {:key => "merge.summary", :value => "true"},
+        {:key => "push.default", :value => "simple"},
         {:key => "core.repositoryformatversion", :value => "0"},
         {:key => "core.filemode", :value => "true"},
         {:key => "core.bare", :value => "false"},
