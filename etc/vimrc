@@ -11,7 +11,7 @@ set encoding=utf-8
 set ai                                                        " Automatically set the indent of a new line (local to buffer)
 set completeopt=longest,menu                                  " Only show completion menu for more then one option and use the longest common text
 set timeout timeoutlen=1000 ttimeoutlen=100                   " Fix slow O inserts from Gary Bernhardt
-set shell=bash                                                " some commands seem to have problems with zsh (i.e. RVM)
+set shell=/bin/sh                                             " some commands seem to have problems with zsh (i.e. RVM)
 set nowrap                                                    " There should be no wrapping (at least not for source code).
 set sidescroll=1                                              " Scroll 1 column at a time horizontally
 set sidescrolloff=2                                           " Keep some columns left/right for sidescrolling
@@ -35,7 +35,6 @@ set hidden                                                    " Handle multiple 
 set laststatus=2                                              " Show the status line all the time
 set title                                                     " Set the terminal's title
 set clipboard=unnamed                                         " Copy to system pasteboard
-set paste                                                     " Don't mess up when pasting
 set winwidth=79                                               " Try to make the current window this wide
 set mouse=n                                                   " Scrolling with the Magic Trackpad is just too nice ;-)
 set wildmenu                                                  " Enhanced command line completion.
@@ -64,7 +63,7 @@ au BufLeave,FocusLost * silent! :wa
 syntax enable                                    " Enable syntax highlighting
 set t_Co=256                                     " 256 colors
 set background=dark                              " Me like it dark
-let base16colorspace=256                         " Access colors present in 256 colorspace
+" let base16colorspace=256                         " Access colors present in 256 colorspace
 colorscheme pinkiepie                            " And me like it pink
 match ErrorMsg '\%>100v.\+'                      " Highlight Characters that overstep 100 characters (via @moonglum)
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' " Highlight VCS conflict markers
