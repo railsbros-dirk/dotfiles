@@ -4,6 +4,10 @@
 # kudos  from wunjo /grb prompt theme and modified
 
 autoload -Uz vcs_info
+zstyle ':vcs_info:*'           enable             git
+zstyle ':vcs_info:git:*'       check-for-changes  true
+zstyle ':vcs_info:git:*:-all-' command            /usr/local/bin/git
+
 autoload colors; colors
 
 prompt_railsbros_help () {
@@ -114,7 +118,6 @@ prompt_railsbros_setup() {
     done
     pc[reset]=$(colorword . . 00)
 
-    vcs_info
     local ex=$?
     psvar=()
 
@@ -125,12 +128,11 @@ prompt_railsbros_setup() {
       psvar[1]="$ex"
     fi
 
-    zstyle ':vcs_info:*' enable             git
-    zstyle ':vcs_info:*' actionformats      "[$pc[scm_branch]%b|%a$pc[reset]%u%c]"
-    zstyle ':vcs_info:*' formats            "[$pc[scm_branch]%b$pc[reset]%u%c]"
-    zstyle ':vcs_info:*' check-for-changes  true
-    zstyle ':vcs_info:*' unstagedstr        "$pc[scm_status_dirty]✖$pc[reset]"
-    zstyle ':vcs_info:*' stagedstr          "$pc[scm_status_staged]↑$pc[reset]"
+    zstyle ':vcs_info:git:*' actionformats      "[$pc[scm_branch]%b|%a$pc[reset]%u%c]"
+    zstyle ':vcs_info:git:*' formats            "[$pc[scm_branch]%b$pc[reset]%u%c]"
+    zstyle ':vcs_info:git:*' unstagedstr        "$pc[scm_status_dirty]✖$pc[reset]"
+    zstyle ':vcs_info:git:*' stagedstr          "$pc[scm_status_staged]↑$pc[reset]"
+    vcs_info
 
     local p_rvm
     p_rvm=""
