@@ -222,8 +222,8 @@ nnoremap g# g#zz
 noremap <Leader>v :vsp<cr>
 noremap <Leader>h :split<cr>
 
-" Clear the search buffer when hitting return
-nnoremap <CR> :nohlsearch<cr>
+" Clear the search highlighting
+nnoremap <leader><cr> :nohlsearch<CR>
 " Easier switching between previous and current buffer
 nnoremap <leader><leader> <c-^>
 
