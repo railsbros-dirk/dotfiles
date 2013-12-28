@@ -15,7 +15,6 @@ alias cd..='cd ..'
 alias ..='cd ..'
 alias grep='grep --color=auto'
 alias tsl="tail -f /var/log/syslog"
-alias df="df -hT"
 alias tree='tree -psC -L'
 
 alias -s txt='less -rE'
