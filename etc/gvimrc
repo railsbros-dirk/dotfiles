@@ -10,19 +10,19 @@
 if has("gui_macvim")
 
   set fuoptions=maxvert,maxhorz     " fullscreen options (MacVim only), resized window when changed to fullscreen
-  set guifont=Menlo:h11
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h12
   set antialias                     " MacVim: smooth fonts.
   set encoding=utf-8                " Use UTF-8 everywhere.
   set guioptions-=T                 " Hide toolbar.
   set guioptions-=L
   set guioptions+=r
-  set transparency=8
+  set transparency=0
 
   macmenu &File.New\ Tab key=<nop>
 
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
   " Command-Shift-F for Ack
-  map <D-F> :Ack<space>
+  map <D-F> :Ag<space>
 
   " Command-][ to increase/decrease indentation
   map <D-]> V>gv<ESC>
