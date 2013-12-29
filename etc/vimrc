@@ -245,6 +245,14 @@ map j gj
 imap <down> <C-o>gj
 map E ge
 
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
 " Resize splits with home H/J/K/L
 map <S-Left> :vertical res +5<CR>
 map <S-Right> :vertical res -5<CR>
