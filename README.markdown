@@ -98,6 +98,22 @@ keep it more obvious what is going on.
 Feel free to use whatever you want for your own dotfiles. If you use
 mine I hope they taking you somewhere.
 
+## KeyRemap4MacBook
+
+For my keyboard configuration I use [KeyRemap4MacBook][18] and [PCKeyboardHack][19]. Both
+tools are really great and help me to make some fancy stuff like using the
+Caps-Lock key as both Control AND Escape :stuck_out_tongue_winking_eye: Besides
+that I use it to emulate some missing keys on my mini keyboard which misses the
+F-layer. If you want to use the KeyRemap4MacBook config make sure to add the
+following to the `private.xml`:
+
+```xml
+<?xml version="1.0"?>
+<root>
+  <include path="{{ ENV_HOME }}/.dotfiles/key_remap_config.xml" />
+</root>
+```
+
 ## Thanks
 
 I didn't came up will all that configuration by myself. Here is a list
@@ -126,3 +142,5 @@ of people I took inspiration from or just copied some code ;-)
 [15]: https://github.com/mkalmes/dotfiles
 [16]: https://github.com/michaelcontento/dotfiles
 [17]: http://tisba.de/
+[18]: https://pqrs.org/macosx/keyremap4macbook/index.html.en
+[19]: https://pqrs.org/macosx/keyremap4macbook/pckeyboardhack.html.en
