@@ -37,10 +37,6 @@ if has("gui_macvim")
   " will be commented
   aunmenu Window.Zoom
 
-  map <C-S-d> Vyp " duplicate current line
-  map <D-d> dd " delete current line
-  imap <D-d> <ESC>ddi
-
   " Jump words with alt-arrow (osx style)
   map <M-Left> b
   map <M-Right> w
