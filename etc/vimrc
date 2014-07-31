@@ -74,92 +74,101 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' " Highlight VCS conflict marker
 " **************** Vundle config
 
 " Setup Vundle itself
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle (won't work otherwise)
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 
 
 
-" **************** Add some Bundles, because why would we have added Vundle?
+" **************** Add some Plugins, because why would we have added Vundle?
 
 " Polyglot: A collection of language packs, loaded on demand
-Bundle "sheerun/vim-polyglot"
+Plugin 'sheerun/vim-polyglot'
+
+Plugin 'wting/rust.vim'
+autocmd! BufRead,BufNewFile *.rs set ft=rust
+" Community Standard for Rust is indentation of 4
+autocmd FileType rust set tabstop=4 softtabstop=4 shiftwidth=4
 
 " At match #N out of M matches
-Bundle 'henrik/vim-indexed-search'
+Plugin 'henrik/vim-indexed-search'
 
 " Fuzzy finder
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 
 " Use the_silver_searcher (ag) from within vim
-Bundle 'rking/ag.vim'
+Plugin 'rking/ag.vim'
 
 " Replace status line with Airline
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
 " Markdown plugins
-Bundle 'tpope/vim-markdown'
-Bundle 'jtratner/vim-flavored-markdown'
-Bundle 'nelstrom/vim-markdown-folding'
+Plugin 'tpope/vim-markdown'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'nelstrom/vim-markdown-folding'
 
 " For blogging
-Bundle 'tpope/vim-liquid'
+Plugin 'tpope/vim-liquid'
 
 " The Vim-Git-Integration™
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
 " RVM integration
-Bundle 'tpope/vim-rvm'
+Plugin 'tpope/vim-rvm'
 
 " Graphical undo history
-Bundle 'sjl/gundo.vim'
+Plugin 'sjl/gundo.vim'
 
 " Align utility
-Bundle 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'
 
 " Zoom into splits
-Bundle 'vim-scripts/ZoomWin'
+Plugin 'vim-scripts/ZoomWin'
 
 " Smarter pasting
-Bundle 'sickill/vim-pasta'
+Plugin 'sickill/vim-pasta'
 
 " Commenting plugin
-Bundle "itomtom/tcomment_vim"
+Plugin 'tomtom/tcomment_vim'
 
 " Help with HTML tags
-Bundle 'tpope/vim-ragtag'
+Plugin 'tpope/vim-ragtag'
 
 " Surround anything with anything (i.e. words with parantheses)
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
 " Make commands like surround work with the '.' command
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 
 " Some aliases
-Bundle 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-unimpaired'
 
 " Close structures automatically
-Bundle 'tpope/vim-endwise'
+Plugin 'tpope/vim-endwise'
 
 " Emojis. For Vim. Nuff said.
-Bundle "junegunn/vim-emoji"
+Plugin 'junegunn/vim-emoji'
 
 " Close parenthesis automatically
-Bundle 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 
 " Better support for Rails
-Bundle 'tpope/vim-rails'
+Plugin 'tpope/vim-rails'
 
 " Syntax checking
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
+" Distraction free
+Plugin 'junegunn/goyo.vim'
 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-
-" **************** Configure the Bundles
+" **************** Configure the Plugins
 
 " Setup up CtrlP
 let g:ctrlp_match_window_reversed = 0

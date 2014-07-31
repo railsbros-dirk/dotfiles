@@ -49,10 +49,10 @@ class Installer
       puts " - Vim Bundles"
 
       unless File.exists?("./etc/vim/bundle/vundle")
-        system "git clone -q https://github.com/gmarik/vundle.git etc/vim/bundle/vundle"
+        system "git clone -q https://github.com/gmarik/Vundle.vim.git etc/vim/bundle/Vundle.vim"
       end
-      system "vim +BundleInstall\! +qall"
-      system "vim +BundleClean\! +qall"
+      system "vim +PluginInstall\! +qall"
+      system "vim +PluginClean\! +qall"
     end
   end
 
