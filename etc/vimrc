@@ -195,6 +195,7 @@ if emoji#available()
   " Cats
   let g:syntastic_error_symbol = emoji#for('scream_cat')
   let g:syntastic_warning_symbol = emoji#for('crying_cat_face')
+  set completefunc=emoji#complete
 else
   " GUI MacVim for example
   let g:syntastic_error_symbol = '✗'
