@@ -9,6 +9,13 @@ function devlog() {
   tail -fn 150 log/development.log
 }
 
+function arango-rebuild() {
+  make clean
+  make setup
+  ./configure --enable-all-in-one-v8 --enable-all-in-one-libev --enable-all-in-one-icu --enable-relative --enable-maintainer-mode --with-bison=/usr/local/Cellar/bison/3.0.2/bin/bison
+  make -j4
+}
+
 function prodlog() {
   echo > log/production.log
   tail -fn 150 log/production.log
