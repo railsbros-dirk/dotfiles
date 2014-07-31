@@ -94,6 +94,7 @@ prompt_railsbros_setup() {
     pc[line]='magenta'
     pc[hist]='green'
     pc[rvm_version]='blue'
+    pc[pink]='blue'
     pc[rc]='red'
     pc[scm_branch]='yellow'
     pc[scm_status_dirty]='red'
@@ -155,7 +156,7 @@ prompt_railsbros_setup() {
     PROMPT+="$pc[shortpath]%1~$pc[reset]"
     PROMPT+=$vcs_info_msg_0_
 
-    local table_flip='[╯°□°]╯︵ ┻━┻'
+    local table_flip="(╯°□°）╯︵ $pc[pink]🎧$pc[reset]"
 
     PROMPT+="%(?..${table_flip}) $pc[#]\$$rst "
 
