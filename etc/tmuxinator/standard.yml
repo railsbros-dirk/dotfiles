@@ -1,0 +1,13 @@
+# ~/.tmuxinator/standard.yml
+
+name: standard
+root: ~/
+
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - # empty
+        - # empty
+        - emacs --daemon
