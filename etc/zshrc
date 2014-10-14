@@ -88,3 +88,6 @@ done
 if [ -f ~/.zsh_config_for_`whoami` ]; then
   source ~/.zsh_config_for_`whoami`
 fi
+
+# added by travis gem
+[ -f /Users/dbreuer/.travis/travis.sh ] && source /Users/dbreuer/.travis/travis.sh
