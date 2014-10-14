@@ -9,3 +9,10 @@ etc/zsh.d/plugins
 # Ignore all vundle bundles except vundle itself
 etc/vim/bundle
 !etc/vim/bundle/vundle
+
+# Ignore the emacs stuff
+etc/emacs.d/savefile
+etc/emacs.d/elpa
+etc/emacs.d/*.eld
+etc/emacs.d/*.cache
+etc/emacs.d/saveplace

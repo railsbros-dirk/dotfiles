@@ -43,4 +43,10 @@ alias migrate="bundle exec 'rake db:migrate; rake db:test:prepare'"
 alias bi="bundle install"
 alias be="bundle exec"
 
+# No more Vim
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+alias vim='emacsclient -t'
+alias vi='emacsclient -t'
+
 # vim: set ft=zsh:
