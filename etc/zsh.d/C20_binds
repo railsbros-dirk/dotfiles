@@ -11,12 +11,9 @@ bindkey -e "^U" kill-whole-line
 bindkey -e "^V" quoted-insert
 bindkey -e "^W" backward-kill-word
 
-bindkey -e "^N" down-history
-bindkey -e "^P" up-history
-
 ## file rename magick
 bindkey '\em' copy-prev-shell-word
-#
+
 # alow for editing of the command line
 # http://zshwiki.org/home/examples/zlewidgets
 autoload -U    edit-command-line
@@ -24,11 +21,11 @@ zle -N         edit-command-line
 bindkey '\ee'  edit-command-line
 
 bindkey '^r' history-incremental-pattern-search-backward
-bindkey '^f' history-incremental-pattern-search-forward
+bindkey '^s' history-incremental-pattern-search-forward
 
 # make search up and down work, so partially type and hit up/down to find relevant stuff
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
 
 # Fix alt-left and alt-right in iTerm2
 bindkey "\e[1;9D" backward-word
@@ -39,14 +36,5 @@ bindkey "\e\e[D" backward-word
 bindkey "\e\e[C" forward-word
 
 bindkey "^?" backward-delete-char
-# bindkey "^[[3~" delete-char
-# bindkey "^[3;5~" delete-char
-# bindkey "\e[3~" delete-char
-
-for keycode in '[' '0'; do
-  bindkey "^[${keycode}A" history-substring-search-up
-  bindkey "^[${keycode}B" history-substring-search-down
-done
-unset keycode
 
 # vim: set ft=zsh:
