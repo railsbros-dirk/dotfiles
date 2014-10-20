@@ -292,6 +292,9 @@ This functions should be added to the hooks of major modes for programming."
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
+;; Writeroom aka Distraction free editing
+(require-package 'writeroom-mode)
+
 ;; Misc configuration
 
 ;; store all backup and autosave files in the system tmp dir
