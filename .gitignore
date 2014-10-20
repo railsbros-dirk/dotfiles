@@ -12,6 +12,7 @@ etc/vim/bundle
 
 # Ignore the emacs stuff
 etc/emacs.d/savefile
+etc/emacs.d/auto-save-list
 etc/emacs.d/elpa
 etc/emacs.d/*.eld
 etc/emacs.d/*.cache
