@@ -40,6 +40,8 @@
 
 (setq user-full-name "Dirk Breuer")
 
+(add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
+
 ;; Configure packages
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -74,7 +76,6 @@
 (require-package 'flycheck)
 (require-package 'rainbow-mode)
 
-
 ;; Fix IDO
 (require-package 'flx-ido)
 (ido-mode 1)
@@ -92,6 +93,17 @@
 (require 'helm-config)
 (require-package 'helm-projectile)
 (require-package 'helm-ag)
+(defun do-in-root (f)
+  (if (projectile-project-p)
+      (funcall f (projectile-project-root))
+      (error "You're not in project")))
+(defun helm-do-ag-in-root ()
+  (interactive)
+  (do-in-root 'helm-do-ag))
+(defun do-ag-in-root (string)
+  (interactive (list (read-from-minibuffer "Search string: " (ag/dwim-at-point))))
+  (do-in-root '(lambda (root) (ag/search string root))))
+
 (require 'helm-misc)
 (require 'helm-locate)
 (setq helm-quick-update t
@@ -113,29 +125,7 @@
                        helm-c-source-locate)
                      "*helm-my-buffers*")))
 
-;; Evil
-
-;; Scroll up with C-u (must come before the require call)
-(setq evil-want-C-u-scroll t)
-
-;; Require the packages
-(require-package 'evil)
-(evil-mode 1)
-(require-package 'evil-jumper) ; c-i / c-o
-(require-package 'evil-visualstar)
-(require-package 'evil-indent-textobject)
-(require-package 'evil-surround)
-(require-package 'evil-leader)
-(require-package 'evil-matchit) ; matchit (show matching parenthesis)
-(require-package 'evil-search-highlight-persist)
-(global-evil-matchit-mode t)
-(global-evil-surround-mode t)
-(global-evil-search-highlight-persist t)
-
-;; Powerline
-;; (require-package 'powerline-evil)
-;; (powerline-evil-vim-color-theme)
-;; (display-time-mode t)
+(require 'init-evil)
 
 ;; Auto-indent settings based on file
 (require-package 'dtrt-indent)
@@ -149,53 +139,6 @@
     (global-flycheck-mode +1)
   (add-hook 'prog-mode-hook 'flycheck-mode))
 
-;; Ace Jump
-(evil-leader/set-key "e" 'evil-ace-jump-word-mode) ; ,e for Ace Jump (word)
-(evil-leader/set-key "l" 'evil-ace-jump-line-mode) ; ,l for Ace Jump (line)
-(evil-leader/set-key "x" 'evil-ace-jump-char-mode) ; ,x for Ace Jump (char)
-
-;; prevent esc-key from translating to meta-key in terminal mode
-(setq evil-esc-delay 0)
-
-;; Change cursor color based on mode
-(setq evil-emacs-state-cursor '("red" box))
-(setq evil-normal-state-cursor '("green" box))
-(setq evil-visual-state-cursor '("orange" box))
-(setq evil-insert-state-cursor '("red" bar))
-(setq evil-replace-state-cursor '("red" bar))
-(setq evil-operator-state-cursor '("red" hollow))
-
-;; Change the leader key
-(global-evil-leader-mode t)
-(setq evil-leader/in-all-states t)
-(evil-leader/set-leader ",")
-
-;; Splitting windows
-(evil-leader/set-key "v" 'split-window-right)
-(evil-leader/set-key "h" 'split-window-below)
-
-;; j/k move over wrapped lines
-(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-
-;; ESC all the things
-(defun minibuffer-keyboard-quit ()
-  "Abort recursive edit.
-In Delete Selection mode, if the mark is active, just deactivate it;
-then it takes a second \\[keyboard-quit] to abort the minibuffer."
-  (interactive)
-  (if (and delete-selection-mode transient-mark-mode mark-active)
-      (setq deactivate-mark  t)
-    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-    (abort-recursive-edit)))
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-(global-set-key [escape] 'evil-exit-emacs-state)
-
 ;; Programming
 (require-package 'guru-mode)
 (require-package 'smartparens)
@@ -206,6 +149,7 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (setq sp-hybrid-kill-entire-symbol nil)
 (sp-use-paredit-bindings)
 
+(smartparens-global-mode t)
 (show-smartparens-global-mode +1)
 
 ;; enlist a more liberal guru
@@ -281,6 +225,13 @@ This functions should be added to the hooks of major modes for programming."
 (add-to-list 'auto-mode-alist '("Puppetfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Berksfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Appraisals\\'" . ruby-mode))
+
+;; SCSS Support
+(require-package 'scss-mode)
+(require-package 'sass-mode)
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+(setq-default scss-compile-at-save nil)
 
 ;; Markdown
 
