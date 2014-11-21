@@ -1,5 +1,5 @@
-local SKIP_LOGO=false
-local SKIP_FORTUNE=true
+local SKIP_LOGO=true
+local SKIP_FORTUNE=false
 
 function showlogo() {
   if [[ -n $SKIP_LOGO && $SKIP_LOGO == "true" ]]; then
@@ -21,11 +21,7 @@ function showfortune() {
     return 0
   fi
 
-  if fortune futurama &> /dev/null; then
-    fortune futurama
-  else
-    fortune startrek
-  fi
+  fortune hitchhiker firefly montypython futurama | ponysay --f walter discord rainbowfly pinkieumbrellahat twilighttime pinkiesilly pinkiefly
 
   echo ""
 }
