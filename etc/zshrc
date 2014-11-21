@@ -42,8 +42,8 @@ else
 fi
 
 # Setup editor
-export VISUAL='vim'
-export EDITOR='vim'
+export VISUAL='emacsclient -a \"\" -t'
+export EDITOR='emacsclient -a \"\" -t'
 
 # Use another histfile
 [ -w $zsh_cache ] && HISTFILE=$zsh_cache/history
