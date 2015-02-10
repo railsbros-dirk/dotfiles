@@ -184,6 +184,7 @@ This functions should be added to the hooks of major modes for programming."
 
 ;; Useful packages
 
+(require-package 'ruby-mode)
 (require-package 'ruby-tools)
 (require-package 'inf-ruby)
 (require-package 'yari)
@@ -243,10 +244,76 @@ This functions should be added to the hooks of major modes for programming."
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
+(require-package 'mmm-mode)
+(require 'mmm-mode)
+(setq mmm-global-mode 'maybe)
+
+(mmm-add-classes
+ '((markdown-python
+    :submode python-mode
+    :face mmm-declaration-submode-face
+    :front "^```python[\n]+"
+    :back "^```$")))
+(mmm-add-classes
+ '((markdown-ruby
+    :submode ruby-mode
+    :face mmm-declaration-submode-face
+    :front "^```ruby[\n]+"
+    :back "^```$")))
+(mmm-add-classes
+ '((markdown-shell
+    :submode shell-script-mode
+    :face mmm-declaration-submode-face
+    :front "^```shell[\n]+"
+    :back "^```$")))
+(mmm-add-classes
+ '((markdown-dockerfile
+    :submode dockerfile-mode
+    :face mmm-declaration-submode-face
+    :front "^```dockerfile[\n]+"
+    :back "^```$")))
+
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-ruby)
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-shell)
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-python)
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-dockerfile)
+
+;; Git Gutter
+(require-package 'git-gutter)
+(global-git-gutter-mode +1)
+
+;; Dockerfile
+(require-package 'dockerfile-mode)
+
 ;; Writeroom aka Distraction free editing
 (require-package 'writeroom-mode)
 
+;; Dash
+(require-package 'helm-dash)
+(setq helm-dash-browser-func 'eww)
+
+(defun ruby-doc ()
+  (interactive)
+  (setq-local helm-dash-docsets '("Ruby")))
+
+(add-hook 'ruby-mode-hook 'ruby-doc)
+
 ;; Misc configuration
+
+;; Don't print the silly \ when wrapping lines
+(set-display-table-slot standard-display-table 'wrap ?\ )
+
+;; Make german umlauts work.
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
+
+;; 80 characters per column is too old school for me
+(setq-default fill-column 120) 
 
 ;; store all backup and autosave files in the system tmp dir
 (setq backup-directory-alist
@@ -266,6 +333,8 @@ This functions should be added to the hooks of major modes for programming."
 ;; No TABS and 2 spaces (Ruby default)
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
 (setq-default tab-width 2)            ;; but maintain correct appearance
+
+(setq ruby-insert-encoding-magic-comment nil)
 
 ;; Indent on RET
 (define-key global-map (kbd "RET") 'newline-and-indent)
@@ -315,7 +384,9 @@ This functions should be added to the hooks of major modes for programming."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(browse-url-browser-function (quote eww-browse-url))
  '(menu-bar-mode nil)
+ '(package-check-signature nil)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(tool-bar-mode nil))
 (custom-set-faces
