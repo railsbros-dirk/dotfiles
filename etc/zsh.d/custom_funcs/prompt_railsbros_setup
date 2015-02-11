@@ -153,7 +153,7 @@ prompt_railsbros_setup() {
       PROMPT+="$pc[host]%m$pc[reset]:"
     fi
 
-    PROMPT+="$pc[shortpath]%1~$pc[reset]"
+    PROMPT+="$pc[shortpath]%C$pc[reset]"
     PROMPT+=$vcs_info_msg_0_
 
     local table_flip="(╯°□°）╯︵ $pc[pink]🎧$pc[reset]"
