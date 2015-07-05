@@ -47,10 +47,10 @@ class Installer
         system "git clone -q --recursive https://github.com/syl20bnr/spacemacs etc/emacs.d"
       end
 
-      link_dotfiles(dotfiles.grep(/emacs\.d/))
-
-      FileUtils.rm_f("etc/emacs.d/private")
-      FileUtils.ln_sf("../spacemacs-private", "etc/emacs.d/private")
+      link_dotfiles(dotfiles.grep(/spacemacs\Z|emacs\.d/))
+      Dir["etc/spacemacs-private/*"].each do |config_layer|
+        FileUtils.ln_sf(File.expand_path(config_layer), "etc/emacs.d/private/")
+      end
     end
   end
 
