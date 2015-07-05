@@ -45,7 +45,7 @@ alias be="bundle exec"
 
 # No more Vim
 alias e='emacsclient -t'
-alias ec='emacsclient -c'
+alias ec='emacsclient -c --no-wait'
 alias vim='emacsclient -t'
 alias vi='emacsclient -t'
 
