@@ -1,0 +1,10 @@
+# ~/.tmuxinator/dev.yml
+
+name: dev
+root: /Users/dbreuer/Code
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - #

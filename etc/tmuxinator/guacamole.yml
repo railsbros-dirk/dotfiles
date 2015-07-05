@@ -1,0 +1,30 @@
+# ~/.tmuxinator/guacamole.yml
+
+name: guacamole
+root: ~/Documents/Work/GalaxyCats/projects/ArangoDB
+
+windows:
+  - editor:
+      layout: 5220,364x88,0,0{263x88,0,0,1,100x88,264,0,21}
+      panes:
+        - vim:
+          - cd guacamole
+          - vim
+        - guard:
+          - cd guacamole
+          - bundle exec guard
+  - playground:
+      layout: 0a3b,364x88,0,0{227x88,0,0,1,136x88,228,0[136x43,228,0,21,136x44,228,44,23]}
+      panes:
+        - # empty
+        - # empty
+        - pry
+  - arangodb:
+      layout: main-horizontal
+      panes:
+        - arangod:
+          - cd arangoDB
+          - ./bin/arangod --database.directory $projects_dir/ArangoDB/dbs --log.level info --log.file -
+        - arangosh:
+          - cd arangoDB
+          - ./bin/arangosh

@@ -1,0 +1,26 @@
+# ~/.tmuxinator/fejo.yml
+
+name: fejo
+root: ~/Code/projects/fejo.dk/
+
+windows:
+  - fejo-next:
+      root: ~/Code/projects/fejo.dk/fejo-next/
+      layout: main-vertical
+      panes:
+        - # empty
+        - # empty
+        - # empty
+  - fejo-legacy:
+      root: ~/Code/projects/fejo.dk/legacy_system/projects
+      layout: main-vertical
+      panes:
+        - # empty
+        - # empty
+        - # empty
+  - ssh-connection:
+      layout: 846d,334x86,0,0[334x48,0,0,26,334x37,0,49{110x37,0,49,29,110x37,111,49,41,112x37,222,49[112x19,222,49,43,112x17,222,69,45]}]
+      panes:
+        - # empty
+        - # empty
+        - ssh -L 8008:127.0.0.1:8080 importer.fejo.dk

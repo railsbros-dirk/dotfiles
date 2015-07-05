@@ -8,6 +8,9 @@ windows:
   - editor:
       layout: main-vertical
       panes:
-        - # empty
-        - # empty
-        - emacs --daemon
+        - #
+  - communication:
+      layout: main-vertical
+      panes:
+        - cd ~/Downloads; TERM=screen-256color mutt
+        - offlineimap
