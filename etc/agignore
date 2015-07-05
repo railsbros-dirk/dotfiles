@@ -1,0 +1,10 @@
+.DS_Store
+.rake_tasks
+.cap_tasks
+.svn
+*.swp
+vendor/bundle
+*/tags
+*.log
+schema.rb
+*_structure.sql
