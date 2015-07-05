@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# encoding: UTF-8
+# encoding: utf-8
 
 require 'fileutils'
 
@@ -25,7 +25,7 @@ class Installer
   end
 
   def all
-    puts ' * Installing dotfiles, vim config, zsh config and some utils to your system ...'
+    puts ' * Installing dotfiles, emacs config, zsh config and some utils to your system ...'
     puts
 
     installers.each do |installer|
@@ -41,24 +41,22 @@ class Installer
     methods.grep(/install_/)
   end
 
-  def install_vim
-    with_explanation('Configuring Vim') do
-      link_dotfiles(dotfiles.grep(/vim/))
-      puts " - Vim submodules"
-      system "git submodule init -q; git submodule update -q"
-      puts " - Vim Bundles"
-
-      unless File.exists?("./etc/vim/bundle/vundle")
-        system "git clone -q https://github.com/gmarik/Vundle.vim.git etc/vim/bundle/Vundle.vim"
+  def install_emacs
+    with_explanation('Configuring Emacs') do
+      unless File.exists?("./etc/emacs.d")
+        system "git clone -q --recursive https://github.com/syl20bnr/spacemacs etc/emacs.d"
       end
-      system "vim +PluginInstall\! +qall"
-      system "vim +PluginClean\! +qall"
+
+      link_dotfiles(dotfiles.grep(/emacs\.d/))
+
+      FileUtils.rm_f("etc/emacs.d/private")
+      FileUtils.ln_sf("../spacemacs-private", "etc/emacs.d/private")
     end
   end
 
   def install_dotfiles
     with_explanation("Linking dotfiles found under etc/") do
-      link_dotfiles(dotfiles - dotfiles.grep(/zsh|vim/))
+      link_dotfiles(dotfiles - dotfiles.grep(/zsh|emacs\.d/))
     end
   end
 

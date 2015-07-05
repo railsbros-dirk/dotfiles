@@ -10,10 +10,5 @@ etc/zsh.d/plugins
 etc/vim/bundle
 !etc/vim/bundle/vundle
 
-# Ignore the emacs stuff
-etc/emacs.d/savefile
-etc/emacs.d/auto-save-list
-etc/emacs.d/elpa
-etc/emacs.d/*.eld
-etc/emacs.d/*.cache
-etc/emacs.d/saveplace
+# Ignore the emacs.d
+etc/emacs.d/*

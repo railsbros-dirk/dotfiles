@@ -1,11 +1,11 @@
 ;; Base16 PinkiePie (https://github.com/chriskempson/base16)
 ;; Scheme: Dirk Breuer (http://tfcl.de)
 
-;;; pinkiepie-dark-theme.el
+;;; base16-pinkiepie-light-theme.el
 
 ;;; Code:
 
-(deftheme pinkiepie-dark)
+(deftheme base16-pinkiepie-light)
 
 (let ((base00 "#151515")
       (base01 "#202020")
@@ -24,14 +24,14 @@
       (base0E "#be1d77")
       (base0F "#8f5536"))
 
-  (custom-theme-set-faces 
-   'pinkiepie-dark
+  (custom-theme-set-faces
+   'base16-pinkiepie-light
 
    ;; Built-in stuff (Emacs 23)
    `(border ((t (:background ,base03))))
    `(border-glyph ((t (nil))))
    `(cursor ((t (:background ,base08))))
-   `(default ((t (:background ,base00 :foreground ,base05))))
+   `(default ((t (:background ,base07 :foreground ,base02))))
    `(fringe ((t (:background ,base02))))
    `(gui-element ((t (:background ,base03 :foreground ,base06))))
    `(highlight ((t (:background ,base01))))
@@ -452,10 +452,10 @@
    `(custom-variable-tag ((t (:foreground ,base0D))))
    `(custom-group-tag ((t (:foreground ,base0D))))
    `(custom-state ((t (:foreground ,base0B)))))
-   
+
 
   (custom-theme-set-variables
-   'pinkiepie-dark
+   'base16-pinkiepie-light
 
    `(ansi-color-names-vector
      ;; black, base08, base0B, base0A, base0D, magenta, cyan, white
@@ -464,6 +464,6 @@
      ;; black, base08, base0B, base0A, base0D, magenta, cyan, white
      [unspecified ,base00 ,base08 ,base0B ,base0A ,base0D ,base0E ,base0D ,base05])))
 
-(provide-theme 'pinkiepie-dark)
+(provide-theme 'base16-pinkiepie-light)
 
-;;; pinkiepie-dark-theme.el ends here
+;;; base16-pinkiepie-light-theme.el ends here
