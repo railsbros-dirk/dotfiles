@@ -17,12 +17,9 @@
       terraform-mode
       ))
 
-;; List of packages to exclude.
-(setq terraform-excluded-packages '())
-
 ;; For each package, define a function terraform/init-<package-name>
 ;;
-(defun terraform/init-my-package ()
+(defun terraform/init-terraform-mode ()
   (use-package terraform-mode)
   )
 ;;
