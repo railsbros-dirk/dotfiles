@@ -1,43 +1,49 @@
-;; -*- mode: dotspacemacs -*-
+;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
-(set-face-attribute 'default nil :font "Fira Mono-11")
 
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration."
   (setq-default
    ;; List of additional paths where to look for configuration layers.
-   ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
+   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     ;; --------------------------------------------------------
-     ;; Example of useful layers you may want to use right away
-     ;; Uncomment a layer name and press C-c C-c to install it
-     ;; --------------------------------------------------------
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+     ;; <M-m f e R> (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
      auto-completion
      better-defaults
-     (git :variables
-          git-gutter-use-fringe t)
+     (colors :variables colors-enable-nyan-cat-progress-bar t)
+     emacs-lisp
+     git
      markdown
-     perspectives
      org
      osx
-     (colors :variables colors-enable-rainbow-delimiters t)
-     (colors :variables colors-enable-nyan-cat-progress-bar t)
-     themes-megapack
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     (syntax-checking :variables syntax-checking-enable-tooltips nil)
      eamcs-lisp
-     syntax-checking
+     html
      ruby
      ruby-on-rails
-     javascript
-     html
+     vagrant
+     smex
+     version-control
      notmuch
      terraform
-     ;; multiple-cursors
      )
+   ;; List of additional packages that will be installed without being
+   ;; wrapped in a layer. If you need some configuration for these
+   ;; packages then consider to create a layer, you can also put the
+   ;; configuration in `dotspacemacs/config'.
+   dotspacemacs-additional-packages '()
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -57,17 +63,15 @@ before layers configuration."
    ;; Either `vim' or `emacs'. Evil is always enabled but if the variable
    ;; is `emacs' then the `holy-mode' is enabled at startup.
    dotspacemacs-editing-style 'vim
-   ;; If non nil output loading progess in `*Messages*' buffer.
+   ;; If non nil output loading progress in `*Messages*' buffer.
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
    ;; banner, `random' chooses a random text banner in `core/banners'
-   ;; directory. A string value must be a path to a .PNG file.
+   ;; directory. A string value must be a path to an image format supported
+   ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed.
-   ;; dotspacemacs-startup-banner 'official
    dotspacemacs-startup-banner 'official
-   ;; t if you always want to see the changelog at startup
-   dotspacemacs-always-show-changelog t
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'."
    dotspacemacs-startup-lists '(recents projects)
@@ -76,7 +80,6 @@ before layers configuration."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(base16-pinkiepie-dark
                          base16-pinkiepie-light)
-
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -100,9 +103,17 @@ before layers configuration."
    ;; By default the command key is `:' so ex-commands are executed like in Vim
    ;; with `:' and Emacs commands are executed with `<leader> :'.
    dotspacemacs-command-key ":"
-   ;; If non nil the paste micro-state is enabled. While enabled pressing `p`
+   ;; Location where to auto-save files. Possible values are `original' to
+   ;; auto-save the file in-place, `cache' to auto-save the file to another
+   ;; file stored in the cache directory and `nil' to disable auto-saving.
+   ;; Default value is `cache'.
+   dotspacemacs-auto-save-file-location 'cache
+   ;; If non nil then `ido' replaces `helm' for some commands. For now only
+   ;; `find-files' (SPC f f) is replaced.
+   dotspacemacs-use-ido nil
+   ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content.
-   dotspacemacs-enable-paste-micro-state t
+   dotspacemacs-enable-paste-micro-state nil
    ;; Guide-key delay in seconds. The Guide-key is the popup buffer listing
    ;; the commands bound to the current keystrokes.
    dotspacemacs-guide-key-delay 0.4
@@ -136,6 +147,9 @@ before layers configuration."
    dotspacemacs-smooth-scrolling t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    dotspacemacs-smartparens-strict-mode nil
+   ;; Select a scope to highlight delimiters. Possible value is `all',
+   ;; `current' or `nil'. Default is `all'
+   dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
    dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
@@ -147,10 +161,7 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
-  ;; I use RVM
-  ;; (setq-default ruby-version-manager 'rvm)
-  ;; I'm a Rails dev ;-)
-  (setq-default ruby-enable-ruby-on-rails-support t)
+   (setq-default ruby-version-manager 'rvm)
   )
 
 (defun dotspacemacs/config ()
@@ -172,16 +183,21 @@ layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
+ '(ansi-color-names-vector
+   ["#151515" "#ac4142" "#90a959" "#fdf6af" "#ed458b" "#be1d77" "#ed458b" "#d0d0d0"])
  '(ansi-term-color-vector
    [unspecified "#151515" "#ac4142" "#90a959" "#fdf6af" "#ed458b" "#be1d77" "#ed458b" "#d0d0d0"])
  '(css-indent-offset 2)
- '(custom-enabled-themes (quote (sanityinc-solarized-light)))
+ '(custom-enabled-themes (quote (base16-pinkiepie-light)))
  '(custom-safe-themes
    (quote
-    ("3048d3120f5fea4be7c3dff23cddcee07ccbefdcc4f9df9db1890c8e2bc58f0b" "836987f5bc8f11d3e7c0b87eb2e1effef007a4920ff4508141ea3bea79479d8c" "4fec6a4d935093f5f82da494d35e6f98da4f504faf35c7924f76efe9fdbdb762" "dced1e2da6e09b45ebf1d73bc8d225806cb592c2c617b7a5a1c527e8052ebd24" "0ab2e998794482e0e732ef1ebda3bfcc8ed6fa22792298cbeb031d552154f64c" "2f5cfa3a08176b56192eb90272c26acdbfd4aa1b413fdab3fb687eb234c62938" "418b3dea14b90420a8b7aa8a16f63f690eb2ce453d23d5e10a3d9b86086f8090" "20e78956d2cc32f44044210cb2f8b127a248a5b27df8f49388285e32d591e840" "d294ac8c98f49d8a1ebc8c5fee7af4c1d87d3b20e92b09d380e78ad2abc82adc" "078b9fbdcd71cb86cb48ae67d8cc7e7378d190ace622b9deaf8f9baa10c31275" "e514a15676d8f514115f0f5e2bb7fb8ab87d2dc42d2cb164ccc4298326e6b871" "ce46dbe370d99d034bebd3b59a51112e7ee8cb87052db8badf21fb4046d9cf83" "3f14bc74c31b1bf7abc405418c7bc9157032347b3d3f48702e5c210be668ac76" "3dafeadb813a33031848dfebfa0928e37e7a3c18efefa10f3e9f48d1993598d3" "08851585c86abcf44bb1232bced2ae13bc9f6323aeda71adfa3791d6e7fea2b6" "953523a952ce4fd47ac88af6a795aea2c3634a3efe9d62cd2f76eda6e12343b5" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "4ac7d22a373285a8481ee55e0c79687cd70bf132483a2b9f40b5f37417346cba" default)))
+    ("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "3048d3120f5fea4be7c3dff23cddcee07ccbefdcc4f9df9db1890c8e2bc58f0b" "836987f5bc8f11d3e7c0b87eb2e1effef007a4920ff4508141ea3bea79479d8c" "4fec6a4d935093f5f82da494d35e6f98da4f504faf35c7924f76efe9fdbdb762" "dced1e2da6e09b45ebf1d73bc8d225806cb592c2c617b7a5a1c527e8052ebd24" "0ab2e998794482e0e732ef1ebda3bfcc8ed6fa22792298cbeb031d552154f64c" "2f5cfa3a08176b56192eb90272c26acdbfd4aa1b413fdab3fb687eb234c62938" "418b3dea14b90420a8b7aa8a16f63f690eb2ce453d23d5e10a3d9b86086f8090" "20e78956d2cc32f44044210cb2f8b127a248a5b27df8f49388285e32d591e840" "d294ac8c98f49d8a1ebc8c5fee7af4c1d87d3b20e92b09d380e78ad2abc82adc" "078b9fbdcd71cb86cb48ae67d8cc7e7378d190ace622b9deaf8f9baa10c31275" "e514a15676d8f514115f0f5e2bb7fb8ab87d2dc42d2cb164ccc4298326e6b871" "ce46dbe370d99d034bebd3b59a51112e7ee8cb87052db8badf21fb4046d9cf83" "3f14bc74c31b1bf7abc405418c7bc9157032347b3d3f48702e5c210be668ac76" "3dafeadb813a33031848dfebfa0928e37e7a3c18efefa10f3e9f48d1993598d3" "08851585c86abcf44bb1232bced2ae13bc9f6323aeda71adfa3791d6e7fea2b6" "953523a952ce4fd47ac88af6a795aea2c3634a3efe9d62cd2f76eda6e12343b5" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "4ac7d22a373285a8481ee55e0c79687cd70bf132483a2b9f40b5f37417346cba" default)))
+ '(enh-ruby-add-encoding-comment-on-save nil)
+ '(js-indent-level 2)
  '(js2-basic-offset 2)
  '(menu-bar-mode nil)
  '(ring-bell-function (quote ignore) t)
+ '(ruby-insert-encoding-magic-comment nil)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
@@ -192,4 +208,5 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
