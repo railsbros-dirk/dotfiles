@@ -374,7 +374,7 @@ end
 ------------------
 
 -- SizeUp uses no animations
-hs.window.animation_duration = 1
+hs.window.animation_duration = 0
 -- Initialize Snapback state
 sizeup.snapback_window_state = { }
 -- return currently focused window
