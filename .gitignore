@@ -11,5 +11,6 @@ etc/vim/bundle
 !etc/vim/bundle/vundle
 
 # Ignore the emacs.d
+etc/emacs.d
 etc/emacs.d/*
 /npm-debug.log
