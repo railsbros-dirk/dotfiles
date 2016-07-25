@@ -43,10 +43,17 @@ alias migrate="bundle exec 'rake db:migrate; rake db:test:prepare'"
 alias bi="bundle install"
 alias be="bundle exec"
 
-# No more Vim
 alias e='emacsclient -t'
 alias ec='emacsclient -c --no-wait'
-alias vim='emacsclient -t'
-alias vi='emacsclient -t'
+
+# Jump
+# jump FOO: jump to a mark named FOO
+# Inspired by the Oh-My-ZSH Jump Plugin
+
+alias j='jump'
+
+jump() { cd -P "$HOME/.marks/$1" }
+_jump() { _files -W "$HOME/.marks/$1" }
+compdef _jump jump
 
 # vim: set ft=zsh:

@@ -10,11 +10,7 @@ windows:
       panes:
         - #
   - mail:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
         - cd ~/Downloads; TERM=screen-256color mutt
         - offlineimap
-  - chat:
-      layout: main-vertical
-      panes:
-        - TERM=screen-256color weechat

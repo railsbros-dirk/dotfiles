@@ -127,7 +127,8 @@ class Installer
         {:key => "branch.master.remote", :value => "origin"},
         {:key => "branch.master.merge", :value => "refs/heads/master"},
         {:key => "i18n.commitEncoding", :value => "utf-8"},
-        {:key => "log.date", :value => "local"}
+        {:key => "log.date", :value => "local"},
+        {:key => "core.excludesfile", :value => "~/.gitignore"},
       ]
 
       git_configs.each do |git_config|

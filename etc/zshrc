@@ -9,10 +9,6 @@ export lc_all="en_us.utf-8"
 #   source $HOME/.zsh.d/base16-pinkiepie.dark.sh
 # fi
 
-if [[ -d $HOME/.rvm/bin ]]; then
-  PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-fi
-
 # Add custom completions and prompt to fpath
 fpath=(~/.zsh.d/custom_funcs $fpath)
 
@@ -38,7 +34,7 @@ fi
 if [[ -d /usr/local/share/zsh-completions ]]; then
   load_completion /usr/local/share/zsh-completions
 else
-  load_completion ${HOME}/.zshuery/completion
+  load_completion ${HOME}/.zshuery/completion/src
 fi
 
 # Setup editor
@@ -76,9 +72,6 @@ typeset -ga chpwd_functions
 autoload -U select-word-style
 select-word-style bash
 
-# Which plugins should be loaded
-plugins=(zsh-syntax-highlighting zsh-history-substring-search)
-
 # load specific configurations
 for zshrc_snipplet in ~/.zsh.d/C[0-9][0-9]*[^~] ; do
   source $zshrc_snipplet
@@ -91,3 +84,15 @@ fi
 
 # added by travis gem
 [ -f /Users/dbreuer/.travis/travis.sh ] && source /Users/dbreuer/.travis/travis.sh
+
+# Which plugins should be loaded
+plugins=(zsh-syntax-highlighting zsh-history-substring-search)
+
+# We need to load the plugins at the very end
+if [ -d $HOME/.zsh.d/plugins ]; then
+    for plugin in $plugins; do
+        source "$HOME/.zsh.d/plugins/$plugin/${plugin}.zsh"
+    done
+fi
+
+# vim: set ft=zsh:
