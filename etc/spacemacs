@@ -27,35 +27,36 @@
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-private-snippets-directory nil
                       auto-completion-enable-sort-by-usage t)
-     better-defaults
      (colors :variables colors-enable-nyan-cat-progress-bar t)
-     emacs-lisp
      (git :variables git-gutter-use-fringe t git-magit-status-fullscreen nil)
-     go
-     javascript
-     markdown
-     org
-     osx
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      (syntax-checking :variables syntax-checking-enable-tooltips nil)
-     emacs-lisp
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl)
+     better-defaults
      elixir
-     html
-     lua
+     emacs-lisp
      emoji
+     go
+     html
+     imenu-list
+     javascript
+     lua
+     markdown
+     notmuch
+     org
+     osx
      ruby
      ruby-on-rails
      rust
-     vagrant
      smex
-     (version-control :variables
-                      version-control-diff-tool 'diff-hl)
-     notmuch
      spell-checking
      sql
      terraform
+     (themes-megapack :packages dracula)
+     vagrant
      yaml
      )
    ;; List of additional packages that will be installed without being
@@ -99,14 +100,15 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(base16-pinkiepie-dark
-                         base16-pinkiepie-light)
+   ;; dotspacemacs-themes '(base16-pinkiepie-dark
+   ;;                       base16-pinkiepie-light)
+   dotspacemacs-themes '(dracula)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Fira Mono"
-                               :size 12
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.3)
@@ -200,13 +202,11 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ahs-case-fold-search nil)
- '(ahs-default-range (quote ahs-range-whole-buffer))
- '(ahs-idle-interval 0.25)
+ '(ahs-case-fold-search nil t)
+ '(ahs-default-range (quote ahs-range-whole-buffer) t)
+ '(ahs-idle-interval 0.25 t)
  '(ahs-idle-timer 0 t)
- '(ahs-inhibit-face-list nil)
- '(ansi-color-names-vector
-   ["#151515" "#ac4142" "#90a959" "#fdf6af" "#ed458b" "#be1d77" "#ed458b" "#d0d0d0"])
+ '(ahs-inhibit-face-list nil t)
  '(ansi-term-color-vector
    [unspecified "#151515" "#ac4142" "#90a959" "#fdf6af" "#ed458b" "#be1d77" "#ed458b" "#d0d0d0"] t)
  '(css-indent-offset 2)
@@ -223,7 +223,14 @@ layers configuration."
  '(magit-branch-arguments nil)
  '(menu-bar-mode nil)
  '(ns-auto-hide-menu-bar t)
- '(ring-bell-function (quote ignore) t)
+ '(package-selected-packages
+   (quote
+    (go-guru pcache multiple-cursors auto-complete git-gutter rust-mode ob-elixir org minitest hide-comnt helm-purpose window-purpose go-mode anzu flyspell-correct yasnippet magit-popup async inflections inf-ruby hcl-mode dash zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tronesque-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme stekene-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme colorsarenice-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme pug-mode f undo-tree elixir-mode flycheck helm-core markdown-mode with-editor js2-mode s iedit smartparens helm magit git-commit projectile evil-unimpaired yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe vagrant-tramp vagrant uuidgen use-package toml-mode toc-org terraform-mode tagedit sql-indent spacemacs-theme spaceline smex smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters racer quelpa projectile-rails popwin persp-mode pbcopy paradox osx-trash osx-dictionary orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file notmuch nginx-mode neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lua-mode lorem-ipsum livid-mode linum-relative link-hint less-css-mode launchctl json-mode js2-refactor js-doc jinja2-mode jade-mode info+ indent-guide imenu-list ido-vertical-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag graphviz-dot-mode google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-mix flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump diff-hl company-web company-tern company-statistics company-go company-emoji column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile ansible-doc ansible alchemist aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(ring-bell-function (quote ignore))
+ '(ruby-align-chained-calls t)
+ '(ruby-deep-arglist nil)
+ '(ruby-deep-indent-paren nil)
+ '(ruby-deep-indent-paren-style (quote space))
  '(ruby-insert-encoding-magic-comment nil)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(web-mode-code-indent-offset 2)
@@ -235,5 +242,4 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ )
