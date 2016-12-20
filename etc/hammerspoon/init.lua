@@ -1,31 +1,66 @@
--- === sizeup ===
---
 -- SizeUp emulation for hammerspoon
---
 -- To use, you can tweak the key bindings and the margins
 
 local sizeup = { }
-
+local dellUltraWide = "Dell U3415W"
 local keys = { }
+
 keys.hyper = {"shift", "ctrl", "alt", "cmd"}
 
 hs.grid.ui.textSize = 100
 hs.grid.setMargins("0 0")
 
+---------------
+-- Hyper Key --
+---------------
 
--------------
--- Layouts --
--------------
+-- All credit goes to @prenagha and @ttscoff for their awesome original code that I tweaked for my own devices.
+-- Credit 1: https://gist.github.com/ttscoff/cce98a711b5476166792d5e6f1ac5907
+-- Credit 2: https://gist.github.com/prenagha/1c28f71cb4d52b3133a4bff1b3849c3e
+-- Credit 3: https://gist.github.com/clickysteve/e13a11b8fc9c963c08b3109d95bbacc5
 
-local dellUltraWide = "Dell U3415W"
-local windowLayout = {
-   {"iTerm",  nil,          dellUltraWide, hs.layout.left30,    nil, nil},
-   {"Emacs",  nil,          dellUltraWide, hs.layout.right70,   nil, nil}
-}
+k = hs.hotkey.modal.new({}, "F17")
+
+-- Hyper-key for all the below are setup somewhere... Usually Keyboard Maestro or similar. Alfred doesn't handle them very well, so will set up separate bindings for individual apps below.
+
+hyperBindings = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "TAB", "SPACE", "RETURN", "-", "=", "\\" }
+
+for i,key in ipairs(hyperBindings) do
+  k:bind({}, key, nil, function() hs.eventtap.keyStroke({'cmd','alt','shift','ctrl'}, key)
+      k.triggered = true
+  end)
+end
+
+-- Enter Hyper Mode when F18 is pressed
+
+pressedF19 = function()
+  k.triggered = false
+  k:enter()
+end
+
+-- Leave Hyper Mode when F18 is pressed,
+--   send ESCAPE if no other keys are pressed.
+
+releasedF19 = function()
+  k:exit()
+  if not k.triggered then
+    hs.eventtap.keyStroke({}, 'ESCAPE')
+  end
+end
+
+-- Bind the Hyper key
+
+f19 = hs.hotkey.bind({}, 'F19', pressedF19, releasedF19)
 
 --------------
 -- Bindings --
 --------------
+
+-- Media controls
+hs.hotkey.bind(keys.hyper, "9", hs.itunes.playpause)
+hs.hotkey.bind(keys.hyper, "RETURN", function()
+  hs.eventtap.keyStroke({}, "padenter")
+end)
 
 --- Split Screen Actions ---
 -- Send Window Left
@@ -63,34 +98,6 @@ hs.hotkey.bind(keys.hyper, "O", function()
   sizeup.send_window_right_third()
 end)
 
---- Quarter Screen Actions ---
--- Send Window Upper Left
-hs.hotkey.bind({"alt"}, "F1", function()
-  sizeup.send_window_upper_left()
-end)
--- Send Window Upper Right
-hs.hotkey.bind({"alt"}, "F2", function()
-  sizeup.send_window_upper_right()
-end)
--- Send Window Lower Left
-hs.hotkey.bind({"alt"}, "F3", function()
-  sizeup.send_window_lower_left()
-end)
--- Send Window Lower Right
-hs.hotkey.bind({"alt"}, "F4", function()
-  sizeup.send_window_lower_right()
-end)
-
---- Multiple Monitor Actions ---
--- Send Window Prev Monitor
-hs.hotkey.bind({ "ctrl", "alt" }, "Left", function()
-  sizeup.send_window_prev_monitor()
-end)
--- Send Window Next Monitor
-hs.hotkey.bind({ "ctrl", "alt" }, "Right", function()
-  sizeup.send_window_next_monitor()
-end)
-
 --- Spaces Actions ---
 
 -- Apple no longer provides any reliable API access to spaces.
@@ -103,18 +110,15 @@ hs.hotkey.bind(keys.hyper, "\\", function()
   sizeup.snapback()
 end)
 --- Other Actions ---
+
 -- Make Window Full Screen
-hs.hotkey.bind(keys.hyper, "m", function()
+hs.hotkey.bind(keys.hyper, "M", function()
   sizeup.maximize()
 end)
--- Send Window Center
-hs.hotkey.bind(keys.hyper, "n", function()
-  sizeup.move_to_center_relative({w=0.70, h=0.95})
-end)
 
---- Apply Layouts
-hs.hotkey.bind(keys.hyper, "q", function()
-  hs.layout.apply(windowLayout)
+-- Send Window Center
+hs.hotkey.bind(keys.hyper, "N", function()
+  sizeup.move_to_center_relative({w=0.70, h=0.95})
 end)
 
 --- Reload config
@@ -260,68 +264,6 @@ function sizeup.send_window_down()
   })
 end
 
-function sizeup.send_window_upper_left()
-  local s = sizeup.screen()
-  local qsp = sizeup.quarter_screen_partitions
-  local g = sizeup.gutter()
-  sizeup.set_frame("Upper Left", {
-    x = s.x,
-    y = s.y,
-    w = (s.w * qsp.x) - g.x,
-    h = (s.h * qsp.y) - g.y
-  })
-end
-
-function sizeup.send_window_upper_right()
-  local s = sizeup.screen()
-  local qsp = sizeup.quarter_screen_partitions
-  local g = sizeup.gutter()
-  sizeup.set_frame("Upper Right", {
-    x = s.x + (s.w * qsp.x) + g.x,
-    y = s.y,
-    w = (s.w * (1 - qsp.x)) - g.x,
-    h = (s.h * (qsp.y)) - g.y
-  })
-end
-
-function sizeup.send_window_lower_left()
-  local s = sizeup.screen()
-  local qsp = sizeup.quarter_screen_partitions
-  local g = sizeup.gutter()
-  sizeup.set_frame("Lower Left", {
-    x = s.x,
-    y = s.y + (s.h * qsp.y) + g.y,
-    w = (s.w * qsp.x) - g.x,
-    h = (s.h * (1 - qsp.y)) - g.y
-  })
-end
-
-function sizeup.send_window_lower_right()
-  local s = sizeup.screen()
-  local qsp = sizeup.quarter_screen_partitions
-  local g = sizeup.gutter()
-  sizeup.set_frame("Lower Right", {
-    x = s.x + (s.w * qsp.x) + g.x,
-    y = s.y + (s.h * qsp.y) + g.y,
-    w = (s.w * (1 - qsp.x)) - g.x,
-    h = (s.h * (1 - qsp.y)) - g.y
-  })
-end
-
-function sizeup.send_window_prev_monitor()
-  hs.alert.show("Prev Monitor")
-  local win = hs.window.focusedWindow()
-  local nextScreen = win:screen():previous()
-  win:moveToScreen(nextScreen)
-end
-
-function sizeup.send_window_next_monitor()
-  hs.alert.show("Next Monitor")
-  local win = hs.window.focusedWindow()
-  local nextScreen = win:screen():next()
-  win:moveToScreen(nextScreen)
-end
-
 -- snapback return the window to its last position. calling snapback twice returns the window to its original position.
 -- snapback holds state for each window, and will remember previous state even when focus is changed to another window.
 function sizeup.snapback()
@@ -368,6 +310,48 @@ function sizeup.move_to_center_absolute(unit)
   })
 end
 
+------------------
+-- Ctrl / ESC   --
+------------------
+
+send_escape = false
+last_mods = {}
+
+control_key_handler = function()
+  send_escape = false
+end
+
+control_key_timer = hs.timer.delayed.new(0.1, control_key_handler)
+
+control_handler = function(evt)
+  local new_mods = evt:getFlags()
+  if last_mods["ctrl"] == new_mods["ctrl"] then
+    return false
+  end
+  if not last_mods["ctrl"] then
+    last_mods = new_mods
+    send_escape = true
+    control_key_timer:start()
+  else
+    if send_escape then
+      hs.eventtap.keyStroke({}, "ESCAPE")
+    end
+    last_mods = new_mods
+    control_key_timer:stop()
+  end
+  return false
+end
+
+control_tap = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, control_handler)
+control_tap:start()
+
+other_handler = function(evt)
+  send_escape = false
+  return false
+end
+
+other_tap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, other_handler)
+other_tap:start()
 
 ------------------
 -- Internal API --
@@ -375,12 +359,15 @@ end
 
 -- SizeUp uses no animations
 hs.window.animation_duration = 0
+
 -- Initialize Snapback state
 sizeup.snapback_window_state = { }
+
 -- return currently focused window
 function sizeup.win()
   return hs.window.focusedWindow()
 end
+
 -- display title, save state and move win to unit
 function sizeup.set_frame(title, unit)
   -- hs.alert.show(title)
@@ -388,6 +375,7 @@ function sizeup.set_frame(title, unit)
   sizeup.snapback_window_state[win:id()] = win:frame()
   return win:setFrame(unit, 0)
 end
+
 -- screen is the available rect inside the screen edge margins
 function sizeup.screen()
   local screen = sizeup.win():screen():frame()
@@ -407,22 +395,6 @@ function sizeup.gutter()
     x = pm.x / 2,
     y = pm.y / 2
   }
-end
-
---- hs.window:moveToScreen(screen)
---- Method
---- move window to the the given screen, keeping the relative proportion and position window to the original screen.
---- Example: win:moveToScreen(win:screen():next()) -- move window to next screen
-function hs.window:moveToScreen(nextScreen)
-  local currentFrame = self:frame()
-  local screenFrame = self:screen():frame()
-  local nextScreenFrame = nextScreen:frame()
-  self:setFrame({
-    x = ((((currentFrame.x - screenFrame.x) / screenFrame.w) * nextScreenFrame.w) + nextScreenFrame.x),
-    y = ((((currentFrame.y - screenFrame.y) / screenFrame.h) * nextScreenFrame.h) + nextScreenFrame.y),
-    h = ((currentFrame.h / screenFrame.h) * nextScreenFrame.h),
-    w = ((currentFrame.w / screenFrame.w) * nextScreenFrame.w)
-  })
 end
 
 --- Display message after loading
