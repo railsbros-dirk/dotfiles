@@ -10,16 +10,10 @@ windows:
       panes:
         - # empty
         - # empty
-        - # empty
+        - cd source/machines
   - fejo-legacy:
       root: ~/Code/projects/fejo.dk/legacy_system/projects
       layout: main-horizontal
       panes:
         - # empty
         - # empty
-        - # empty
-  - ssh-connection:
-      layout: main-horizontal
-      panes:
-        - # empty
-        - ssh -L 8008:127.0.0.1:8080 importer.fejo.dk

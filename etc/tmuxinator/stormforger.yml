@@ -1,0 +1,19 @@
+# ~/.tmuxinator/stormforger.yml
+
+name: stormforger
+root: ~/Code/projects/stormforger.com/
+
+windows:
+  - forge:
+      root: ~/Code/projects/stormforger.com/
+      layout: main-horizontal
+      panes:
+        - # empty
+        - cd src/forge
+        - cd src/infra
+  - forge-box:
+      root: ~/Code/projects/stormforger.com/
+      layout: main-horizontal
+      panes:
+        - ssh -A smith@local.stormforger.net
+        - ssh -A smith@local.stormforger.net

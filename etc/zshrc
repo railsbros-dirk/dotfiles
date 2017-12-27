@@ -96,3 +96,5 @@ if [ -d $HOME/.zsh.d/plugins ]; then
 fi
 
 # vim: set ft=zsh:
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

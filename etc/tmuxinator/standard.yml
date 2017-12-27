@@ -6,7 +6,7 @@ root: ~/
 
 windows:
   - editor:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
         - #
   - mail:
